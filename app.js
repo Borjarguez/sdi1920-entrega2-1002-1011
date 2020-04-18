@@ -46,7 +46,7 @@ gestorBD.init(app, mongo);
 let routerUsuarioSession = express.Router();
 routerUsuarioSession.use(function (req, res, next) {
     console.log("routerUsuarioSession");
-    if (req.session.user) {
+    if (req.session.usuario) {
         next();
     } else {
         res.redirect("/login");
@@ -66,8 +66,7 @@ app.set('clave', 'abcdefg');
 app.set('crypto', crypto);
 
 //Rutas/controladores por lógica
-require("./routes/rusuarios.js")(app, swig, gestorBD); // (app, param1, param2, etc.)
-//require("./routes/rapi.js")(app, gestorBD);
+require("./routes/rusuarios.js")(app, swig, gestorBD);
 
 app.get('/', function (req, res) {
     res.redirect('/home');
