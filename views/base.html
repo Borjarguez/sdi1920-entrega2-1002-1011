@@ -24,10 +24,9 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li id="mTienda" class="active"><a href="/tienda">Tienda</a></li>
-                <li id="mPublicaciones"><a href="/publicaciones">Publicaciones</a></li>
-                <li id="mCompras"><a href="/compras">Compras</a></li>
+                <li><a href="/tienda">Tienda</a></li>
             </ul>
+
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/signup"><span class="glyphicon glyphicon-user"></span> Sign up</a></li>
                 <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Log in</a></li>
@@ -37,7 +36,7 @@
 </nav>
 
 <div class="container">
-    <p class="{{ errorT.tipoMensaje }}"> {{ errorT.mensaje }}</p>
+    <p class="{{ errorT.tipoMensaje }}" id="errorMessage"> {{ errorT.mensaje }}</p>
 
     <!-- Contenido -->
     {% block contenido_principal %}

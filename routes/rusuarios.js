@@ -69,8 +69,6 @@ module.exports = function (app, swig, gestorBD) {
             password: secure
         };
 
-        console.log("PASE POR AQUI");
-
         gestorBD.obtainUsers(criteria, function (users) {
             if (users == null || users.length == 0) {
                 req.session.usuario = null;
@@ -80,11 +78,9 @@ module.exports = function (app, swig, gestorBD) {
                     message: "Email o password incorrecto"
                 };
 
-                console.log("NO FUNCIONA MELON");
                 req.session.error = errorT;
                 res.redirect("/login");
             } else {
-                console.log("SI QUE FUNCIONA PERO NO");
                 req.session.usuario = users[0].email;
                 req.session.error = null;
                 res.redirect('/home');
@@ -92,7 +88,7 @@ module.exports = function (app, swig, gestorBD) {
         });
     });
 
-    app.get('/desconectarse', function (req, res) {
+    app.get('/logout', function (req, res) {
         req.session.usuario = null;
         res.send("Usuario desconectado");
     });
