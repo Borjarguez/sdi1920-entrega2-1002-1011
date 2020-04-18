@@ -34,7 +34,7 @@ module.exports = function (app, swig, gestorBD) {
             if (users.length != 0 && users != null) {
                 req.session.usuario = null;
                 res.redirect("/signup?message=Email already registered");
-            }else{
+            } else {
                 gestorBD.insertUser(user, function (id) {
                     if (id == null) {
                         res.redirect("/signup?message=Error during the register");
@@ -50,13 +50,13 @@ module.exports = function (app, swig, gestorBD) {
 
     app.get("/login", function (req, res) {
         if (req.session.error != null) {
-            let respuesta = swig.renderFile('views/login.html', {
+            let response = swig.renderFile('views/login.html', {
                 errorT: req.session.error
             });
-            res.send(respuesta);
+            res.send(response);
         } else {
-            let respuesta = swig.renderFile('views/login.html', {});
-            res.send(respuesta);
+            let response = swig.renderFile('views/login.html', {});
+            res.send(response);
         }
     });
 
@@ -66,24 +66,28 @@ module.exports = function (app, swig, gestorBD) {
 
         let criteria = {
             email: req.body.email,
-            password: seguro
+            password: secure
         };
 
-        gestorBD.obtenerUsuarios(criteria, function (users) {
+        console.log("PASE POR AQUI");
+
+        gestorBD.obtainUsers(criteria, function (users) {
             if (users == null || users.length == 0) {
                 req.session.usuario = null;
 
                 let errorT = {
-                    tipoMensaje: "alert-danger",
-                    mensaje: "Email o password incorrecto"
+                    messageType: "alert-danger",
+                    message: "Email o password incorrecto"
                 };
 
+                console.log("NO FUNCIONA MELON");
                 req.session.error = errorT;
                 res.redirect("/login");
             } else {
+                console.log("SI QUE FUNCIONA PERO NO");
                 req.session.usuario = users[0].email;
                 req.session.error = null;
-                res.redirect('/publicaciones');
+                res.redirect('/home');
             }
         });
     });
@@ -99,4 +103,38 @@ module.exports = function (app, swig, gestorBD) {
         });
         res.send(respuesta);
     })
+
+    app.get("/listUsers", function (req, res) {
+            let criteria = {};
+
+            if (req.query.search != null)
+                criteria = {"nombre": {$regex: ".*" + req.query.search + ".*"}};
+
+            let pg = parseInt(req.query.pg);
+
+            if (req.query.pg == null) pg = 1;
+
+            gestorBD.obtainUsersPg(criteria, pg, function (users, total) {
+                if (users == null) {
+                    res.send("Listing error");
+                } else {
+                    let lastPg = total / 4;
+
+                    if (total % 4 > 0) lastPg = lastPg + 1;
+
+                    let pages = [];
+
+                    for (let i = pg - 2; i <= pg + 2; i++)
+                        if (i > 0 && i <= lastPg) pages.push(i);
+
+                    let response = swig.renderFile('views/listUsers.html', {
+                        users: users,
+                        pages: pages,
+                        actual: pg
+                    });
+                    res.send(response);
+                }
+            });
+        }
+    );
 };

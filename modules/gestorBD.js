@@ -43,18 +43,18 @@ module.exports = {
         });
     },
 
-    obtenerUsuariosPg: function (criterio, pg, funcionCallback) {
+    obtainUsersPg: function (criteria, pg, funcionCallback) {
         this.mongo.MongoClient.connect(this.app.get('db'), function (err, db) {
             if (err) {
                 funcionCallback(null);
             } else {
-                let collection = db.collection('canciones');
+                let collection = db.collection('users');
                 collection.count(function (err, count) {
-                    collection.find(criterio).skip((pg - 1) * 4).limit(4).toArray(function (err, canciones) {
+                    collection.find(criteria).skip((pg - 1) * 4).limit(4).toArray(function (err, users) {
                         if (err) {
                             funcionCallback(null);
                         } else {
-                            funcionCallback(canciones, count);
+                            funcionCallback(users, count);
                         }
                         db.close();
                     });
