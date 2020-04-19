@@ -2,4 +2,27 @@
 {% block titulo %} Tienda – uoMusic {% endblock %}
 {% block contenido_principal %}
 
-<h1>Pagina Home</h1>
+<h2>Página principal</h2>
+<div class="table-responsive" style="text-align: center;">
+    <table id="datos" class="table table-hover"
+           style="margin: 0 auto; text-align: center;">
+        <thead>
+        <tr>
+            <th style="text-align: center;">Email</th>
+            <th style="text-align: center;">Nombre</th>
+            <th style="text-align: center;">Apellidos</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.email }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.surname }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

@@ -90,7 +90,7 @@ module.exports = function (app, swig, gestorBD) {
 
     app.get('/logout', function (req, res) {
         req.session.usuario = null;
-        res.send("Usuario desconectado");
+        res.redirect("/login");
     });
 
     app.get("/error", function (req, res) {
@@ -136,7 +136,17 @@ module.exports = function (app, swig, gestorBD) {
     );
 
     app.get("/home", function (req, res) {
-        let response = swig.renderFile('views/home.html', {});
-        res.send(response);
+        let criteria = {}
+        gestorBD.obtainUsers(criteria, function (users) {
+            if (users == null || users.length == 0)
+                res.send("Error al listar");
+            else {
+                let response = swig.renderFile('views/home.html',
+                    {
+                        users: users
+                    });
+                res.send(response);
+            }
+        });
     })
 };
