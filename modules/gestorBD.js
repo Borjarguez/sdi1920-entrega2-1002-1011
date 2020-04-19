@@ -48,7 +48,7 @@ module.exports = {
             if (err) {
                 funcionCallback(null);
             } else {
-                let collection = db.collection('users');
+                let collection = db.collection('usuarios');
                 collection.count(function (err, count) {
                     collection.find(criteria).skip((pg - 1) * 4).limit(4).toArray(function (err, users) {
                         if (err) {

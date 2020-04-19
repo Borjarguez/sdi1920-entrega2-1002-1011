@@ -104,7 +104,7 @@ module.exports = function (app, swig, gestorBD) {
             let criteria = {};
 
             if (req.query.search != null)
-                criteria = {"nombre": {$regex: ".*" + req.query.search + ".*"}};
+                criteria = {"name": {$regex: ".*" + req.query.search + ".*"}};
 
             let pg = parseInt(req.query.pg);
 
@@ -128,9 +128,15 @@ module.exports = function (app, swig, gestorBD) {
                         pages: pages,
                         actual: pg
                     });
+
                     res.send(response);
                 }
             });
         }
     );
+
+    app.get("/home", function (req, res) {
+        let response = swig.renderFile('views/home.html', {});
+        res.send(response);
+    })
 };
