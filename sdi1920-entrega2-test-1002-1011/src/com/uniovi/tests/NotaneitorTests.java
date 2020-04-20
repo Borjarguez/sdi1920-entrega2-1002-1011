@@ -1,5 +1,4 @@
 package com.uniovi.tests;
-//Paquetes Java
 import java.util.List;
 //Paquetes JUnit 
 import org.junit.*;
@@ -14,10 +13,8 @@ import com.uniovi.tests.util.SeleniumUtils;
 import com.uniovi.tests.pageobjects.*;
 
 
-//Ordenamos las pruebas por el nombre del método
 @FixMethodOrder(MethodSorters.NAME_ASCENDING) 
 public class NotaneitorTests {
-	//En Windows (Debe ser la versión 65.0.1 y desactivar las actualizacioens automáticas)):
 	//static String PathFirefox65 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
 	//static String Geckdriver024 = "C:\\Path\\geckodriver024win64.exe";
 	//En MACOSX (Debe ser la versión 65.0.1 y desactivar las actualizacioens automáticas):
@@ -48,14 +45,11 @@ public class NotaneitorTests {
 	}
 	@BeforeClass 
 	static public void begin() {
-		//COnfiguramos las pruebas.
-		//Fijamos el timeout en cada opción de carga de una vista. 2 segundos.
 		PO_View.setTimeout(3);
 
 	}
 	@AfterClass
 	static public void end() {
-		//Cerramos el navegador al finalizar las pruebas
 		driver.quit();
 	}
 
