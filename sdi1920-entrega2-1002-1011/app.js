@@ -42,20 +42,44 @@ app.use(bodyParser.urlencoded({extended: true}));
 let gestorBD = require("./modules/gestorBD.js");
 gestorBD.init(app, mongo);
 
+// routerUsuarioToken
+var routerUsuarioToken = express.Router();
+routerUsuarioToken.use(function (req, res, next) {
+    var token = req.headers['token'] || req.body.token || req.query.token;
+    if (token != null) {
+        jwt.verify(token, 'secreto', function (err, infoToken) {
+            if (err || (Date.now() / 1000 - infoToken.tiempo) > 240) {
+                res.status(403);
+                res.json({
+                    acceso: false,
+                    error: 'Token invalido o caducado'
+                });
+                return;
+            } else {
+                res.usuario = infoToken.usuario;
+                next();
+            }
+        });
+    } else {
+        res.status(403); // Forbidden
+        res.json({
+            acceso: false,
+            mensaje: 'No hay Token'
+        });
+    }
+});
+
+// Aplicar routerUsuarioToken
+app.use('/api/*', routerUsuarioToken);
+
 // routerUsuarioSession
 let routerUsuarioSession = express.Router();
 routerUsuarioSession.use(function (req, res, next) {
-    //console.log("routerUsuarioSession");
-    if (req.session.usuario) {
-        next();
-    } else {
-        res.redirect("/login");
-    }
+    req.session.usuario ? next() : res.redirect("/login");
 });
 
 //Aplicar routerUsuarioSession
 app.use("/home", routerUsuarioSession);
-//app.use("/publicaciones", routerUsuarioSession);
 
 app.use(express.static('public'));
 

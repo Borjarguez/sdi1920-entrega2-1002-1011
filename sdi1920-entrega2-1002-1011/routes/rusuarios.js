@@ -11,12 +11,24 @@ module.exports = function (app, swig, gestorBD) {
 
     app.post('/signup', function (req, res) {
         if (req.body.password != req.body.passwordCheck) {
-            res.redirect("/signup?message=Both passwords must be equal");
+            let errorT = {
+                messageType: "alert-danger",
+                message: "Ambas contraseñas debem ser iguales"
+            };
+
+            req.session.error = errorT;
+            res.redirect("/signup");
             return;
         }
 
         if (req.body.email == "") {
-            res.redirect("/signup?message=Email cannot be empty");
+            let errorT = {
+                messageType: "alert-danger",
+                message: "El campo email no puede estar vacío"
+            };
+
+            req.session.error = errorT;
+            res.redirect("/signup");
             return;
         }
 
@@ -36,9 +48,9 @@ module.exports = function (app, swig, gestorBD) {
                 res.redirect("/signup?message=Email already registered");
             } else {
                 gestorBD.insertUser(user, function (id) {
-                    if (id == null) {
+                    if (id == null)
                         res.redirect("/signup?message=Error during the register");
-                    } else {
+                    else {
                         req.session.usuario = user.email;
                         res.redirect("/home");
                     }
