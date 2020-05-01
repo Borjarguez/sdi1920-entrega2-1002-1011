@@ -50,7 +50,7 @@ module.exports = {
             } else {
                 let collection = db.collection('usuarios');
                 collection.count(function (err, count) {
-                    collection.find(criteria).skip((pg - 1) * 4).limit(4).toArray(function (err, users) {
+                    collection.find(criteria).skip((pg - 1) * 5).limit(5).toArray(function (err, users) {
                         if (err) {
                             funcionCallback(null);
                         } else {
@@ -60,6 +60,94 @@ module.exports = {
                     });
                 });
             }
+        });
+    },
+    mandarPeticion: function (criterio,peticion, funcionCallback) {
+        this.mongo.MongoClient.connect(this.app.get('db'), function (err, db) {
+            if (err){
+                funcionCallback(null);
+            }else{
+
+                let collection = db.collection('peticiones');
+                collection.find(criterio).toArray(function (err, peticiones) {
+                    if (err || peticiones.length > 0) {
+                        funcionCallback(null);
+                    } else {
+                        collection.insert(peticion, function (err, result) {
+                            if (err) {
+                                funcionCallback(null);
+                            } else {
+                                funcionCallback(result.ops[0].sender);
+                            }
+                        })
+                    }
+
+                });
+            }
+
+        });
+    },
+    obtenerPeticionesPg: function (criterio, pg, funcionCallback) {
+        this.mongo.MongoClient.connect(this.app.get('db'), function (err, db) {
+            var collection = db.collection('peticiones');
+            collection.count(function (err, count) {
+                collection.find(criterio).skip((pg - 1) * 5).limit(5)
+                    .toArray(function (err, peticiones) {
+                        if (err) {
+                            funcionCallback(null);
+                        } else {
+                            funcionCallback(peticiones, count);
+                        }
+                        db.close();
+                    });
+            });
+        })
+    },
+    aceptarPeticion: function (criterio, funcionCallback) {
+        this.mongo.MongoClient.connect(this.app.get('db'), function (err, db) {
+            var collection = db.collection('peticiones');
+            collection.findOne(criterio, function (err, peticion) {
+                if (err){
+                    funcionCallback(null);
+                }else {
+                    collection.update(criterio, {$set: {"accepted": true}}, function (err, peticion) {
+                        if (err){
+                            funcionCallback(null);
+                        }else {
+                            funcionCallback(peticion);
+                        }
+                    });
+                }
+            });
+        });
+    },
+    obtenerAmigosPg: function (criterio, pg,emailUsuario, funcionCallback) {
+        this.mongo.MongoClient.connect(this.app.get('db'), function (err, db) {
+            let collection = db.collection('peticiones');
+            let collectionU = db.collection('usuarios');
+            collection.find(criterio).skip((pg - 1) * 5).limit(5).
+            toArray(function (err, peticiones) {
+                let i = 0;
+                let emails = [];
+                for (i = 0; i < peticiones.length; i++) {
+                    let peticion = peticiones[i];
+                    if (peticion.sender == emailUsuario){
+                        emails.push(peticion.receiver);
+                    }
+                    else if (peticion.receiver == emailUsuario){
+                        emails.push(peticion.sender);
+                    }
+                }
+                let amigos = [];
+                criterio = {"email":{$in:emails}};
+                collectionU.find(criterio).toArray(function (err, amigos) {
+                    if (err) {
+                        funcionCallback(null);
+                    }else{
+                        funcionCallback(amigos);
+                    }
+                });
+            });
         });
     },
 };

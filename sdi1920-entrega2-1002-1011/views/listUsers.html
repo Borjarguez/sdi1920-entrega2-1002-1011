@@ -36,6 +36,9 @@
             <td>{{ user.email }}</td>
             <td>{{ user.name }}</td>
             <td>{{ user.surname }}</td>
+            <td>
+                <a href="/peticion/{{user.email}}">Agregar amigo</a>
+            </td>
         </tr>
         {% endfor %}
         </tbody>
