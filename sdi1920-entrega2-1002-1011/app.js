@@ -20,6 +20,16 @@ app.set('jwt', jwt);
 let fs = require('fs');
 let https = require('https');
 
+let log4js = require('log4js');
+//loggerlevel no es necesario
+log4js.configure({
+    appenders: { sdi: { type: 'file', filename: 'sdiLog.log' } },
+    categories: { default: { appenders: ['sdi'], level: 'trace' } }
+});
+let logger = log4js.getLogger('sdi');
+app.set('logger', logger);
+
+
 let expressSession = require('express-session');
 app.use(expressSession({
     secret: 'abcdefg',
@@ -45,23 +55,40 @@ gestorBD.init(app, mongo);
 // routerUsuarioSession
 let routerUsuarioSession = express.Router();
 routerUsuarioSession.use(function (req, res, next) {
-    //console.log("routerUsuarioSession");
+    let logger = app.get('logger');
     if (req.session.usuario) {
+        logger.log("El usuario que se encuentra en sesión es: "+req.session.usuario);
         next();
     } else {
+        logger.error("No se encuentra ningún usuario en sesión");
         res.redirect("/login");
+    }
+});
+
+let routerUsuarioSessionAmigos = express.Router();
+routerUsuarioSessionAmigos.use(function (req, res, next) {
+    let logger = app.get('logger');
+    if (req.session.usuario) {
+        logger.log("El usuario que se encuentra en sesión es: "+req.session.usuario);
+        next();
+    } else {
+        logger.error("No se encuentra ningún usuario en sesión");
+        res.send("No puedes ver la lista de amigos sin estar identificado.")
     }
 });
 
 //Aplicar routerUsuarioSession
 app.use("/home", routerUsuarioSession);
-//app.use("/publicaciones", routerUsuarioSession);
+app.use("/listUsers", routerUsuarioSession);
+app.use("/peticiones", routerUsuarioSession);
+app.use("/amigos", routerUsuarioSessionAmigos);
 
 app.use(express.static('public'));
 
 // Variables
 app.set('port', 8081);
 app.set('db', 'mongodb://admin:sdi@tiendamusica-shard-00-00-divfp.mongodb.net:27017,tiendamusica-shard-00-01-divfp.mongodb.net:27017,tiendamusica-shard-00-02-divfp.mongodb.net:27017/test?ssl=true&replicaSet=tiendamusica-shard-0&authSource=admin&retryWrites=true&w=majority');
+
 app.set('clave', 'abcdefg');
 app.set('crypto', crypto);
 

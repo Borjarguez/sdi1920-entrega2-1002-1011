@@ -1,13 +1,21 @@
 module.exports = function (app, swig, gestorBD) {
 
     app.get('/peticion/:email', function (req, res) {
-        var peticion = {
+
+        let peticion = {
             sender: req.session.usuario,
             receiver : req.params.email,
             accepted : false
         };
         if (peticion.sender == peticion.receiver){
-            res.redirect("/listUsers?mensaje=No te puedes invitar a ti mismo");
+            let errorT = {
+                messageType: "alert-danger",
+                message: "No te puedes invitar a ti mismo"
+            };
+
+            req.session.error = errorT;
+
+            res.redirect("/listUsers");
         }
 
         else {
@@ -15,8 +23,14 @@ module.exports = function (app, swig, gestorBD) {
             let criterio ={"receiver":peticion.sender,"sender":peticion.receiver};
             let criterio01={"receiver":peticion.receiver,"sender":peticion.sender};
             gestorBD.mandarPeticion(criterio,peticion, function (email) {
-                if (email == null) res.redirect("/listUsers?mensaje=No se puede invitar a este usuario");
-                else res.redirect("/listUsers");
+                if (email == null){
+                    res.redirect("/listUsers?mensaje=No se puede invitar a este usuario");
+                }
+                else{
+                    console.log(req.params.email);
+                    res.redirect("/listUsers");
+
+                }
             });
         }
 
@@ -29,7 +43,7 @@ module.exports = function (app, swig, gestorBD) {
             pg = 1;
         }
         gestorBD.obtenerPeticionesPg(criterio,pg, function(peticiones, total) {
-            if (invitaciones == null){
+            if (peticiones == null){
                 res.send("Listing error for request");
             }
             else {
@@ -40,7 +54,7 @@ module.exports = function (app, swig, gestorBD) {
 
                 for (let i = pg - 2; i <= pg + 2; i++)
                     if (i > 0 && i <= lastPg) pages.push(i);
-                let responde = swig.renderFile('views/peticioness.html', {
+                let responde = swig.renderFile('views/peticiones.html', {
                     peticiones : peticiones,
                     pages:pages,
                     actual:pg

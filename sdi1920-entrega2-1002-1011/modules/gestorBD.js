@@ -79,7 +79,9 @@ module.exports = {
                             } else {
                                 funcionCallback(result.ops[0].sender);
                             }
-                        })
+                            db.close();
+                        });
+
                     }
 
                 });
