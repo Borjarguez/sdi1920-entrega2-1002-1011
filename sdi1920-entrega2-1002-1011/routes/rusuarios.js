@@ -145,8 +145,7 @@ module.exports = function (app, swig, gestorBD) {
 
     app.get("/amigos", function (req, res) {
         let emailUser = req.session.usuario;
-        let criterio = {"sender":emailUser,"accepted":true};
-        let criterio2 = {"receiver":emailUser,"accepted":true};
+        let criterio = {$or:[{"sender":emailUser,"accepted":true} || {"receiver":emailUser,"accepted":true}]};
         let pg = parseInt(req.query.pg);
 
         if (req.query.pg == null) pg = 1;

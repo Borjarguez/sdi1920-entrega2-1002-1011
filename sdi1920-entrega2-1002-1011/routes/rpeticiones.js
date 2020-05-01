@@ -20,14 +20,20 @@ module.exports = function (app, swig, gestorBD) {
 
         else {
             //Mirar si ya hay una amistad entre ellos o si ya le ha enviado una petición
-            let criterio ={"receiver":peticion.sender,"sender":peticion.receiver};
-            let criterio01={"receiver":peticion.receiver,"sender":peticion.sender};
+            let criterio ={$or:[{"receiver":peticion.sender,"sender":peticion.receiver},
+            {"receiver":peticion.receiver,"sender":peticion.sender}]};
             gestorBD.mandarPeticion(criterio,peticion, function (email) {
                 if (email == null){
-                    res.redirect("/listUsers?mensaje=No se puede invitar a este usuario");
+                    let errorT = {
+                        messageType: "alert-danger",
+                        message: "No se puede invitar a este usuario"
+                    };
+
+                    req.session.error = errorT;
+
+                    res.redirect("/listUsers");
                 }
                 else{
-                    console.log(req.params.email);
                     res.redirect("/listUsers");
 
                 }
