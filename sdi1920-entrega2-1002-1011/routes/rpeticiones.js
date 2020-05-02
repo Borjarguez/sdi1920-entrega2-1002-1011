@@ -8,14 +8,10 @@ module.exports = function (app, swig, gestorBD) {
             accepted : false
         };
         if (peticion.sender == peticion.receiver){
-            let errorT = {
-                messageType: "alert-danger",
-                message: "No te puedes invitar a ti mismo"
-            };
 
-            req.session.error = errorT;
 
-            res.redirect("/listUsers");
+            res.redirect("/listUsers"+"?mensaje=No te puedes mandar petición a ti mismo&tipoMensaje=alert-danger");
+
         }
 
         else {
@@ -24,14 +20,7 @@ module.exports = function (app, swig, gestorBD) {
             {"receiver":peticion.receiver,"sender":peticion.sender}]};
             gestorBD.mandarPeticion(criterio,peticion, function (email) {
                 if (email == null){
-                    let errorT = {
-                        messageType: "alert-danger",
-                        message: "No se puede invitar a este usuario"
-                    };
-
-                    req.session.error = errorT;
-
-                    res.redirect("/listUsers");
+                    res.redirect("/listUsers"+"?mensaje=No se puede mandar petición a este usuario&tipoMensaje=alert-danger");
                 }
                 else{
                     res.redirect("/listUsers");
