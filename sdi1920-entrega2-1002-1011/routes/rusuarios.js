@@ -73,13 +73,7 @@ module.exports = function (app, swig, gestorBD) {
             if (users == null || users.length == 0) {
                 req.session.usuario = null;
 
-                let errorT = {
-                    messageType: "alert-danger",
-                    message: "Email o password incorrecto"
-                };
-
-                req.session.error = errorT;
-                res.redirect("/login");
+                res.redirect("/login"+"?mensaje=Email o password incorrecto&tipoMensaje=alert-danger");
             } else {
                 req.session.usuario = users[0].email;
                 req.session.error = null;
