@@ -25,7 +25,7 @@ module.exports = {
         });
     },
 
-    obtainUsers: function (criterio, funcionCallback) {
+    obtenerUsuarios: function (criterio, funcionCallback) {
         this.mongo.MongoClient.connect(this.app.get('db'), function (err, db) {
             if (err) {
                 funcionCallback(null);
@@ -43,7 +43,7 @@ module.exports = {
         });
     },
 
-    obtainUsersPg: function (criteria, pg, funcionCallback) {
+    obtenerUsuariosPg: function (criteria, pg, funcionCallback) {
         this.mongo.MongoClient.connect(this.app.get('db'), function (err, db) {
             if (err) {
                 funcionCallback(null);
@@ -123,6 +123,7 @@ module.exports = {
             });
         });
     },
+
     obtenerAmigosPg: function (criterio, pg,emailUsuario, funcionCallback) {
         this.mongo.MongoClient.connect(this.app.get('db'), function (err, db) {
             let collection = db.collection('peticiones');
@@ -152,4 +153,33 @@ module.exports = {
             });
         });
     },
+
+    obtenerAmigos: function (criterio, funcionCallback) {
+        this.mongo.MongoClient.connect(this.app.get('db'), function (err, db) {
+            let collection = db.collection('peticiones');
+            let collectionU = db.collection('usuarios');
+            collection.find(criterio).toArray(function (err, peticiones) {
+                let i = 0;
+                let emails = [];
+                for (i = 0; i < peticiones.length; i++) {
+                    let peticion = peticiones[i];
+                    if (peticion.sender == emailUsuario) {
+                        emails.push(peticion.receiver);
+                    } else if (peticion.receiver == emailUsuario) {
+                        emails.push(peticion.sender);
+                    }
+                }
+                let amigos = [];
+                criterio = {"email": {$in: emails}};
+                collectionU.find(criterio).toArray(function (err, amigos) {
+                    if (err) {
+                        funcionCallback(null);
+                    } else {
+                        funcionCallback(amigos);
+                    }
+                });
+            });
+        });
+    }
+
 };

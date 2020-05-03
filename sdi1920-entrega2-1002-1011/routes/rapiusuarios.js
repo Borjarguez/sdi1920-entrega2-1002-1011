@@ -1,17 +1,4 @@
-module.exports = funcapp.get("api/listFriends", function (req, res) {
-        let criteria = {};
-        let friendsList;
-
-        gestorBD.obtainFriends(criteria, function (friends) {
-            if (friends == null || friends.length === 0) {
-                res.status(401);
-            } else {
-                friendsList = friends;
-                res.status(200);
-                res.send(JSON.stringify(friends));
-            }
-        })
-    });tion (app, gestorBD) {
+module.exports = function (app, swig, gestorBD) {
 
     app.post("/api/autenticar", function (req, res) {
         let seguro = app.get("crypto").createHmac('sha256', app.get('clave')).update(req.body.password).digest('hex');
@@ -37,6 +24,24 @@ module.exports = funcapp.get("api/listFriends", function (req, res) {
                 })
             }
         })
+    });
+
+    app.get("/api/friend", function (req, res) {
+        let criteria = {
+            $or: [{"sender": req.session.usuario, "accepted": true} || {
+                "receiver": req.session.usuario, "accepted": true
+            }]
+        };
+
+        gestorBD.obtenerAmigos(criteria, function (amigos) {
+            if (amigos == null) {
+                res.status(500);
+                res.json({error: "se ha producido un error"});
+            } else {
+                res.status(200);
+                res.send(JSON.stringify(amigos));
+            }
+        });
     });
 
 
