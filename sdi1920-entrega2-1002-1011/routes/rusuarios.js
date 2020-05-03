@@ -179,4 +179,133 @@ module.exports = function (app, swig, gestorBD) {
             }
         });
     });
+
+    app.get("/reset", function (req, res) {
+        var encryptedAdmin = app.get("crypto").createHmac('sha256', app.get('clave'))
+            .update("admin").digest('hex');
+        var encryptedUser = app.get("crypto").createHmac('sha256', app.get('clave'))
+            .update("123456").digest('hex');
+        var f = new Date();
+        var datosIniciales = {
+            usuarios : [
+                {
+                    name: "admin",
+                    lastName: "admin",
+                    email: "admin@email.com",
+                    password: encryptedUser
+                },
+                {
+                    name: "Pedro",
+                    lastName: "Alonso",
+                    email: "pedro@uniovi.es",
+                    password: encryptedUser
+                },
+                {
+                    name: "Lucas",
+                    lastName: "Fernandez",
+                    email: "lucas@uniovi.es",
+                    password: encryptedUser
+                },
+                {
+                    name: "Marta",
+                    lastName: "Jimenez",
+                    email: "marta@uniovi.es",
+                    password: encryptedUser
+                },
+                {
+                    name: "Maria",
+                    lastName: "Perez",
+                    email: "maria@uniovi.es",
+                    password: encryptedUser
+                },
+                {
+                    name: "Inés",
+                    lastName: "Andrés",
+                    email: "ines@uniovi.es",
+                    password: encryptedUser
+                },{
+                    name: "Borja",
+                    lastName: "Rodriguez",
+                    email: "Borja@uniovi.es",
+                    password: encryptedUser
+                },{
+                    name: "Prueba",
+                    lastName: "Prueba",
+                    email: "prueba@uniovi.es",
+                    password: encryptedUser
+                },{
+                    name: "Luisa",
+                    lastName: "Diaz",
+                    email: "luisa@uniovi.es",
+                    password: encryptedUser
+                },{
+                    name: "sdi",
+                    lastName: "asignatura",
+                    email: "sdi@uniovi.es",
+                    password: encryptedUser
+                },{
+                    name: "Aurora",
+                    lastName: "Santos",
+                    email: "aurora@uniovi.es",
+                    password: encryptedUser
+                }
+            ],
+            peticiones : [
+                {
+                    sender: "admin@uniovi.es",
+                    receiver: "prueba@uniovi.es",
+                    accepted: false
+                },{
+                    sender: "admin@uniovi.es",
+                    receiver: "prueba@uniovi.es",
+                    accepted: false
+                },{
+                    sender: "pedro@uniovi.es",
+                    receiver: "prueba@uniovi.es",
+                    accepted: false
+                },{
+                    sender: "lucas@uniovi.es",
+                    receiver: "prueba@uniovi.es",
+                    accepted: false
+                },{
+                    sender: "marta@uniovi.es",
+                    receiver: "prueba@uniovi.es",
+                    accepted: false
+                },{
+                    sender: "maria@uniovi.es",
+                    receiver: "prueba@uniovi.es",
+                    accepted: false
+                }
+            ],
+            amigos : [
+                {
+                    sender: "ines@uniovi.es",
+                    receiver: "prueba@uniovi.es",
+                    accepted: true
+                },{
+                    sender: "borja@uniovi.es",
+                    receiver: "prueba@uniovi.es",
+                    accepted: true
+                },{
+                    sender: "luisa@uniovi.es",
+                    receiver: "prueba@uniovi.es",
+                    accepted: true
+                },{
+                    sender: "sdi@uniovi.es",
+                    receiver: "prueba@uniovi.es",
+                    accepted: true
+                },{
+                    sender: "aurora@uniovi.es",
+                    receiver: "prueba@uniovi.es",
+                    accepted: true
+                }
+            ]
+        };
+        gestorBD.resetearBD(datosIniciales, function () {
+            res.send("Base de datos reseteada");
+        });
+    });
+
+
+
 };
