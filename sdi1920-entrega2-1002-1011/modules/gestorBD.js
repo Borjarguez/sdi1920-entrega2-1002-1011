@@ -156,8 +156,8 @@ module.exports = {
             let collection = db.collection('peticiones');
             let collectionU = db.collection('usuarios');
             collection.find(criterio).toArray(function (err, peticiones) {
-                let i = 0;
-                let emails = [];
+                let i = 0, emails = [];
+
                 for (i = 0; i < peticiones.length; i++) {
                     let peticion = peticiones[i];
                     if (peticion.sender == emailUsuario) {
@@ -166,14 +166,11 @@ module.exports = {
                         emails.push(peticion.sender);
                     }
                 }
+
                 let amigos = [];
                 criterio = {"email": {$in: emails}};
                 collectionU.find(criterio).toArray(function (err, amigos) {
-                    if (err) {
-                        funcionCallback(null);
-                    } else {
-                        funcionCallback(amigos);
-                    }
+                    err ? funcionCallback(null) : funcionCallback(amigos);
                 });
             });
         });
@@ -186,11 +183,7 @@ module.exports = {
             } else {
                 var collection = db.collection('conversaciones');
                 collection.insert(conversacion, function (err, result) {
-                    if (err) {
-                        funcionCallback(null);
-                    } else {
-                        funcionCallback(result.ops[0]._id);
-                    }
+                    err ? funcionCallback(null) : funcionCallback(result.ops[0]._id);
                     db.close();
                 });
             }
@@ -199,20 +192,29 @@ module.exports = {
 
     obtenerConversaciones: function (criterio, funcionCallback) {
         this.mongo.MongoClient.connect(this.app.get('db'), function (err, db) {
-            if (err) {
+            if (err)
                 funcionCallback(null);
-            } else {
+            else {
                 var collection = db.collection('conversaciones');
                 collection.find(criterio).toArray(function (err, conversaciones) {
-                    if (err) {
-                        funcionCallback(null);
-                    } else {
-                        funcionCallback(conversaciones);
-                    }
+                    err ? funcionCallback(null) : funcionCallback(conversaciones);
                     db.close();
                 });
             }
         });
     },
 
+    insertarMensaje: function (criteria, atributos, funcionCallback) {
+        this.mongo.MongoClient.connect(this.app.get('db'), function (err, db) {
+            if (err)
+                funcionCallback(null);
+            else {
+                var collection = db.collection('conversaciones');
+                collection.update(criteria, atributos, function (err, obj) {
+                    err ? funcionCallback(null) : funcionCallback(obj);
+                    db.close();
+                });
+            }
+        });
+    },
 };

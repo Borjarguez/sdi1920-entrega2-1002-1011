@@ -63,15 +63,15 @@ module.exports = function (app, swig, gestorBD) {
 
         gestorBD.obtenerUsuarios({
             "_id": gestorBD.mongo.ObjectID(req.params.id)
-        }, function (usuario) {
-            if (usuario == null || usuario[0] == null) {
+        }, function (user) {
+            if (user == null || user[0] == null) {
                 res.status(500);
                 res.json({
                     error: "se ha producido un error"
                 });
             } else {
                 gestorBD.obtenerAmigos({
-                    "receiver": usuario[0].email,
+                    "receiver": user[0].email,
                     "accepted": true
                 }, function (amigo) {
                     if (amigo == null || amigo[0] == null) {
@@ -150,12 +150,14 @@ module.exports = function (app, swig, gestorBD) {
         });
     });
 
-    app.get("/api/chat", function (req, res) {
-        var criterio = {
-            "$or": [{"sender": res.usuario},{"receiver": res.usuario}]
+    app.get("/api/chat/:id", function (req, res) {
+        // TODO revisar porque no me parece que esté bien
+        let criteria = {
+            "$or": [{"sender": res.usuario}, {"receiver": res.usuario},
+                {"sender": req.params.id}, {"receiver": req.params.id}]
         };
 
-        gestorBD.obtenerConversaciones(criterio, function (mensajes) {
+        gestorBD.obtenerConversaciones(criteria, function (mensajes) {
             if (mensajes == null) {
                 res.status(403);
                 res.json({
