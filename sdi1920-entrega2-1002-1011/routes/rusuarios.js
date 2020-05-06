@@ -107,7 +107,7 @@ module.exports = function (app, swig, gestorBD) {
 
             let pg = parseInt(req.query.pg);
 
-            if (req.query.pg == null) pg = 1;
+            if (req.query.pg == null){ pg = 1;}
 
             gestorBD.obtainUsersPg(criteria, pg, function (users, total) {
                 if (users == null) {
@@ -151,10 +151,9 @@ module.exports = function (app, swig, gestorBD) {
 
     app.get("/amigos", function (req, res) {
         let emailUser = req.session.usuario;
-        let criterio = {$or:[{"sender":emailUser,"accepted":true} || {"receiver":emailUser,"accepted":true}]};
+        let criterio = {$or:[{"sender":emailUser,"accepted":true},{"receiver":emailUser,"accepted":true}]};
         let pg = parseInt(req.query.pg);
-
-        if (req.query.pg == null) pg = 1;
+        if (req.query.pg == null){ pg = 1;}
         gestorBD.obtenerAmigosPg(criterio, pg, emailUser, function (amigos, total) {
             if (amigos == null){
                 res.send("Error al listar los amigos.")
@@ -190,72 +189,73 @@ module.exports = function (app, swig, gestorBD) {
             usuarios : [
                 {
                     name: "admin",
-                    lastName: "admin",
+                    surname: "admin",
                     email: "admin@email.com",
                     password: encryptedUser
                 },
                 {
                     name: "Pedro",
-                    lastName: "Alonso",
+                    surname: "Alonso",
                     email: "pedro@uniovi.es",
                     password: encryptedUser
                 },
                 {
                     name: "Lucas",
-                    lastName: "Fernandez",
+                    surname: "Fernandez",
                     email: "lucas@uniovi.es",
                     password: encryptedUser
                 },
                 {
                     name: "Marta",
-                    lastName: "Jimenez",
+                    surname: "Jimenez",
                     email: "marta@uniovi.es",
                     password: encryptedUser
                 },
                 {
                     name: "Maria",
-                    lastName: "Perez",
+                    surname: "Perez",
                     email: "maria@uniovi.es",
                     password: encryptedUser
                 },
                 {
                     name: "Inés",
-                    lastName: "Andrés",
+                    surname: "Andrés",
                     email: "ines@uniovi.es",
                     password: encryptedUser
                 },{
                     name: "Borja",
-                    lastName: "Rodriguez",
-                    email: "Borja@uniovi.es",
+                    surname: "Rodriguez",
+                    email: "borja@uniovi.es",
                     password: encryptedUser
                 },{
                     name: "Prueba",
-                    lastName: "Prueba",
+                    surname: "Prueba",
                     email: "prueba@uniovi.es",
                     password: encryptedUser
                 },{
                     name: "Luisa",
-                    lastName: "Diaz",
+                    surname: "Diaz",
                     email: "luisa@uniovi.es",
                     password: encryptedUser
                 },{
                     name: "sdi",
-                    lastName: "asignatura",
+                    surname: "asignatura",
                     email: "sdi@uniovi.es",
                     password: encryptedUser
                 },{
                     name: "Aurora",
-                    lastName: "Santos",
+                    surname: "Santos",
                     email: "aurora@uniovi.es",
+                    password: encryptedUser
+                },{
+                    name: "Antonio",
+                    surname: "Garcia",
+                    email: "anton@uniovi.es",
                     password: encryptedUser
                 }
             ],
             peticiones : [
                 {
-                    sender: "admin@uniovi.es",
-                    receiver: "prueba@uniovi.es",
-                    accepted: false
-                },{
                     sender: "admin@uniovi.es",
                     receiver: "prueba@uniovi.es",
                     accepted: false
@@ -274,6 +274,26 @@ module.exports = function (app, swig, gestorBD) {
                 },{
                     sender: "maria@uniovi.es",
                     receiver: "prueba@uniovi.es",
+                    accepted: false
+                },{
+                    sender: "admin@uniovi.es",
+                    receiver: "anton@uniovi.es",
+                    accepted: false
+                },{
+                    sender: "pedro@uniovi.es",
+                    receiver: "anton@uniovi.es",
+                    accepted: false
+                },{
+                    sender: "lucas@uniovi.es",
+                    receiver: "anton@uniovi.es",
+                    accepted: false
+                },{
+                    sender: "marta@uniovi.es",
+                    receiver: "anton@uniovi.es",
+                    accepted: false
+                },{
+                    sender: "maria@uniovi.es",
+                    receiver: "anton@uniovi.es",
                     accepted: false
                 }
             ],

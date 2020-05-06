@@ -92,7 +92,7 @@ module.exports = {
     obtenerPeticionesPg: function (criterio, pg, funcionCallback) {
         this.mongo.MongoClient.connect(this.app.get('db'), function (err, db) {
             var collection = db.collection('peticiones');
-            collection.count(function (err, count) {
+            collection.find(criterio).count(function (err, count) {
                 collection.find(criterio).skip((pg - 1) * 5).limit(5)
                     .toArray(function (err, peticiones) {
                         if (err) {
@@ -127,8 +127,10 @@ module.exports = {
         this.mongo.MongoClient.connect(this.app.get('db'), function (err, db) {
             let collection = db.collection('peticiones');
             let collectionU = db.collection('usuarios');
-            collection.find(criterio).skip((pg - 1) * 5).limit(5).
-            toArray(function (err, peticiones) {
+
+            collection.find(criterio).toArray(function (err, peticiones) {
+
+                console.log(peticiones);
                 let i = 0;
                 let emails = [];
                 for (i = 0; i < peticiones.length; i++) {
@@ -140,15 +142,19 @@ module.exports = {
                         emails.push(peticion.sender);
                     }
                 }
-                let amigos = [];
+
                 criterio = {"email":{$in:emails}};
-                collectionU.find(criterio).toArray(function (err, amigos) {
-                    if (err) {
-                        funcionCallback(null);
-                    }else{
-                        funcionCallback(amigos);
-                    }
+                collectionU.find(criterio).count(function (err, count) {
+                    collectionU.find(criterio).skip((pg - 1) * 5).limit(5)
+                        .toArray(function (err, amigos) {
+                        if (err) {
+                            funcionCallback(null);
+                        }else{
+                            funcionCallback(amigos,count);
+                        }
+                    });
                 });
+
             });
         });
     },

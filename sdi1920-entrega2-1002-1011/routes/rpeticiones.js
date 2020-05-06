@@ -33,22 +33,21 @@ module.exports = function (app, swig, gestorBD) {
 
     app.get('/peticiones', function(req,res) {
         var criterio = {"receiver":req.session.usuario,"accepted":false};
-        var pg = parseInt(req.query.pg);
-        if ( req.query.pg == null){
-            pg = 1;
-        }
+        let pg = parseInt(req.query.pg);
+
+        if (req.query.pg == null){ pg = 1;}
         gestorBD.obtenerPeticionesPg(criterio,pg, function(peticiones, total) {
             if (peticiones == null){
                 res.send("Listing error for request");
             }
             else {
                 let lastPg = total / 5;
-
                 if (total % 5 > 0) lastPg = lastPg + 1;
                 let pages = [];
 
                 for (let i = pg - 2; i <= pg + 2; i++)
                     if (i > 0 && i <= lastPg) pages.push(i);
+
                 let responde = swig.renderFile('views/peticiones.html', {
                     peticiones : peticiones,
                     pages:pages,

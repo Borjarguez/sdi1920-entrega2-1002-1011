@@ -273,7 +273,45 @@ public class NotaneitorTests {
     //PR15. Sin hacer /
     @Test
     public void PR15() {
-        assertTrue("PR15 sin hacer", false);
+        // Vamos a resetear
+        driver.navigate().to("https://localhost:8081/reset");
+        PO_LoginView.fillForm(driver, "prueba@uniovi.es", "123456");
+        PO_View.getP();
+        PO_HomeView.checkElement(driver, "id", "private");
+   		// Menú para ver la lista de usuarios
+   		List<WebElement> elementos  = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listUsers')]");
+
+   		// Pinchamos en ver usuarios
+   		elementos.get(0).click();
+        //Vamos a la paginación 3 que es donde se encuentra anton@uniovi.es
+
+
+
+
+
+   		// Pinchamos en enviar petición de amistad
+        		elementos = PO_View.checkElement(driver, "free",
+        				"//td[contains(text(), 'anton@uniovi.es')]/following-sibling::*/a[contains(@name, 'peticion')]");
+        		// MIRAMOS QUE SE LE PUEDE MANDAR PETICIÓN
+        		assertTrue(elementos.get(0).getText().equals("Agregar amigo"));
+        		// Se envia petición
+        		elementos.get(0).click();
+
+        		// MIRAR QUE LO RECIBIO
+        		PO_HomeView.clickOption(driver, "logout", "class", "btn btn-primary");
+
+        		PO_LoginView.fillForm(driver, "anton@uniovi.es", "123456");
+
+        		// Esperamos a aparezca la opción de ver peticiones
+        		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, 'peticiones')]");
+        		// Pinchamos en ver peticiones
+        		elementos.get(0).click();
+
+        		//Tenía 5 peticiones antes, por lo que ahora debería tener 6, y tener paginación.
+        		elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr", PO_View.getTimeout());
+        		assertTrue(elementos.size() == 1);
+
+        		PO_HomeView.clickOption(driver, "logout", "class", "btn btn-primary");
     }
 
     //PR16. Sin hacer /
@@ -303,19 +341,31 @@ public class NotaneitorTests {
     //P20. Sin hacer /
     @Test
     public void PR20() {
-        assertTrue("PR20 sin hacer", false);
+        // Vamos a resetear
+        driver.navigate().to("https://localhost:8081/reset");
+        // Vamos a listado de usuarios
+        driver.navigate().to("https://localhost:8081/listUsers");
+        PO_View.checkElement(driver, "text", "Log in");
     }
 
     //PR21. Sin hacer /
     @Test
     public void PR21() {
-        assertTrue("PR21 sin hacer", false);
+        // Vamos a resetear
+        driver.navigate().to("https://localhost:8081/reset");
+        // Vamos a listado de usuarios
+        driver.navigate().to("https://localhost:8081/peticiones");
+        PO_View.checkElement(driver, "text", "Log in");
     }
 
     //PR22. Sin hacer /
     @Test
     public void PR22() {
-        assertTrue("PR22 sin hacer", false);
+        // Vamos a resetear
+        driver.navigate().to("https://localhost:8081/reset");
+        // Vamos a listado de usuarios
+        driver.navigate().to("https://localhost:8081/amigos");
+        PO_View.checkElement(driver, "text", "No puedes ver la lista de amigos sin estar identificado.");
     }
 
     //PR23. Sin hacer /
