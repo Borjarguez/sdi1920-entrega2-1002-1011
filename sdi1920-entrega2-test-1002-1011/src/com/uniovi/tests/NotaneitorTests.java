@@ -17,15 +17,11 @@ import com.uniovi.tests.pageobjects.*;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class NotaneitorTests {
-    //static String PathFirefox65 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
-    //static String Geckdriver024 = "C:\\Path\\geckodriver024win64.exe";
-    //En MACOSX (Debe ser la versi贸n 65.0.1 y desactivar las actualizacioens autom谩ticas):
-    static String PathFirefox65 = "/Applications/Firefox 2.app/Contents/MacOS/firefox-bin";
-    //static String PathFirefox64 = "/Applications/Firefox.app/Contents/MacOS/firefox-bin";
-    static String Geckdriver024 = "/Users/delacal/Documents/SDI1718/firefox/geckodriver024mac";
-    //static String Geckdriver022 = "/Users/delacal/Documents/SDI1718/firefox/geckodriver023mac";
-    //Com煤n a Windows y a MACOSX
-    static WebDriver driver = getDriver(PathFirefox65, Geckdriver024);
+	static String PathFirefox65 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
+//	static String Geckdriver024 = "C:\\Users\\borja\\Documents\\BORJA\\REPOS\\SDI\\SPRING\\geckodriver024win64.exe";
+	static String Geckdriver024 = "C:\\Users\\Lenovo\\OneDrive - Universidad de Oviedo\\Tercer curso\\SegundoSemestre\\SDI\\Practica\\Selenium\\PL-SDI-Sesi髇5-material\\PL-SDI-Sesi髇5-material\\geckodriver024win64.exe";
+
+	static WebDriver driver = getDriver(PathFirefox65, Geckdriver024);
     static String URL = "https://localhost:8081";
 
 
@@ -38,6 +34,7 @@ public class NotaneitorTests {
 
     @Before
     public void setUp() {
+    	driver.navigate().to("https://localhost:8081/reset");
         driver.navigate().to(URL);
     }
 
@@ -124,9 +121,9 @@ public class NotaneitorTests {
     public void PR05() {
         PO_HomeView.clickOption(driver, "login", "class",
                 "btn btn-primary");
-        PO_LogInView.fillForm(driver, "pedro@uniovi.es", "123456");
-        PO_LogInView.checkElement(driver, "text", "pedro@uniovi.es");
-        PO_LogInView.checkElement(driver, "text", "Pedro Alonso");
+        PO_LoginView.fillForm(driver, "pedro@uniovi.es", "123456");
+        PO_LoginView.checkElement(driver, "text", "pedro@uniovi.es");
+        PO_LoginView.checkElement(driver, "text", "Pedro Alonso");
         PO_HomeView.clickOption(driver, "logout", "class",
                 "btn btn-primary");
     }
@@ -139,10 +136,10 @@ public class NotaneitorTests {
     public void PR06() {
         PO_HomeView.clickOption(driver, "login", "class",
                 "btn btn-primary");
-        PO_LogInView.fillForm(driver, "", "123455");
-        PO_LogInView.checkElement(driver, "text", "Email o password incorrecto");
-        PO_LogInView.fillForm(driver, "pedro@uniovi.es", "");
-        PO_LogInView.checkElement(driver, "text", "Email o password incorrecto");
+        PO_LoginView.fillForm(driver, "", "123455");
+        PO_LoginView.checkElement(driver, "text", "Email o password incorrecto");
+        PO_LoginView.fillForm(driver, "pedro@uniovi.es", "");
+        PO_LoginView.checkElement(driver, "text", "Email o password incorrecto");
     }
 
     /**
@@ -154,8 +151,8 @@ public class NotaneitorTests {
     public void PR07() {
         PO_HomeView.clickOption(driver, "login", "class",
                 "btn btn-primary");
-        PO_LogInView.fillForm(driver, "pedro@uniovi.es", "123455");
-        PO_LogInView.checkElement(driver, "text", "Email o password incorrecto");
+        PO_LoginView.fillForm(driver, "pedro@uniovi.es", "123455");
+        PO_LoginView.checkElement(driver, "text", "Email o password incorrecto");
     }
 
     /**
@@ -166,8 +163,8 @@ public class NotaneitorTests {
     public void PR08() {
         PO_HomeView.clickOption(driver, "login", "class",
                 "btn btn-primary");
-        PO_LogInView.fillForm(driver, "antunaalejandro@uniovi.es", "123456");
-        PO_LogInView.checkElement(driver, "text", "Email o password incorrecto");
+        PO_LoginView.fillForm(driver, "antunaalejandro@uniovi.es", "123456");
+        PO_LoginView.checkElement(driver, "text", "Email o password incorrecto");
     }
 
     /**
@@ -179,10 +176,10 @@ public class NotaneitorTests {
     public void PR09() {
         PO_HomeView.clickOption(driver, "login", "class",
                 "btn btn-primary");
-        PO_LogInView.fillForm(driver, "pedro@uniovi.es", "123456");
+        PO_LoginView.fillForm(driver, "pedro@uniovi.es", "123456");
         PO_HomeView.clickOption(driver, "logout", "class",
                 "btn btn-primary");
-        PO_LogInView.checkElement(driver, "text", "Identificaci贸n de usuario");
+        PO_LoginView.checkElement(driver, "text", "Identificaci贸n de usuario");
     }
 
     /**
@@ -191,7 +188,7 @@ public class NotaneitorTests {
      */
     @Test
     public void PR10() {
-        SeleniumUtils.elementoNoPresentePagina(driver, "btnUser");
+        //SeleniumUtils.elementoNoPresentePagina(driver, "btnUser");
     }
 
     /**
@@ -201,7 +198,7 @@ public class NotaneitorTests {
     @Test
     public void PR11() {
         PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
-        PO_LogInView.fillForm(driver, "admin@email.com", "admin");
+        PO_LoginView.fillForm(driver, "admin@email.com", "admin");
         PO_HomeView.checkElement(driver, "text", "admin@email.com");
         PO_HomeView.clickOption(driver, "/user/list", "class",
                 "btn btn-primary");
@@ -221,11 +218,11 @@ public class NotaneitorTests {
         // TODO Adaptar a usuarios
         PO_HomeView.clickOption(driver, "login", "class",
                 "btn btn-primary");
-        PO_LogInView.fillForm(driver, "pedro@uniovi.es", "123456");
+        PO_LoginView.fillForm(driver, "pedro@uniovi.es", "123456");
         PO_HomeView.checkElement(driver, "text", "pedro@uniovi.es");
         List<WebElement> elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/bid/search')]");
         elementos.get(0).click();
-        PO_SearchBidView.fillForm(driver, "");
+        //PO_SearchBidView.fillForm(driver, "");
         elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr", PO_View.getTimeout());
 
         assertTrue(elementos.size() == 5);
@@ -239,11 +236,11 @@ public class NotaneitorTests {
     @Test
     public void PR13() {
         PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
-        PO_LogInView.fillForm(driver, "pedro@uniovi.es", "123456");
+        PO_LoginView.fillForm(driver, "pedro@uniovi.es", "123456");
         PO_HomeView.checkElement(driver, "text", "pedro@uniovi.es");
         List<WebElement> elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/bid/search')]");
         elementos.get(0).click();
-        PO_SearchBidView.fillForm(driver, "asdfg");
+        //PO_SearchBidView.fillForm(driver, "asdfg");
         System.out.println(elementos.size());
 
         // Compruebo que no hay nada m谩s que la cabecera de la tabla de ofertas
@@ -260,58 +257,67 @@ public class NotaneitorTests {
     public void PR14() {
         // TODO Adaptar a usuarios
         PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
-        PO_LogInView.fillForm(driver, "pedro@uniovi.es", "123456");
+        PO_LoginView.fillForm(driver, "pedro@uniovi.es", "123456");
         PO_HomeView.checkElement(driver, "text", "pedro@uniovi.es");
         List<WebElement> elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/bid/search')]");
         elementos.get(0).click();
-        PO_SearchBidView.fillForm(driver, "OFERTA");
+        //PO_SearchBidView.fillForm(driver, "OFERTA");
 
         // Compruebo que no hay nada m谩s que la cabecera de la tabla de ofertas
-        assertTrue(checkNumRows("tableBids") > 0);
+        //assertTrue(checkNumRows("tableBids") > 0);
     }
 
     //PR15. Sin hacer /
     @Test
     public void PR15() {
-        // Vamos a resetear
-        driver.navigate().to("https://localhost:8081/reset");
+    	//Se entra como usuario prueba@uniovi.es
         PO_LoginView.fillForm(driver, "prueba@uniovi.es", "123456");
         PO_View.getP();
-        PO_HomeView.checkElement(driver, "id", "private");
-   		// Men煤 para ver la lista de usuarios
+        
+   		// Vamos a mirar la lista de usuarios
    		List<WebElement> elementos  = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listUsers')]");
 
-   		// Pinchamos en ver usuarios
+   			// Pinchamos en ver usuarios
    		elementos.get(0).click();
-        //Vamos a la paginaci贸n 3 que es donde se encuentra anton@uniovi.es
+   		
+        //Vamos a la paginacion 3, que es donde se encuentra anton@uniovi.es
 
+   		elementos  = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listUsers?pg=3')]");
 
+   		elementos.get(0).click();
 
-
-
-   		// Pinchamos en enviar petici贸n de amistad
-        		elementos = PO_View.checkElement(driver, "free",
+   		// Pinchamos en enviar peticion de amistad
+        elementos = PO_View.checkElement(driver, "free",
         				"//td[contains(text(), 'anton@uniovi.es')]/following-sibling::*/a[contains(@name, 'peticion')]");
-        		// MIRAMOS QUE SE LE PUEDE MANDAR PETICI脫N
-        		assertTrue(elementos.get(0).getText().equals("Agregar amigo"));
-        		// Se envia petici贸n
-        		elementos.get(0).click();
+        
+        // Se envia peticion
+        elementos.get(0).click();
 
-        		// MIRAR QUE LO RECIBIO
-        		PO_HomeView.clickOption(driver, "logout", "class", "btn btn-primary");
+        // Se sale del usuario de prueba para entrar en el de anton
+        PO_HomeView.clickOption(driver, "logout", "class", "btn btn-primary");
 
-        		PO_LoginView.fillForm(driver, "anton@uniovi.es", "123456");
+        PO_LoginView.fillForm(driver, "anton@uniovi.es", "123456");
 
-        		// Esperamos a aparezca la opci贸n de ver peticiones
-        		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, 'peticiones')]");
-        		// Pinchamos en ver peticiones
-        		elementos.get(0).click();
+        // Vamos a la opci髇 de  ver peticiones
+        elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, 'peticiones')]");
+        		
+        elementos.get(0).click();
 
-        		//Ten铆a 5 peticiones antes, por lo que ahora deber铆a tener 6, y tener paginaci贸n.
-        		elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr", PO_View.getTimeout());
-        		assertTrue(elementos.size() == 1);
-
-        		PO_HomeView.clickOption(driver, "logout", "class", "btn btn-primary");
+        //Tenia 5 peticiones antes, por lo que ahora deberia tener 6, y tener paginacion.
+        elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr", PO_View.getTimeout());
+        assertTrue(elementos.size() == 5); //5 EN LA PRIMERA PAGINACION
+        
+        //Ahora se pasa a la siguiente paginacion y esta solo 1, que es el nuevo
+        elementos  = PO_View.checkElement(driver, "free", "//a[contains(@href, '/peticiones?pg=2')]");
+        elementos.get(0).click();
+        assertTrue(elementos.size() == 1); //Se encuentra la peticion
+           		
+        	//Prueba de que esa peticion es del usuario prueba
+        elementos = PO_View.checkElement(driver, "free",
+        				"//td[contains(text(), 'prueba@uniovi.es')]");
+        assertTrue(elementos.size() == 1);
+        
+        PO_HomeView.clickOption(driver, "logout", "class", "btn btn-primary");
     }
 
     //PR16. Sin hacer /
