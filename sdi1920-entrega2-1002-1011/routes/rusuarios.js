@@ -14,7 +14,7 @@ module.exports = function (app, swig, gestorBD) {
         if (req.body.password != req.body.passwordCheck) {
             let errorT = {
                 messageType: "alert-danger",
-                message: "Ambas contraseñas debem ser iguales"
+                message: "Ambas contraseñas deben ser iguales"
             };
 
             req.session.error = errorT;
@@ -43,7 +43,7 @@ module.exports = function (app, swig, gestorBD) {
             password: secure
         };
 
-        gestorBD.obtainUsers({email: req.body.email}, function (users) {
+        gestorBD.obtenerUsuarios({email: req.body.email}, function (users) {
             if (users.length != 0 && users != null) {
                 req.session.usuario = null;
                 res.redirect("/signup?message=Email already registered");
@@ -57,7 +57,6 @@ module.exports = function (app, swig, gestorBD) {
                     }
                 });
             }
-
         });
     });
 
@@ -82,7 +81,7 @@ module.exports = function (app, swig, gestorBD) {
             password: secure
         };
 
-        gestorBD.obtainUsers(criteria, function (users) {
+        gestorBD.obtenerUsuarios(criteria, function (users) {
             if (users == null || users.length == 0) {
                 req.session.usuario = null;
 
@@ -112,7 +111,7 @@ module.exports = function (app, swig, gestorBD) {
                 pg = 1;
             }
 
-            gestorBD.obtainUsersPg(criteria, pg, function (users, total) {
+            gestorBD.obtenerUsuariosPg(criteria, pg, function (users, total) {
                 if (users == null) {
                     res.send("Error al listar");
                 } else {
@@ -139,7 +138,7 @@ module.exports = function (app, swig, gestorBD) {
 
     app.get("/home", function (req, res) {
         let criteria = {}
-        gestorBD.obtainUsers(criteria, function (users) {
+        gestorBD.obtenerUsuarios(criteria, function (users) {
             if (users == null || users.length == 0)
                 res.send("Error al listar");
             else {

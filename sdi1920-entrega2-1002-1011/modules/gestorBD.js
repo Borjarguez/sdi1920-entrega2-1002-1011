@@ -25,7 +25,7 @@ module.exports = {
         });
     },
 
-    obtainUsers: function (criterio, funcionCallback) {
+    obtenerUsuarios: function (criterio, funcionCallback) {
         this.mongo.MongoClient.connect(this.app.get('db'), function (err, db) {
             if (err) {
                 funcionCallback(null);
@@ -43,7 +43,7 @@ module.exports = {
         });
     },
 
-    obtainUsersPg: function (criteria, pg, funcionCallback) {
+    obtenerUsuariosPg: function (criteria, pg, funcionCallback) {
         this.mongo.MongoClient.connect(this.app.get('db'), function (err, db) {
             if (err) {
                 funcionCallback(null);
@@ -62,12 +62,11 @@ module.exports = {
             }
         });
     },
-    mandarPeticion: function (criterio,peticion, funcionCallback) {
+    mandarPeticion: function (criterio, peticion, funcionCallback) {
         this.mongo.MongoClient.connect(this.app.get('db'), function (err, db) {
-            if (err){
+            if (err) {
                 funcionCallback(null);
-            }else{
-
+            } else {
                 let collection = db.collection('peticiones');
                 collection.find(criterio).toArray(function (err, peticiones) {
                     if (err || peticiones.length > 0) {
@@ -109,13 +108,13 @@ module.exports = {
         this.mongo.MongoClient.connect(this.app.get('db'), function (err, db) {
             var collection = db.collection('peticiones');
             collection.findOne(criterio, function (err, peticion) {
-                if (err){
+                if (err) {
                     funcionCallback(null);
-                }else {
+                } else {
                     collection.update(criterio, {$set: {"accepted": true}}, function (err, peticion) {
-                        if (err){
+                        if (err) {
                             funcionCallback(null);
-                        }else {
+                        } else {
                             funcionCallback(peticion);
                         }
                     });
@@ -123,7 +122,8 @@ module.exports = {
             });
         });
     },
-    obtenerAmigosPg: function (criterio, pg,emailUsuario, funcionCallback) {
+
+    obtenerAmigosPg: function (criterio, pg, emailUsuario, funcionCallback) {
         this.mongo.MongoClient.connect(this.app.get('db'), function (err, db) {
             let collection = db.collection('peticiones');
             let collectionU = db.collection('usuarios');
@@ -134,10 +134,9 @@ module.exports = {
                 let emails = [];
                 for (i = 0; i < peticiones.length; i++) {
                     let peticion = peticiones[i];
-                    if (peticion.sender == emailUsuario){
+                    if (peticion.sender == emailUsuario) {
                         emails.push(peticion.receiver);
-                    }
-                    else if (peticion.receiver == emailUsuario){
+                    } else if (peticion.receiver == emailUsuario) {
                         emails.push(peticion.sender);
                     }
                 }
