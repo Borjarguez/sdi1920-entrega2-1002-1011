@@ -267,7 +267,11 @@ public class NotaneitorTests {
         //assertTrue(checkNumRows("tableBids") > 0);
     }
 
-    //PR15. Sin hacer /
+    /**
+     * PR15
+     * Desde el listado de usuarios de la aplicación, enviar una invitación de amistad a un usuario.
+     * Comprobar que la solicitud de amistad aparece en el listado de invitaciones (punto siguiente). 
+     * */
     @Test
     public void PR15() {
     	//Se entra como usuario prueba@uniovi.es
@@ -320,31 +324,52 @@ public class NotaneitorTests {
         PO_HomeView.clickOption(driver, "logout", "class", "btn btn-primary");
     }
 
-    //PR16. Sin hacer /
+    /**
+     * PR16
+     * Desde el listado de usuarios de la aplicación, enviar una invitación de amistad a un usuario al
+     * que ya le habíamos enviado la invitación previamente. No debería dejarnos enviar la invitación, se podría
+     * ocultar el botón de enviar invitación o notificar que ya había sido enviada previamente 
+     * */
     @Test
     public void PR16() {
         assertTrue("PR16 sin hacer", false);
     }
 
-    //PR017. Sin hacer /
+    /**
+     * PR17
+     * Mostrar el listado de invitaciones de amistad recibidas. Comprobar con un listado que
+	   contenga varias invitaciones recibidas.
+     * */
     @Test
     public void PR17() {
         assertTrue("PR17 sin hacer", false);
     }
 
-    //PR18. Sin hacer /
+    /**
+     * PR18
+     * Sobre el listado de invitaciones recibidas. Hacer click en el botón/enlace de una de ellas y
+     * comprobar que dicha solicitud desaparece del listado de invitaciones.
+     * */
     @Test
     public void PR18() {
         assertTrue("PR18 sin hacer", false);
     }
 
-    //PR19. Sin hacer /
+    /**
+     * PR19
+     * Mostrar el listado de amigos de un usuario. Comprobar que el listado contiene los amigos que
+     * deben ser.
+     * */
     @Test
     public void PR19() {
         assertTrue("PR19 sin hacer", false);
     }
 
-    //P20. Sin hacer /
+    /**
+     * PR20
+     * Intentar acceder sin estar autenticado a la opción de listado de usuarios. Se deberá volver al
+     * formulario de login.
+     * */
     @Test
     public void PR20() {
         // Vamos a resetear
@@ -354,7 +379,11 @@ public class NotaneitorTests {
         PO_View.checkElement(driver, "text", "Log in");
     }
 
-    //PR21. Sin hacer /
+    /**
+     * PR21
+     * Intentar acceder sin estar autenticado a la opción de listado de invitaciones de amistad recibida
+     * de un usuario estándar. Se deberá volver al formulario de login.
+     * */
     @Test
     public void PR21() {
         // Vamos a resetear
@@ -364,7 +393,11 @@ public class NotaneitorTests {
         PO_View.checkElement(driver, "text", "Log in");
     }
 
-    //PR22. Sin hacer /
+    /**
+     * PR22
+     * Intentar acceder estando autenticado como usuario standard a la lista de amigos de otro
+     * usuario. Se deberá mostrar un mensaje de acción indebida
+     * */
     @Test
     public void PR22() {
         // Vamos a resetear
