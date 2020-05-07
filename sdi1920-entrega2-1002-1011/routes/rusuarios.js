@@ -1,11 +1,12 @@
 module.exports = function (app, swig, gestorBD) {
 
-    app.get("/usuarios", function (req, res) {
-        res.send("ver usuarios");
-    });
-
     app.get("/signup", function (req, res) {
         let respuesta = swig.renderFile('views/signup.html', {});
+        res.send(respuesta);
+    });
+
+    app.get("/index", function (req, res) {
+        let respuesta = swig.renderFile('views/index.html', {});
         res.send(respuesta);
     });
 
@@ -85,7 +86,7 @@ module.exports = function (app, swig, gestorBD) {
             if (users == null || users.length == 0) {
                 req.session.usuario = null;
 
-                res.redirect("/login"+"?mensaje=Email o password incorrecto&tipoMensaje=alert-danger");
+                res.redirect("/login" + "?mensaje=Email o password incorrecto&tipoMensaje=alert-danger");
             } else {
                 req.session.usuario = users[0].email;
                 req.session.error = null;
@@ -107,7 +108,9 @@ module.exports = function (app, swig, gestorBD) {
 
             let pg = parseInt(req.query.pg);
 
-            if (req.query.pg == null){ pg = 1;}
+            if (req.query.pg == null) {
+                pg = 1;
+            }
 
             gestorBD.obtainUsersPg(criteria, pg, function (users, total) {
                 if (users == null) {
@@ -151,13 +154,15 @@ module.exports = function (app, swig, gestorBD) {
 
     app.get("/amigos", function (req, res) {
         let emailUser = req.session.usuario;
-        let criterio = {$or:[{"sender":emailUser,"accepted":true},{"receiver":emailUser,"accepted":true}]};
+        let criterio = {$or: [{"sender": emailUser, "accepted": true}, {"receiver": emailUser, "accepted": true}]};
         let pg = parseInt(req.query.pg);
-        if (req.query.pg == null){ pg = 1;}
+        if (req.query.pg == null) {
+            pg = 1;
+        }
         gestorBD.obtenerAmigosPg(criterio, pg, emailUser, function (amigos, total) {
-            if (amigos == null){
+            if (amigos == null) {
                 res.send("Error al listar los amigos.")
-            }else {
+            } else {
                 let lastPg = total / 5;
 
                 if (total % 5 > 0) lastPg = lastPg + 1;
@@ -167,13 +172,11 @@ module.exports = function (app, swig, gestorBD) {
                 for (let i = pg - 2; i <= pg + 2; i++)
                     if (i > 0 && i <= lastPg) pages.push(i);
 
-
                 let response = swig.renderFile('views/amigos.html', {
                     amigos: amigos,
                     pages: pages,
                     actual: pg
                 });
-
                 res.send(response);
             }
         });
@@ -186,7 +189,7 @@ module.exports = function (app, swig, gestorBD) {
             .update("123456").digest('hex');
         var f = new Date();
         var datosIniciales = {
-            usuarios : [
+            usuarios: [
                 {
                     name: "admin",
                     surname: "admin",
@@ -222,99 +225,99 @@ module.exports = function (app, swig, gestorBD) {
                     surname: "Andrés",
                     email: "ines@uniovi.es",
                     password: encryptedUser
-                },{
+                }, {
                     name: "Borja",
                     surname: "Rodriguez",
                     email: "borja@uniovi.es",
                     password: encryptedUser
-                },{
+                }, {
                     name: "Prueba",
                     surname: "Prueba",
                     email: "prueba@uniovi.es",
                     password: encryptedUser
-                },{
+                }, {
                     name: "Luisa",
                     surname: "Diaz",
                     email: "luisa@uniovi.es",
                     password: encryptedUser
-                },{
+                }, {
                     name: "sdi",
                     surname: "asignatura",
                     email: "sdi@uniovi.es",
                     password: encryptedUser
-                },{
+                }, {
                     name: "Aurora",
                     surname: "Santos",
                     email: "aurora@uniovi.es",
                     password: encryptedUser
-                },{
+                }, {
                     name: "Antonio",
                     surname: "Garcia",
                     email: "anton@uniovi.es",
                     password: encryptedUser
                 }
             ],
-            peticiones : [
+            peticiones: [
                 {
                     sender: "admin@uniovi.es",
                     receiver: "prueba@uniovi.es",
                     accepted: false
-                },{
+                }, {
                     sender: "pedro@uniovi.es",
                     receiver: "prueba@uniovi.es",
                     accepted: false
-                },{
+                }, {
                     sender: "lucas@uniovi.es",
                     receiver: "prueba@uniovi.es",
                     accepted: false
-                },{
+                }, {
                     sender: "marta@uniovi.es",
                     receiver: "prueba@uniovi.es",
                     accepted: false
-                },{
+                }, {
                     sender: "maria@uniovi.es",
                     receiver: "prueba@uniovi.es",
                     accepted: false
-                },{
+                }, {
                     sender: "admin@uniovi.es",
                     receiver: "anton@uniovi.es",
                     accepted: false
-                },{
+                }, {
                     sender: "pedro@uniovi.es",
                     receiver: "anton@uniovi.es",
                     accepted: false
-                },{
+                }, {
                     sender: "lucas@uniovi.es",
                     receiver: "anton@uniovi.es",
                     accepted: false
-                },{
+                }, {
                     sender: "marta@uniovi.es",
                     receiver: "anton@uniovi.es",
                     accepted: false
-                },{
+                }, {
                     sender: "maria@uniovi.es",
                     receiver: "anton@uniovi.es",
                     accepted: false
                 }
             ],
-            amigos : [
+            amigos: [
                 {
                     sender: "ines@uniovi.es",
                     receiver: "prueba@uniovi.es",
                     accepted: true
-                },{
+                }, {
                     sender: "borja@uniovi.es",
                     receiver: "prueba@uniovi.es",
                     accepted: true
-                },{
+                }, {
                     sender: "luisa@uniovi.es",
                     receiver: "prueba@uniovi.es",
                     accepted: true
-                },{
+                }, {
                     sender: "sdi@uniovi.es",
                     receiver: "prueba@uniovi.es",
                     accepted: true
-                },{
+                }, {
                     sender: "aurora@uniovi.es",
                     receiver: "prueba@uniovi.es",
                     accepted: true
@@ -325,7 +328,6 @@ module.exports = function (app, swig, gestorBD) {
             res.send("Base de datos reseteada");
         });
     });
-
 
 
 };

@@ -1,27 +1,33 @@
 package com.uniovi.tests;
 
-import java.util.List;
-//Paquetes JUnit 
+import com.uniovi.tests.pageobjects.PO_HomeView;
+import com.uniovi.tests.pageobjects.PO_LoginView;
+import com.uniovi.tests.pageobjects.PO_RegisterView;
+import com.uniovi.tests.pageobjects.PO_View;
+import com.uniovi.tests.util.SeleniumUtils;
 import org.junit.*;
 import org.junit.runners.MethodSorters;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+import java.util.List;
 
 import static org.junit.Assert.assertTrue;
-//Paquetes Selenium 
-import org.openqa.selenium.*;
-import org.openqa.selenium.firefox.*;
+
+//Paquetes JUnit
+//Paquetes Selenium
 //Paquetes Utilidades de Testing Propias
-import com.uniovi.tests.util.SeleniumUtils;
 //Paquetes con los Page Object
-import com.uniovi.tests.pageobjects.*;
 
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class NotaneitorTests {
 	static String PathFirefox65 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
-//	static String Geckdriver024 = "C:\\Users\\borja\\Documents\\BORJA\\REPOS\\SDI\\SPRING\\geckodriver024win64.exe";
-	static String Geckdriver024 = "C:\\Users\\Lenovo\\OneDrive - Universidad de Oviedo\\Tercer curso\\SegundoSemestre\\SDI\\Practica\\Selenium\\PL-SDI-Sesión5-material\\PL-SDI-Sesión5-material\\geckodriver024win64.exe";
+    static String Geckdriver024 = "tools\\geckodriver024win64.exe";
 
 	static WebDriver driver = getDriver(PathFirefox65, Geckdriver024);
+    static String URLReset = "https://localhost:8081/reset";
     static String URL = "https://localhost:8081";
 
 
@@ -34,7 +40,7 @@ public class NotaneitorTests {
 
     @Before
     public void setUp() {
-    	driver.navigate().to("https://localhost:8081/reset");
+    	driver.navigate().to(URLReset);
         driver.navigate().to(URL);
     }
 
