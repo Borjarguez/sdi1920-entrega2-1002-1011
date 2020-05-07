@@ -40,12 +40,11 @@
             dataType: 'json',
             headers: {"token": token},
             success: function (respuesta) {
-                console.log(respuesta); // <-- Prueba
+                console.log(respuesta);
                 $("#contenedor-principal").load("widget-canciones.html");
             },
             error: function (error) {
                 $("#widget-agregar").prepend("<div class='alert alert-danger'>Parámetros incorrectos</div>");
-                //$("#contenedor-principal").load("widget-login.html");
             }
         });
     }
