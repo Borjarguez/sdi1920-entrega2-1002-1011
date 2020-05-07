@@ -1,11 +1,10 @@
 package com.uniovi.tests.pageobjects;
 
-import java.util.List;
-
+import com.uniovi.tests.util.SeleniumUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.uniovi.tests.util.SeleniumUtils;
+import java.util.List;
 
 public class PO_View {
 	
