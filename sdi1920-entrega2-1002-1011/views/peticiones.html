@@ -20,7 +20,7 @@
             <tr>
                 <td>{{ peticion.sender }}</td>
                 <td>
-                    <a href="/aceptar/{{ peticion._id.toString() }}">Aceptar petición de amistad</a>
+                    <a name="mandarPeticion" href="/aceptar/{{ peticion._id.toString() }}">Aceptar petición de amistad</a>
                 </td>
             </tr>
             {% endfor %}
@@ -32,7 +32,7 @@
 
 <!-- Paginación mostrar la actual y 2 anteriores y dos siguientes -->
 <div class="row text-center">
-    <ul class="pagination">
+    <ul class="pagination" name="pagination">
         {% for page in pages %}
         <li class="page-item" id="pi-{{ page }}">
             <a class="page-link" href="/peticiones?pg={{ page }}">{{ page }}</a>

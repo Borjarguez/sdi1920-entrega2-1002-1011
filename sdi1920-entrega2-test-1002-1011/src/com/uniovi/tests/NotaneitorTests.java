@@ -24,7 +24,7 @@ import static org.junit.Assert.assertTrue;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class NotaneitorTests {
 	static String PathFirefox65 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
-    static String Geckdriver024 = "tools\\geckodriver024win64.exe";
+    static String Geckdriver024 = "src\\com\\uniovi\\tests\\tools\\geckodriver024win64.exe";
 
 	static WebDriver driver = getDriver(PathFirefox65, Geckdriver024);
     static String URLReset = "https://localhost:8081/reset";
@@ -280,6 +280,7 @@ public class NotaneitorTests {
      * */
     @Test
     public void PR15() {
+    	PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
     	//Se entra como usuario prueba@uniovi.es
         PO_LoginView.fillForm(driver, "prueba@uniovi.es", "123456");
         PO_View.getP();
@@ -338,7 +339,41 @@ public class NotaneitorTests {
      * */
     @Test
     public void PR16() {
-        assertTrue("PR16 sin hacer", false);
+    	//Vamos a utilizar lo de antes y mandarla una petición a anton, y luego ver que no podemos enviarla.
+    	PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+    	//Se entra como usuario prueba@uniovi.es
+        PO_LoginView.fillForm(driver, "prueba@uniovi.es", "123456");
+        PO_View.getP();
+        
+   		// Vamos a mirar la lista de usuarios
+   		List<WebElement> elementos  = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listUsers')]");
+
+   			// Pinchamos en ver usuarios
+   		elementos.get(0).click();
+   		
+        //Vamos a la paginacion 3, que es donde se encuentra anton@uniovi.es
+
+   		elementos  = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listUsers?pg=3')]");
+
+   		elementos.get(0).click();
+
+   		// Pinchamos en enviar peticion de amistad
+        elementos = PO_View.checkElement(driver, "free",
+        				"//td[contains(text(), 'anton@uniovi.es')]/following-sibling::*/a[contains(@name, 'peticion')]");
+        
+        // Se envia peticion
+        elementos.get(0).click();
+        
+        //ANTON YA TIENE LA PETICION, AHORA VAMOS A MIRAR QUE NO PODEMOS ENVIARSELA
+        elementos  = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listUsers')]");
+		elementos.get(0).click();
+		elementos  = PO_View.checkElement(driver, "free", "//ul[contains(@class, 'pagination')]/li");
+		System.out.println(elementos.size());
+		//elementos.get(0).click();
+		elementos = PO_View.checkElement(driver, "free",
+				"//td[contains(text(), 'anton@uniovi.es')]/following-sibling::*/a[contains(@name, 'peticion')]");
+		elementos.get(0).click();
+		PO_View.checkElement(driver, "text", "No se puede mandar petición a este usuario");
     }
 
     /**
@@ -348,7 +383,39 @@ public class NotaneitorTests {
      * */
     @Test
     public void PR17() {
-        assertTrue("PR17 sin hacer", false);
+    	PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+    	//Primero comprobamos que anton tiene 5 invitaciones y luego va a tener 6 y la sexta es de prueba 
+    	PO_LoginView.fillForm(driver, "anton@uniovi.es", "123456");
+    	List<WebElement> elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, 'peticiones')]");
+        elementos.get(0).click();
+        elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr", PO_View.getTimeout());
+        assertTrue(elementos.size() == 5); //5 EN LA PRIMERA PAGINACION
+        PO_HomeView.clickOption(driver, "logout", "class", "btn btn-primary");
+        
+        //Ahora prueba@uniovi.es le va a enviar una peticion
+        PO_LoginView.fillForm(driver, "prueba@uniovi.es", "123456");
+   		elementos  = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listUsers')]");
+   		elementos.get(0).click();
+   		elementos  = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listUsers?pg=3')]");
+   		elementos.get(0).click();
+        elementos = PO_View.checkElement(driver, "free",
+        				"//td[contains(text(), 'anton@uniovi.es')]/following-sibling::*/a[contains(@name, 'peticion')]");
+        elementos.get(0).click();
+        PO_HomeView.clickOption(driver, "logout", "class", "btn btn-primary");
+        
+        //Ahora anton va a tener las 5 y una nueva en la segunda paginacion
+        PO_LoginView.fillForm(driver, "anton@uniovi.es", "123456");
+    	elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, 'peticiones')]");
+        elementos.get(0).click();
+        elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr", PO_View.getTimeout());
+        assertTrue(elementos.size() == 5); //5 EN LA PRIMERA PAGINACION
+        
+        elementos  = PO_View.checkElement(driver, "free", "//a[contains(@href, '/peticiones?pg=2')]");
+        elementos.get(0).click();
+        assertTrue(elementos.size() == 1); 
+        elementos = PO_View.checkElement(driver, "free",
+        				"//td[contains(text(), 'prueba@uniovi.es')]");
+        assertTrue(elementos.size() == 1);
     }
 
     /**
@@ -358,7 +425,20 @@ public class NotaneitorTests {
      * */
     @Test
     public void PR18() {
-        assertTrue("PR18 sin hacer", false);
+    	PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+    	//prueba@uniovi.es tiene 5 peticiones, si aceptamos una, debería tener 4
+    	PO_LoginView.fillForm(driver, "prueba@uniovi.es", "123456");
+    	List<WebElement> elementos  = PO_View.checkElement(driver, "free", "//a[contains(@href, '/peticiones')]");
+   		elementos.get(0).click();
+   		elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr", PO_View.getTimeout());
+		assertTrue(elementos.size() == 5);
+        elementos = PO_View.checkElement(driver, "free",
+        				"//td[contains(text(), 'maria@uniovi.es')]/following-sibling::*/a[contains(@name, 'mandarPeticion')]");
+        elementos.get(0).click();
+        //Le aceptó la peticion a Maria, por lo que ahora habría 4 peticiones
+        elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr", PO_View.getTimeout());
+		assertTrue(elementos.size() == 4);
+        PO_HomeView.clickOption(driver, "logout", "class", "btn btn-primary");
     }
 
     /**
@@ -368,7 +448,57 @@ public class NotaneitorTests {
      * */
     @Test
     public void PR19() {
-        assertTrue("PR19 sin hacer", false);
+    	PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+    	//Anton le envia peticion
+    	PO_LoginView.fillForm(driver, "anton@uniovi.es", "123456");
+   		List<WebElement> elementos  = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listUsers')]");
+   		elementos.get(0).click();
+   		elementos  = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listUsers?pg=2')]");
+   		elementos.get(0).click();
+        elementos = PO_View.checkElement(driver, "free",
+        				"//td[contains(text(), 'prueba@uniovi.es')]/following-sibling::*/a[contains(@name, 'peticion')]");
+        elementos.get(0).click();
+        PO_HomeView.clickOption(driver, "logout", "class", "btn btn-primary");
+        
+    	//Ahora entramos en el de prueba@uniovi.es
+    	//prueba@uniovi.es tiene 6 peticiones
+    	PO_LoginView.fillForm(driver, "prueba@uniovi.es", "123456");
+    	elementos  = PO_View.checkElement(driver, "free", "//a[contains(@href, '/amigos')]");
+   		elementos.get(0).click();
+   		//Tiene 5 amigos
+   		elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr", PO_View.getTimeout());
+		assertTrue(elementos.size() == 5);
+		
+		//Ahora va a aceptar la peticion de anton
+		elementos  = PO_View.checkElement(driver, "free", "//a[contains(@href, '/peticiones')]");
+   		elementos.get(0).click();
+   		elementos  = PO_View.checkElement(driver, "free", "//a[contains(@href, '/peticiones?pg=2')]");
+   		elementos.get(0).click();
+        elementos = PO_View.checkElement(driver, "free",
+        				"//td[contains(text(), 'anton@uniovi.es')]/following-sibling::*/a[contains(@name, 'mandarPeticion')]");
+        elementos.get(0).click();
+        //Le aceptó la peticion a Maria, por lo que ahora habría 5 peticiones de las que quedan
+        elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr", PO_View.getTimeout());
+		assertTrue(elementos.size() == 5);
+		
+		//Y ademas ahora va a tener 6 amigos
+		elementos  = PO_View.checkElement(driver, "free", "//a[contains(@href, '/amigos')]");
+   		elementos.get(0).click();
+   		//Tiene 5 amigos en la primera pag 
+   		elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr", PO_View.getTimeout());
+		assertTrue(elementos.size() == 5);
+		//Y en la segunda paginacion tendra uno y se encuentra anton
+		elementos  = PO_View.checkElement(driver, "free", "//a[contains(@href, '/amigos?pg=2')]");
+		elementos.get(0).click();
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr", PO_View.getTimeout());
+		
+		assertTrue(elementos.size() == 1);
+		elementos = PO_View.checkElement(driver, "free",
+				"//td[contains(text(), 'anton@uniovi.es')]");
+		assertTrue(elementos.size() == 1);
+		
+        PO_HomeView.clickOption(driver, "logout", "class", "btn btn-primary");
+        
     }
 
     /**
@@ -378,11 +508,11 @@ public class NotaneitorTests {
      * */
     @Test
     public void PR20() {
-        // Vamos a resetear
-        driver.navigate().to("https://localhost:8081/reset");
         // Vamos a listado de usuarios
         driver.navigate().to("https://localhost:8081/listUsers");
-        PO_View.checkElement(driver, "text", "Log in");
+        List<WebElement> elementos = PO_View.checkElement(driver, "free",
+				"//h2[contains(text(), 'Log in')]");
+        assertTrue(elementos.size()==1);
     }
 
     /**
@@ -392,11 +522,11 @@ public class NotaneitorTests {
      * */
     @Test
     public void PR21() {
-        // Vamos a resetear
-        driver.navigate().to("https://localhost:8081/reset");
-        // Vamos a listado de usuarios
-        driver.navigate().to("https://localhost:8081/peticiones");
-        PO_View.checkElement(driver, "text", "Log in");
+        // Vamos a listado de peticiones
+    	driver.navigate().to("https://localhost:8081/peticiones");
+        List<WebElement> elementos = PO_View.checkElement(driver, "free",
+				"//h2[contains(text(), 'Log in')]");
+        assertTrue(elementos.size()==1);
     }
 
     /**

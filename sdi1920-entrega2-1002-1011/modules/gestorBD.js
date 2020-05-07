@@ -130,7 +130,6 @@ module.exports = {
 
             collection.find(criterio).toArray(function (err, peticiones) {
 
-                console.log(peticiones);
                 let i = 0;
                 let emails = [];
                 for (i = 0; i < peticiones.length; i++) {
