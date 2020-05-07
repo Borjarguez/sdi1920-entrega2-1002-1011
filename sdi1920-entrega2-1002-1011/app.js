@@ -79,7 +79,7 @@ routerUsuarioToken.use(function (req, res, next) {
 });
 
 // Aplicar routerUsuarioToken
-app.use('/api/*', routerUsuarioToken);
+app.use('/api/amigo', routerUsuarioToken);
 
 // routerUsuarioSession
 let routerUsuarioSession = express.Router();
@@ -117,7 +117,6 @@ app.use(express.static('public'));
 // Variables
 app.set('port', 8081);
 app.set('db', 'mongodb://admin:sdi@tiendamusica-shard-00-00-divfp.mongodb.net:27017,tiendamusica-shard-00-01-divfp.mongodb.net:27017,tiendamusica-shard-00-02-divfp.mongodb.net:27017/test?ssl=true&replicaSet=tiendamusica-shard-0&authSource=admin&retryWrites=true&w=majority');
-
 app.set('clave', 'abcdefg');
 app.set('crypto', crypto);
 
