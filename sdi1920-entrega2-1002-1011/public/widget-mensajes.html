@@ -1,0 +1,94 @@
+<div id="widget-mensajes">
+    <h2>Mensajes</h2>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Emisor</th>
+            <th>Destino</th>
+            <th>Texto</th>
+            <th>Leido</th>
+            <th class="col-md-1"></th>
+        </tr>
+        </thead>
+        </tr>
+        </thead>
+        <tbody id="tablaCuerpo">
+        </tbody>
+    </table>
+</div>
+
+<div id="widget-mensaje">
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="message">Nuevo mensaje:</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" name="message"
+                   placeholder="mensaje" id="message"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button class="btn" type="button" id="boton-enviar" onclick="enviarMensaje()">Enviar</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.history.pushState("", "", "/cliente.html?w=mensajes");
+    var mensajes;
+
+    function cargarMensajes() {
+        $.ajax({
+            url: URLbase + "/mensajes",
+            type: "GET",
+            data: {
+                usuario : amigo
+            },
+            dataType: 'json',
+            headers: {
+                "token": token
+            },
+            success: function (respuesta) {
+                mensajes = respuesta;
+                actualizarTabla(mensajes);
+            },
+            error: function (error) {
+                $("#contenedor-principal").load("widget-login.html");
+            }
+        });
+    }
+
+    function enviarMensaje() {
+        $.ajax({
+            url: URLbase + "/mensaje",
+            type: "POST",
+            data: {
+                texto: $("#message").val(),
+                destino: amigo
+            },
+            dataType: 'json',
+            headers: {
+                "token": token
+            },
+            success: function (respuesta) {
+                cargarMensajes();
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+    function actualizarTabla(mensajesMostrar) {
+        $("#tablaCuerpo").empty(); // Vaciar la tabla
+        for (i = 0; i < mensajesMostrar.length; i++) {
+            $("#tablaCuerpo").append(
+                "<tr id=" + mensajesMostrar[i]._id + ">" + "<td>"
+                + mensajesMostrar[i].emisor + "</td>" + "<td>"
+                + mensajesMostrar[i].destino + "</td>" + "<td>"
+                + mensajesMostrar[i].texto + "</td>" + "<td>"
+                + mensajesMostrar[i].leido + "</td>" + "<td>"
+                + "</td>" + "</tr>");
+        }
+    }
+
+    cargarMensajes();
+</script>

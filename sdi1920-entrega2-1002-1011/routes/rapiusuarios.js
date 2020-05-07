@@ -1,13 +1,12 @@
-module.exports = function (app, swig, gestorBD) {
+module.exports = function (app, gestorBD) {
 
-    app.post("/api/autenticar", function (req, res) {
+    app.post("/api/autenticar/", function (req, res) {
         let seguro = app.get("crypto").createHmac('sha256', app.get('clave')).update(req.body.password).digest('hex');
 
         let criterio = {
             email: req.body.email,
             password: seguro
         };
-
         gestorBD.obtenerUsuarios(criterio, function (usuarios) {
             if (usuarios == null || usuarios.length == 0) {
                 res.status(401);
@@ -28,12 +27,12 @@ module.exports = function (app, swig, gestorBD) {
         })
     });
 
-    app.get("/api/friend", function (req, res) {
+    app.get("/api/amigo", function (req, res) {
         let criteria = {
             $or: [{
                 "sender": req.session.usuario,
                 "accepted": true
-            } || {
+            }, {
                 "receiver": req.session.usuario,
                 "accepted": true
             }]
