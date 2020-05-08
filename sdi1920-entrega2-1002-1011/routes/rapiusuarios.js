@@ -27,18 +27,11 @@ module.exports = function (app, gestorBD) {
         })
     });
 
-    app.get("/api/amigo", function (req, res) {
-        let criteria = {
-            $or: [{
-                "sender": req.session.usuario,
-                "accepted": true
-            }, {
-                "receiver": req.session.usuario,
-                "accepted": true
-            }]
-        };
+    app.get("/api/amigos", function (req, res) {
+        let email = req.session.usuario;
+        let criteria = {$or: [{"sender": email, "accepted": true}, {"receiver": email, "accepted": true}]};
 
-        gestorBD.obtenerAmigos(criteria, function (amigos) {
+        gestorBD.obtenerAmigos(criteria, email, function (amigos) {
             if (amigos == null) {
                 res.status(500);
                 res.json({
