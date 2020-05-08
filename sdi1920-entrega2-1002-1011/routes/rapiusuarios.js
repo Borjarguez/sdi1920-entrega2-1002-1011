@@ -38,7 +38,7 @@ module.exports = function (app, gestorBD) {
             }]
         };
 
-        gestorBD.obtenerAmigos(criteria, function (amigos) {
+        gestorBD.obtenerAmigos(criteria, email, function (amigos) {
             if (amigos == null) {
                 res.status(500);
                 res.json({
