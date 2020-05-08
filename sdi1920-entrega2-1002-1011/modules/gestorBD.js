@@ -142,15 +142,15 @@ module.exports = {
                 }
 
                 criterio = {"email": {$in: emails}};
-                collectionU.find(criterio).count(function (err, count) {
+
                     collectionU.find(criterio).toArray(function (err, amigos) {
                         if (err) {
                             funcionCallback(null);
                         } else {
-                            funcionCallback(amigos, count);
+                            funcionCallback(amigos);
                         }
                     });
-                });
+
 
             });
         });

@@ -640,7 +640,7 @@ public class NotaneitorTests {
 	@Test
 	public void PR25() {
 		// Como el usuario prueba@uniovi.es tiene varios amigos, vamos a probar con ese
-		driver.navigate().to("http://localhost:8081/cliente.html");
+		driver.navigate().to("https://localhost:8081/cliente.html");
 		// Rellenamos el formulario bien
 		PO_LoginView.fillForm(driver, "prueba@uniovi.es", "123456");
 
@@ -659,7 +659,7 @@ public class NotaneitorTests {
 	@Test
 	public void PR26() {
 		// Como el usuario prueba@uniovi.es tiene varios amigos, vamos a probar con ese
-		driver.navigate().to("http://localhost:8081/cliente.html");
+		driver.navigate().to("https://localhost:8081/cliente.html");
 		// Rellenamos el formulario bien
 		PO_LoginView.fillForm(driver, "prueba@uniovi.es", "123456");
 

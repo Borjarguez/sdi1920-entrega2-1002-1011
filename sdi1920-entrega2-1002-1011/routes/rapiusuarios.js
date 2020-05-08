@@ -28,12 +28,14 @@ module.exports = function (app, gestorBD) {
     });
 
     app.get("/api/amigos", function (req, res) {
+        let token = res.usuario;
+        let email = token.toString();
         let criteria = {
             $or: [{
-                "sender": req.session.usuario,
+                "sender": email,
                 "accepted": true
             }, {
-                "receiver": req.session.usuario,
+                "receiver": email,
                 "accepted": true
             }]
         };

@@ -11,9 +11,7 @@ public class PO_SearchView extends PO_View {
 		search.click();
 		search.clear();
 		search.sendKeys(searchp);
-		// Pulsar el boton de Buscar.
-		By boton = By.className("btn");
-		driver.findElement(boton).click();
+		
 	}
 
 }
