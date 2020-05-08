@@ -27,7 +27,7 @@ module.exports = function (app, gestorBD) {
         })
     });
 
-    app.get("/api/amigo", function (req, res) {
+    app.get("/api/amigos", function (req, res) {
         let criteria = {
             $or: [{
                 "sender": req.session.usuario,

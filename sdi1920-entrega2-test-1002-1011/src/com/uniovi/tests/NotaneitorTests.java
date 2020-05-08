@@ -602,11 +602,15 @@ public class NotaneitorTests {
 		PO_View.checkElement(driver, "text", "No puedes ver la lista de amigos sin estar identificado.");
 	}
 
-	// PR23. Sin hacer /
+	
+	/**
+	 * PR23
+	 * Inicio de sesión con datos válidos.
+	 * */
 	@Test
 	public void PR23() {
 		// Vamos al login
-		driver.navigate().to("http://localhost:8081/cliente.html");
+		driver.navigate().to("https://localhost:8081/cliente.html");
 		// Rellenamos el formulario bien
 		PO_LoginView.fillForm(driver, "prueba@uniovi.es", "123456");
 
@@ -615,18 +619,24 @@ public class NotaneitorTests {
 		assertTrue(elementos.size() == 1);
 	}
 
-	// PR24. Sin hacer /
+	/**
+	 * PR24
+	 * Inicio de sesión con datos inválidos (usuario no existente en la aplicación).
+	 * */
 	@Test
 	public void PR24() {
 		// Vamos al login
-		driver.navigate().to("http://localhost:8081/cliente.html");
+		driver.navigate().to("https://localhost:8081/cliente.html");
 		// Rellenamos el formulario bien
 		PO_LoginView.fillForm(driver, "prueba@uniovi.es", "12222223456");
 		PO_View.checkElement(driver, "text", "Usuario no encontrado");
 
 	}
 
-	// PR25. Sin hacer /
+	/**
+	 * PR25
+	 * Acceder a la lista de amigos de un usuario, que al menos tenga tres amigos.
+	 * */
 	@Test
 	public void PR25() {
 		// Como el usuario prueba@uniovi.es tiene varios amigos, vamos a probar con ese
@@ -641,7 +651,11 @@ public class NotaneitorTests {
 
 	}
 
-	// PR26. Sin hacer /
+	/**
+	 * PR26
+	 * Acceder a la lista de amigos de un usuario, y realizar un filtrado para encontrar a un amigo
+	 * concreto, el nombre a buscar debe coincidir con el de un amigo.
+	 * */
 	@Test
 	public void PR26() {
 		// Como el usuario prueba@uniovi.es tiene varios amigos, vamos a probar con ese
@@ -662,19 +676,33 @@ public class NotaneitorTests {
 		
 	}
 
-	// PR27. Sin hacer /
+	/**
+	 * PR27
+	 * Acceder a la lista de mensajes de un amigo “chat”, la lista debe contener al menos tres
+	 * mensajes.
+	 * */
 	@Test
 	public void PR27() {
 		assertTrue("PR27 sin hacer", false);
 	}
 
-	// PR029. Sin hacer /
+	/**
+	 * PR29
+	 * Identificarse en la aplicación y enviar un mensaje a un amigo, validar que el mensaje enviado
+	 * aparece en el chat. Identificarse después con el usuario que recibido el mensaje y validar que tiene un
+	 * mensaje sin leer, entrar en el chat y comprobar que el mensaje pasa a tener el estado leído.
+	 * */
 	@Test
 	public void PR29() {
 		assertTrue("PR29 sin hacer", false);
 	}
 
-	// PR030. Sin hacer /
+	/**
+	 * PR30
+	 * Identificarse en la aplicación y enviar tres mensajes a un amigo, validar que los mensajes
+	 * enviados aparecen en el chat. Identificarse después con el usuario que recibido el mensaje y validar que el
+	 * número de mensajes sin leer aparece en la propia lista de amigos.
+	 * */
 	@Test
 	public void PR30() {
 		assertTrue("PR30 sin hacer", false);
