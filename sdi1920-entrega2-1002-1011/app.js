@@ -79,7 +79,7 @@ routerUsuarioToken.use(function (req, res, next) {
 });
 
 // Aplicar routerUsuarioToken
-app.use('/api/amigos', routerUsuarioToken);
+app.use('/api/chat', routerUsuarioToken);
 
 // routerUsuarioSession
 let routerUsuarioSession = express.Router();

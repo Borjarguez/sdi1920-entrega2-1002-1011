@@ -142,16 +142,13 @@ module.exports = {
                 }
 
                 criterio = {"email": {$in: emails}};
-
-                    collectionU.find(criterio).toArray(function (err, amigos) {
-                        if (err) {
-                            funcionCallback(null);
-                        } else {
-                            funcionCallback(amigos);
-                        }
-                    });
-
-
+                collectionU.find(criterio).toArray(function (err, amigos) {
+                    if (err) {
+                        funcionCallback(null);
+                    } else {
+                        funcionCallback(amigos);
+                    }
+                });
             });
         });
     },
@@ -215,5 +212,57 @@ module.exports = {
                 });
             }
         });
-    }
+    },
+    obtenerConversaciones: function (criterio, funcionCallback) {
+        this.mongo.MongoClient.connect(this.app.get('db'), function (err, db) {
+            if (err) {
+                funcionCallback(null);
+            } else {
+                var collection = db.collection('conversaciones');
+                collection.find(criterio).toArray(function (err, conversaciones) {
+                    if (err) {
+                        funcionCallback(null);
+                    } else {
+                        funcionCallback(conversaciones);
+                    }
+                    db.close();
+                });
+            }
+        });
+    },
+    insertarConversacion: function (conversacion, funcionCallback) {
+        this.mongo.MongoClient.connect(this.app.get('db'), function (err, db) {
+            if (err) {
+                funcionCallback(null);
+            } else {
+                var collection = db.collection('conversaciones');
+                collection.insert(conversacion, function (err, result) {
+                    if (err) {
+                        funcionCallback(null);
+                    } else {
+                        funcionCallback(result.ops[0]._id);
+                    }
+                    db.close();
+                });
+            }
+        });
+    },
+
+    insertarMensaje: function (criterio, atributos, funcionCallback) {
+        this.mongo.MongoClient.connect(this.app.get('db'), function (err, db) {
+            if (err) {
+                funcionCallback(null);
+            } else {
+                var collection = db.collection('conversaciones');
+                collection.update(criterio, atributos, function (err, obj) {
+                    if (err) {
+                        funcionCallback(null);
+                    } else {
+                        funcionCallback(obj);
+                    }
+                    db.close();
+                });
+            }
+        });
+    },
 };

@@ -27,18 +27,9 @@ module.exports = function (app, gestorBD) {
         })
     });
 
-    app.get("/api/amigos", function (req, res) {
-        let token = res.usuario;
-        let email = token.toString();
-        let criteria = {
-            $or: [{
-                "sender": email,
-                "accepted": true
-            }, {
-                "receiver": email,
-                "accepted": true
-            }]
-        };
+    app.get("/api/chat/amigos", function (req, res) {
+        let email = res.usuario;
+        let criteria = {$or: [{"sender": email, "accepted": true}, {"receiver": email, "accepted": true}]};
 
         gestorBD.obtenerAmigos(criteria, email, function (amigos) {
             if (amigos == null) {
@@ -54,33 +45,33 @@ module.exports = function (app, gestorBD) {
     });
 
     app.put("/api/chat/:id", function (req, res) {
-        var criteria = {
-            "$or": [{
-                "receiver": res.usuario
-            }, {
-                "sender": res.usuario
-            }]
-        };
+        let email = res.usuario;
+        let criteria = {$or: [{"sender": email, "accepted": true}, {"receiver": email, "accepted": true}]};
 
-        gestorBD.obtenerUsuarios({
-            "_id": gestorBD.mongo.ObjectID(req.params.id)
-        }, function (user) {
-            if (user == null || user[0] == null) {
+        gestorBD.obtenerUsuarios({"_id": gestorBD.mongo.ObjectID(req.params.id)}, function (usuarios) {
+            if (usuarios == null) {
                 res.status(500);
                 res.json({
                     error: "se ha producido un error"
                 });
             } else {
-                gestorBD.obtenerAmigos({
-                    "receiver": user[0].email,
-                    "accepted": true
-                }, function (amigo) {
-                    if (amigo == null || amigo[0] == null) {
+                gestorBD.obtenerAmigos(criteria, email, function (amigos) {
+                    if (amigos == null || amigos[0] == null) {
                         res.status(500);
                         res.json({
                             error: "se ha producido un error"
                         });
                     } else {
+                        let amigo = null;
+                        for (let i = 0; i < amigos.length; i++)
+                            if (amigos[i].email === usuarios[0].email)
+                                amigo = amigos[i]
+                        criteria = {
+                            $or: [
+                                {$and: [{"sender": email}, {"receiver": amigo.email}]},
+                                {$and: [{"sender": amigo.email}, {"receiver": email}]}
+                            ]
+                        };
                         gestorBD.obtenerConversaciones(criteria, function (conversaciones) {
                             if (conversaciones == null) {
                                 res.status(500);
@@ -89,9 +80,9 @@ module.exports = function (app, gestorBD) {
                                 });
                             } else {
                                 if (conversaciones[0] == null) {
-                                    var conversacion = {
+                                    let conversacion = {
                                         "sender": res.usuario,
-                                        "receiver": amigo[0],
+                                        "receiver": amigo.email,
                                         "mensajes": [{
                                             "_id": gestorBD.mongo.ObjectID(),
                                             "sender": res.usuario,
@@ -101,20 +92,19 @@ module.exports = function (app, gestorBD) {
                                         }]
                                     };
 
-                                    gestorBD.insertarConversacion(conversacion,
-                                        function (conversaciones) {
-                                            if (conversaciones == null) {
-                                                res.status(500);
-                                                res.json({
-                                                    error: "se ha producido un error"
-                                                });
-                                            } else {
-                                                res.status(201);
-                                                res.json({
-                                                    mensaje: "conversacion iniciada",
-                                                })
-                                            }
-                                        });
+                                    gestorBD.insertarConversacion(conversacion, function (conversaciones) {
+                                        if (conversaciones == null) {
+                                            res.status(500);
+                                            res.json({
+                                                error: "se ha producido un error"
+                                            });
+                                        } else {
+                                            res.status(201);
+                                            res.json({
+                                                mensaje: "conversacion iniciada",
+                                            })
+                                        }
+                                    });
                                 } else {
                                     var mensaje = {
                                         "_id": gestorBD.mongo.ObjectID(),
@@ -125,11 +115,7 @@ module.exports = function (app, gestorBD) {
                                         "read": false
                                     };
 
-                                    gestorBD.insertarMensaje(criterio, {
-                                        "$push": {
-                                            "mensajes": mensaje
-                                        }
-                                    }, function (conversaciones) {
+                                    gestorBD.insertarMensaje(criterio, {"$push": {"mensajes": mensaje}}, function (conversaciones) {
                                         if (conversaciones == null) {
                                             res.status(500);
                                             res.json({
@@ -148,28 +134,52 @@ module.exports = function (app, gestorBD) {
                     }
                 });
             }
-        });
+        })
+
     });
 
     app.get("/api/chat/:id", function (req, res) {
-        // TODO revisar porque no me parece que esté bien
-        let criteria = {
-            "$or": [{"sender": res.usuario}, {"receiver": res.usuario},
-                {"sender": req.params.id}, {"receiver": req.params.id}]
-        };
+        let email = res.usuario;
+        let criteria = {$or: [{"sender": email, "accepted": true}, {"receiver": email, "accepted": true}]};
 
-        gestorBD.obtenerConversaciones(criteria, function (mensajes) {
-            if (mensajes == null) {
-                res.status(403);
+        gestorBD.obtenerUsuarios({"_id": gestorBD.mongo.ObjectID(req.params.id)}, function (usuarios) {
+            if (usuarios == null) {
+                res.status(500);
                 res.json({
-                    acceso: false,
-                    error: 'Acceso denegado'
+                    error: "se ha producido un error"
                 });
-                return;
             } else {
-                res.status(200);
-                res.send(JSON.stringify(mensajes));
+                gestorBD.obtenerAmigos(criteria, email, function (amigos) {
+                    if (amigos == null || amigos[0] == null) {
+                        res.status(500);
+                        res.json({
+                            error: "se ha producido un error"
+                        });
+                    } else {
+                        let amigo = null;
+                        for (let i = 0; i < amigos.length; i++)
+                            if (amigos[i].email === usuarios[0].email)
+                                amigo = amigos[i]
+                        criteria = {
+                            $or: [
+                                {$and: [{"sender": email}, {"receiver": amigo.email}]},
+                                {$and: [{"sender": amigo.email}, {"receiver": email}]}
+                            ]
+                        };
+                        gestorBD.obtenerConversaciones(criteria, function (conversaciones) {
+                            if (conversaciones == null) {
+                                res.status(500);
+                                res.json({
+                                    error: "se ha producido un error"
+                                });
+                            } else {
+                                res.status(200);
+                                res.send(JSON.stringify(conversaciones));
+                            }
+                        });
+                    }
+                });
             }
         });
     });
-};
+}
