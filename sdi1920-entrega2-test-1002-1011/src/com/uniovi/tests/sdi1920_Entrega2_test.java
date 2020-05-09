@@ -1,12 +1,10 @@
 package com.uniovi.tests;
 
-import com.uniovi.tests.pageobjects.PO_HomeView;
-import com.uniovi.tests.pageobjects.PO_LoginView;
-import com.uniovi.tests.pageobjects.PO_RegisterView;
-import com.uniovi.tests.pageobjects.PO_View;
+import com.uniovi.tests.pageobjects.*;
 import com.uniovi.tests.util.SeleniumUtils;
 import org.junit.*;
 import org.junit.runners.MethodSorters;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -212,61 +210,68 @@ public class sdi1920_Entrega2_test {
 
     /**
      * PR12
-     * Hacer una búsqueda con el campo vacío y comprobar que se muestra la página que
+     * Hacer una busqueda con el campo vacio y comprobar que se muestra la pagina que
      * corresponde con el listado usuarios existentes en el sistema
      */
     @Test
     public void PR12() {
-        // TODO Adaptar a usuarios
-        PO_HomeView.clickOption(driver, "login", "class",
-                "btn btn-primary");
+        PO_HomeView.clickOption(driver, "login", "class","btn btn-primary");
         PO_LoginView.fillForm(driver, "pedro@uniovi.es", "123456");
-        PO_HomeView.checkElement(driver, "text", "pedro@uniovi.es");
-        List<WebElement> elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/bid/search')]");
+        PO_HomeView.checkElement(driver, "text", "P�gina principal");
+        List<WebElement> elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listUsers')]");
         elementos.get(0).click();
-        //PO_SearchBidView.fillForm(driver, "");
+        PO_SearchView.fillForm(driver, "");
         elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr", PO_View.getTimeout());
-
         assertTrue(elementos.size() == 5);
     }
 
     /**
      * PR13
-     * Hacer una búsqueda escribiendo en el campo un texto que no exista y comprobar que se
-     * muestra la página que corresponde, con la lista de usuarios vacía
+     * Hacer una busqueda escribiendo en el campo un texto que no exista y comprobar que se
+     * muestra la página que corresponde, con la lista de usuarios vacia
      */
     @Test
     public void PR13() {
         PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
         PO_LoginView.fillForm(driver, "pedro@uniovi.es", "123456");
         PO_HomeView.checkElement(driver, "text", "pedro@uniovi.es");
-        List<WebElement> elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/bid/search')]");
+        List<WebElement> elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listUsers')]");
         elementos.get(0).click();
-        //PO_SearchBidView.fillForm(driver, "asdfg");
-        System.out.println(elementos.size());
+        PO_SearchView.fillForm(driver, "asdfg");
 
-        // Compruebo que no hay nada más que la cabecera de la tabla de ofertas
+        // Compruebo que no hay nada mas que la cabecera de la tabla de ofertas
         assertTrue(elementos.size() < 2);
     }
 
     /**
      * PR14
-     * Hacer una búsqueda con un texto específico y comprobar que se muestra la página que
+     * Hacer una busqueda con un texto especifico y comprobar que se muestra la pagina que
      * corresponde, con la lista de usuarios en los que el texto especificados sea parte de su nombre, apellidos o
      * de su email
      */
     @Test
     public void PR14() {
-        // TODO Adaptar a usuarios
         PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
         PO_LoginView.fillForm(driver, "pedro@uniovi.es", "123456");
-        PO_HomeView.checkElement(driver, "text", "pedro@uniovi.es");
-        List<WebElement> elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/bid/search')]");
+        PO_HomeView.checkElement(driver, "text", "P�gina principal");
+        List<WebElement> elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listUsers')]");
         elementos.get(0).click();
-        //PO_SearchBidView.fillForm(driver, "OFERTA");
+        PO_SearchView.fillForm(driver, "Pedr");
 
-        // Compruebo que no hay nada más que la cabecera de la tabla de ofertas
-        //assertTrue(checkNumRows("tableBids") > 0);
+        // Compruebo que hay algo mas que la cabecera de la tabla de usuarios
+        assertTrue(checkNumRows("datos") > 1);
+    }
+
+    /**
+     * Metodo que comprueba el numero de filas de la tabla pasada como parametro
+     * Utilizada unicamente para la PR14
+     * @param table, la tabla a mirar
+     * @return numero de filas
+     */
+    private int checkNumRows(String table){
+        WebElement baseTable2 = driver.findElement(By.id(table));
+        List<WebElement> tableRows2 = baseTable2.findElements(By.tagName("tr"));
+        return tableRows2.size();
     }
 
     /**

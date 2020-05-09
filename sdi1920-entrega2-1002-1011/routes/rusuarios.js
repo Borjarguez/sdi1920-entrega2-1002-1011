@@ -96,8 +96,8 @@ module.exports = function (app, swig, gestorBD) {
     app.get("/listUsers", function (req, res) {
             let criteria = {};
 
-            if (req.query.search != null)
-                criteria = {"name": {$regex: ".*" + req.query.search + ".*"}};
+            if (req.query.searchText != null)
+                criteria = {"name": {$regex: ".*" + req.query.searchText + ".*"}};
 
             let pg = parseInt(req.query.pg);
 
