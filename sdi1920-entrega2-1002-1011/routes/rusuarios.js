@@ -182,11 +182,8 @@ module.exports = function (app, swig, gestorBD) {
     });
 
     app.get("/reset", function (req, res) {
-        var encryptedAdmin = app.get("crypto").createHmac('sha256', app.get('clave'))
-            .update("admin").digest('hex');
         var encryptedUser = app.get("crypto").createHmac('sha256', app.get('clave'))
             .update("123456").digest('hex');
-        var f = new Date();
         var datosIniciales = {
             usuarios: [
                 {
@@ -320,6 +317,49 @@ module.exports = function (app, swig, gestorBD) {
                     sender: "aurora@uniovi.es",
                     receiver: "prueba@uniovi.es",
                     accepted: true
+                }
+            ],
+            conversaciones : [
+                {
+                    "senderConver": "prueba@uniovi.es",
+                    "receiverConver": "ines@uniovi.es",
+                    "mensajes": [
+                        {
+                            "_id":gestorBD.mongo.ObjectID(),
+                            "sender": "prueba@uniovi.es",
+                            "receiver": "ines@uniovi.es",
+                            "texto": "Hola Inés",
+                            "read": true
+                        },
+                        {
+                            "_id":gestorBD.mongo.ObjectID(),
+                            "sender": "ines@uniovi.es",
+                            "receiver": "prueba@uniovi.es",
+                            "texto": "Hola prueba",
+                            "read": true
+                        },
+                        {
+                            "_id":gestorBD.mongo.ObjectID(),
+                            "sender": "prueba@uniovi.es",
+                            "receiver": "ines@uniovi.es",
+                            "texto": "¿Como estás?",
+                            "read": true
+                        },
+                        {
+                            "_id":gestorBD.mongo.ObjectID(),
+                            "sender": "ines@uniovi.es",
+                            "receiver": "prueba@uniovi.es",
+                            "texto": "Bueno..",
+                            "read": true
+                        },
+                        {
+                            "_id":gestorBD.mongo.ObjectID(),
+                            "sender": "prueba@uniovi.es",
+                            "receiver": "ines@uniovi.es",
+                            "texto": "¿Que te pasa?",
+                            "read": false
+                        }
+                    ]
                 }
             ]
         };

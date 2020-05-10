@@ -196,16 +196,22 @@ module.exports = {
                 collection.deleteMany({}, function (err, result) {
                     var collection = db.collection('peticiones');
                     collection.deleteMany({}, function (err, result) {
-                        var collection = db.collection('usuarios');
-                        collection.insertMany(datosIniciales.usuarios).then(result => {
-                            var collection = db.collection('peticiones');
-                            collection.insertMany(datosIniciales.peticiones).then(result => {
-                                collection.insertMany(datosIniciales.amigos).then(result => {
-                                    db.close();
-                                    funcionCallback();
+                        var collection = db.collection('conversaciones');
+                        collection.deleteMany({}, function (err, result) {
+                            var collection = db.collection('usuarios');
+                            collection.insertMany(datosIniciales.usuarios).then(result => {
+                                var collection = db.collection('peticiones');
+                                collection.insertMany(datosIniciales.peticiones).then(result => {
+                                    collection.insertMany(datosIniciales.amigos).then(result => {
+                                        var collection = db.collection('conversaciones');
+                                        collection.insertMany(datosIniciales.conversaciones).then(result => {
+                                            db.close();
+                                            funcionCallback();
+                                        });
+                                    });
+
+
                                 });
-
-
                             });
                         });
                     });
@@ -223,6 +229,7 @@ module.exports = {
                     if (err) {
                         funcionCallback(null);
                     } else {
+
                         funcionCallback(conversaciones);
                     }
                     db.close();
@@ -254,14 +261,35 @@ module.exports = {
                 funcionCallback(null);
             } else {
                 var collection = db.collection('conversaciones');
+
                 collection.update(criterio, atributos, function (err, obj) {
                     if (err) {
                         funcionCallback(null);
                     } else {
+
                         funcionCallback(obj);
                     }
                     db.close();
                 });
+            }
+        });
+    },marcarMensajeLeido: function (criterio,atributos, funcionCallback) {
+        this.mongo.MongoClient.connect(this.app.get('db'), function (err, db) {
+            if (err) {
+                funcionCallback(null);
+            } else {
+                var collection = db.collection('conversaciones');
+
+                collection.update(criterio,
+                    atributos,function (err, obj) {
+                        if (err) {
+                            funcionCallback(null);
+                        } else {
+                            funcionCallback(obj);
+                        }
+                        db.close();
+                    });
+
             }
         });
     },

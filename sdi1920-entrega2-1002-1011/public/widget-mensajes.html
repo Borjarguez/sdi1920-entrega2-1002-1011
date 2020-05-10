@@ -35,21 +35,24 @@
 <script>
     window.history.pushState("", "", "/cliente.html?w=mensajes");
     var mensajes;
+    var conver;
 
     function cargarMensajes() {
         $.ajax({
-            url: URLbase + "/mensajes",
+            url: URLbase + "/chat/"+amigo,
             type: "GET",
-            data: {
-                usuario : amigo
-            },
+            data: {},
             dataType: 'json',
             headers: {
                 "token": token
             },
             success: function (respuesta) {
-                mensajes = respuesta;
-                actualizarTabla(mensajes);
+                if (JSON.stringify(mensajes)!=JSON.stringify(respuesta.mensajes)){
+                    mensajes = respuesta.mensajes;
+                    conver=respuesta._id;
+                    actualizarTabla(mensajes);
+                }
+
             },
             error: function (error) {
                 $("#contenedor-principal").load("widget-login.html");
@@ -59,36 +62,78 @@
 
     function enviarMensaje() {
         $.ajax({
-            url: URLbase + "/mensaje",
-            type: "POST",
+            url: URLbase + "/chat/"+amigo,
+            type: "PUT",
             data: {
-                texto: $("#message").val(),
-                destino: amigo
+                text: $("#message").val()
             },
             dataType: 'json',
             headers: {
                 "token": token
             },
             success: function (respuesta) {
+
                 cargarMensajes();
+                $("#message").value="";
             },
             error: function (error) {
+                $("#contenedor-principal").load("widget-login.html");
             }
         });
     }
 
+    function actualizarMensajeLeido(id) {
+        $.ajax({
+            url: URLbase + "/chat/marcarLeido/"+id,
+            type: "PUT",
+            data: {
+                am:conver
+            },
+            dataType: 'json',
+            headers: {
+                "token": token
+            },
+            success: function (respuesta) {
+
+            },
+            error: function (error) {
+                $("#contenedor-principal").load("widget-login.html");
+            }
+        });
+
+    }
+
     function actualizarTabla(mensajesMostrar) {
+
         $("#tablaCuerpo").empty(); // Vaciar la tabla
         for (i = 0; i < mensajesMostrar.length; i++) {
-            $("#tablaCuerpo").append(
-                "<tr id=" + mensajesMostrar[i]._id + ">" + "<td>"
-                + mensajesMostrar[i].emisor + "</td>" + "<td>"
-                + mensajesMostrar[i].destino + "</td>" + "<td>"
-                + mensajesMostrar[i].texto + "</td>" + "<td>"
-                + mensajesMostrar[i].leido + "</td>" + "<td>"
-                + "</td>" + "</tr>");
+
+            if (mensajesMostrar[i].read){
+                $("#tablaCuerpo").append(
+                    "<tr id=" + mensajesMostrar[i]._id + ">" + "<td>"
+                    + mensajesMostrar[i].sender + "</td>" + "<td>"
+                    + mensajesMostrar[i].receiver + "</td>" + "<td>"
+                    + mensajesMostrar[i].texto + "</td>" + "<td>"
+                    + "Leido" + "</td>" + "<td>"
+                    + "</td>" + "</tr>");
+            }else{
+
+                $("#tablaCuerpo").append(
+                    "<tr id=" + mensajesMostrar[i]._id + ">" + "<td>"
+                    + mensajesMostrar[i].sender + "</td>" + "<td>"
+                    + mensajesMostrar[i].receiver + "</td>" + "<td>"
+                    + mensajesMostrar[i].texto + "</td>" + "<td>"
+                    + "No leido" + "</td>" + "<td>"
+                    + "</td>" + "</tr>");
+            }
+            actualizarMensajeLeido(mensajesMostrar[i]._id);
+
         }
     }
 
     cargarMensajes();
+    setInterval(function () {
+        cargarMensajes();
+
+    }, 1000);
 </script>

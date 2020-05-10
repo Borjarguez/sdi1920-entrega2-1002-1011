@@ -11,6 +11,7 @@ import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -263,7 +264,7 @@ public class NotaneitorTests {
 	}
 
 	/**
-	 * PR15 Desde el listado de usuarios de la aplicación, enviar una invitación de
+	 * PR15 Desde el listado de usuarios de la aplicaciï¿½n, enviar una invitaciï¿½n de
 	 * amistad a un usuario. Comprobar que la solicitud de amistad aparece en el
 	 * listado de invitaciones (punto siguiente).
 	 */
@@ -274,7 +275,7 @@ public class NotaneitorTests {
 		// peticiones
 		PO_LoginView.fillForm(driver, "anton@uniovi.es", "123456");
 
-		// Vamos a la opción de ver peticiones
+		// Vamos a la opciï¿½n de ver peticiones
 		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, 'peticiones')]");
 		elementos.get(0).click();
 
@@ -315,7 +316,7 @@ public class NotaneitorTests {
 		// la peticion de prueba@uniovi.es
 		PO_LoginView.fillForm(driver, "anton@uniovi.es", "123456");
 
-		// Vamos a la opción de ver peticiones
+		// Vamos a la opciï¿½n de ver peticiones
 		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, 'peticiones')]");
 
 		elementos.get(0).click();
@@ -339,10 +340,10 @@ public class NotaneitorTests {
 	}
 
 	/**
-	 * PR16 Desde el listado de usuarios de la aplicación, enviar una invitación de
-	 * amistad a un usuario al que ya le habíamos enviado la invitación previamente.
-	 * No debería dejarnos enviar la invitación, se podría ocultar el botón de
-	 * enviar invitación o notificar que ya había sido enviada previamente
+	 * PR16 Desde el listado de usuarios de la aplicaciï¿½n, enviar una invitaciï¿½n de
+	 * amistad a un usuario al que ya le habï¿½amos enviado la invitaciï¿½n previamente.
+	 * No deberï¿½a dejarnos enviar la invitaciï¿½n, se podrï¿½a ocultar el botï¿½n de
+	 * enviar invitaciï¿½n o notificar que ya habï¿½a sido enviada previamente
 	 */
 	@Test
 	public void PR16() {
@@ -370,7 +371,8 @@ public class NotaneitorTests {
 		// Se envia peticion
 		elementos.get(0).click();
 
-		// ----------Segundo se intenta enviar otra vez la peticion y se ve que no se puede
+		// ----------Segundo se intenta enviar otra vez la peticion y se ve que no se
+		// puede
 		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listUsers')]");
 		elementos.get(0).click();
 		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listUsers?pg=3')]");
@@ -378,7 +380,7 @@ public class NotaneitorTests {
 		elementos = PO_View.checkElement(driver, "free",
 				"//td[contains(text(), 'anton@uniovi.es')]/following-sibling::*/a[contains(@name, 'peticion')]");
 		elementos.get(0).click();
-		PO_View.checkElement(driver, "text", "No se puede mandar petición a este usuario");
+		PO_View.checkElement(driver, "text", "No se puede mandar peticiï¿½n a este usuario");
 	}
 
 	/**
@@ -398,7 +400,7 @@ public class NotaneitorTests {
 		assertTrue(getCuantasPaginas() == 1);
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr", PO_View.getTimeout());
 		assertTrue(elementos.size() == 5); // 5 EN LA PRIMERA PAGINACION
-		PO_NavView.clickOption(driver,"logout", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "logout", "class", "btn btn-primary");
 
 		// ----------Segundo se entra como usuario prueba@uniovi.es para mandar peticion
 		// a anton
@@ -434,7 +436,7 @@ public class NotaneitorTests {
 
 	/**
 	 * PR18 Sobre el listado de invitaciones recibidas. Hacer click en el
-	 * botón/enlace de una de ellas y comprobar que dicha solicitud desaparece del
+	 * botï¿½n/enlace de una de ellas y comprobar que dicha solicitud desaparece del
 	 * listado de invitaciones.
 	 */
 	@Test
@@ -471,7 +473,7 @@ public class NotaneitorTests {
 				"//td[contains(text(), 'anton@uniovi.es')]/following-sibling::*/a[contains(@name, 'mandarPeticion')]");
 		elementos.get(0).click();
 
-		// ----------Le aceptó la peticion a anton, por lo que ahora van a tener 5
+		// ----------Le aceptï¿½ la peticion a anton, por lo que ahora van a tener 5
 		// peticiones y 1 de paginacion
 		// 1 de paginacion
 		assertTrue(getCuantasPaginas() == 1);
@@ -565,8 +567,8 @@ public class NotaneitorTests {
 	}
 
 	/**
-	 * PR20 Intentar acceder sin estar autenticado a la opción de listado de
-	 * usuarios. Se deberá volver al formulario de login.
+	 * PR20 Intentar acceder sin estar autenticado a la opciï¿½n de listado de
+	 * usuarios. Se deberï¿½ volver al formulario de login.
 	 */
 	@Test
 	public void PR20() {
@@ -577,8 +579,8 @@ public class NotaneitorTests {
 	}
 
 	/**
-	 * PR21 Intentar acceder sin estar autenticado a la opción de listado de
-	 * invitaciones de amistad recibida de un usuario estándar. Se deberá volver al
+	 * PR21 Intentar acceder sin estar autenticado a la opciï¿½n de listado de
+	 * invitaciones de amistad recibida de un usuario estï¿½ndar. Se deberï¿½ volver al
 	 * formulario de login.
 	 */
 	@Test
@@ -591,7 +593,7 @@ public class NotaneitorTests {
 
 	/**
 	 * PR22 Intentar acceder estando autenticado como usuario standard a la lista de
-	 * amigos de otro usuario. Se deberá mostrar un mensaje de acción indebida
+	 * amigos de otro usuario. Se deberï¿½ mostrar un mensaje de acciï¿½n indebida
 	 */
 	@Test
 	public void PR22() {
@@ -602,11 +604,9 @@ public class NotaneitorTests {
 		PO_View.checkElement(driver, "text", "No puedes ver la lista de amigos sin estar identificado.");
 	}
 
-	
 	/**
-	 * PR23
-	 * Inicio de sesión con datos válidos.
-	 * */
+	 * PR23 Inicio de sesiï¿½n con datos vï¿½lidos.
+	 */
 	@Test
 	public void PR23() {
 		// Vamos al login
@@ -620,9 +620,9 @@ public class NotaneitorTests {
 	}
 
 	/**
-	 * PR24
-	 * Inicio de sesión con datos inválidos (usuario no existente en la aplicación).
-	 * */
+	 * PR24 Inicio de sesiï¿½n con datos invï¿½lidos (usuario no existente en la
+	 * aplicaciï¿½n).
+	 */
 	@Test
 	public void PR24() {
 		// Vamos al login
@@ -634,9 +634,9 @@ public class NotaneitorTests {
 	}
 
 	/**
-	 * PR25
-	 * Acceder a la lista de amigos de un usuario, que al menos tenga tres amigos.
-	 * */
+	 * PR25 Acceder a la lista de amigos de un usuario, que al menos tenga tres
+	 * amigos.
+	 */
 	@Test
 	public void PR25() {
 		// Como el usuario prueba@uniovi.es tiene varios amigos, vamos a probar con ese
@@ -652,10 +652,10 @@ public class NotaneitorTests {
 	}
 
 	/**
-	 * PR26
-	 * Acceder a la lista de amigos de un usuario, y realizar un filtrado para encontrar a un amigo
-	 * concreto, el nombre a buscar debe coincidir con el de un amigo.
-	 * */
+	 * PR26 Acceder a la lista de amigos de un usuario, y realizar un filtrado para
+	 * encontrar a un amigo concreto, el nombre a buscar debe coincidir con el de un
+	 * amigo.
+	 */
 	@Test
 	public void PR26() {
 		// Como el usuario prueba@uniovi.es tiene varios amigos, vamos a probar con ese
@@ -667,45 +667,173 @@ public class NotaneitorTests {
 		List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",
 				PO_View.getTimeout());
 		assertTrue(elementos.size() == 5);
-		
-		//Ahora hacemos el filtrado por nombre, vamos a buscar a sdi
+
+		// Ahora hacemos el filtrado por nombre, vamos a buscar a sdi
 		PO_SearchView.fillForm(driver, "sdi");
-		elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",
-				PO_View.getTimeout());
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr", PO_View.getTimeout());
 		assertTrue(elementos.size() == 1);
-		
+
 	}
 
 	/**
-	 * PR27
-	 * Acceder a la lista de mensajes de un amigo “chat”, la lista debe contener al menos tres
-	 * mensajes.
-	 * */
+	 * PR27 Acceder a la lista de mensajes de un amigo ï¿½chatï¿½, la lista debe
+	 * contener al menos tres mensajes.
+	 */
 	@Test
 	public void PR27() {
-		assertTrue("PR27 sin hacer", false);
+		// En el reset aï¿½adimos una conversacion de prueba e ines de 5 mensajes
+		driver.navigate().to("https://localhost:8081/cliente.html");
+		// Rellenamos el formulario bien
+		PO_LoginView.fillForm(driver, "prueba@uniovi.es", "123456");
+
+		// Vamos a dar click en ines
+		List<WebElement> elementos = PO_View.checkElement(driver, "free",
+				"//td[contains(text(), 'ines@uniovi.es')]/following-sibling::*/a[contains(@id, 'mensajes')]");
+		elementos.get(0).click();
+
+		// Ahora se va a abrir el chat con ines
+
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr", PO_View.getTimeout());
+		assertTrue(elementos.size() == 5);
 	}
 
 	/**
-	 * PR29
-	 * Identificarse en la aplicación y enviar un mensaje a un amigo, validar que el mensaje enviado
-	 * aparece en el chat. Identificarse después con el usuario que recibido el mensaje y validar que tiene un
-	 * mensaje sin leer, entrar en el chat y comprobar que el mensaje pasa a tener el estado leído.
-	 * */
+	 * PR29 Identificarse en la aplicaciï¿½n y enviar un mensaje a un amigo, validar
+	 * que el mensaje enviado aparece en el chat. Identificarse despuï¿½s con el
+	 * usuario que recibido el mensaje y validar que tiene un mensaje sin leer,
+	 * entrar en el chat y comprobar que el mensaje pasa a tener el estado leï¿½do.
+	 */
 	@Test
 	public void PR29() {
-		assertTrue("PR29 sin hacer", false);
+		//Lo que se va a hacer es entrar como sdi, ver que no hay ningun mensaje sin leer
+		//en la conversaciÃ³n con prueba, luego entrar como prueba, enviarle un mensaje.
+		driver.navigate().to("https://localhost:8081/cliente.html");
+		PO_LoginView.fillForm(driver, "sdi@uniovi.es", "123456");
+
+		//Esperamos a que lo calcule
+		SeleniumUtils.esperarSegundos(driver, 4);
+		
+		
+		// Vemos lo de prueba
+		List<WebElement> elementos = PO_View.checkElement(driver, "free",
+				"//td[contains(text(), 'prueba@uniovi.es')]/following-sibling::*/a[contains(@name, 'numLeido')]");
+		
+		assertTrue(elementos.get(0).getText().equals("0"));
+		
+
+		// Ahora se va a prueba para enviarle un mensaje a sdi
+		driver.manage().deleteAllCookies();
+		driver.navigate().to("https://localhost:8081/cliente.html");
+		PO_LoginView.fillForm(driver, "prueba@uniovi.es", "123456");
+		elementos = PO_View.checkElement(driver, "free",
+				"//td[contains(text(), 'sdi@uniovi.es')]/following-sibling::*/a[contains(@id, 'mensajes')]");
+		
+		elementos.get(0).click();
+		
+		
+		//Ahora vamos a aï¿½adir el mensaje
+		
+		WebElement search = driver.findElement(By.name("message"));
+		search.click();
+		search.clear();
+		search.sendKeys("Mensaje de prueba");
+		WebElement elemento = driver.findElement(By.id("boton-enviar"));
+		elemento.click();
+		
+		//Ahora se encuentra como sdi
+		driver.manage().deleteAllCookies();
+		driver.navigate().to("https://localhost:8081/cliente.html");
+		PO_LoginView.fillForm(driver, "sdi@uniovi.es", "123456");
+		
+		//Esperamos a que lo calcule
+		SeleniumUtils.esperarSegundos(driver, 4);
+		
+		elementos = PO_View.checkElement(driver, "free",
+				"//td[contains(text(), 'prueba@uniovi.es')]/following-sibling::*/a[contains(@name, 'numLeido')]");
+		assertTrue(elementos.get(0).getText().equals("1"));
+		elementos = PO_View.checkElement(driver, "free",
+				"//td[contains(text(), 'prueba@uniovi.es')]/following-sibling::*/a[contains(@id, 'mensajes')]");
+		elementos.get(0).click();
+		//Primero no leido
+		elementos = PO_View.checkElement(driver, "free", "//td[contains(text(), 'No leido')]");
+		assertTrue(elementos.size() == 1);
+		//Al segundo cambia a leido
+		elementos = PO_View.checkElement(driver, "free", "//td[contains(text(), 'Leido')]");
+		assertTrue(elementos.size() == 1);
+		
+		driver.navigate().to("https://localhost:8081/cliente.html");
+		//Esperamos a que lo calcule y ahora habria 0
+		SeleniumUtils.esperarSegundos(driver, 4);
+		
+		elementos = PO_View.checkElement(driver, "free",
+				"//td[contains(text(), 'prueba@uniovi.es')]/following-sibling::*/a[contains(@name, 'numLeido')]");
+		assertTrue(elementos.get(0).getText().equals("0"));
+		
+		
 	}
 
 	/**
-	 * PR30
-	 * Identificarse en la aplicación y enviar tres mensajes a un amigo, validar que los mensajes
-	 * enviados aparecen en el chat. Identificarse después con el usuario que recibido el mensaje y validar que el
-	 * número de mensajes sin leer aparece en la propia lista de amigos.
-	 * */
+	 * PR30 Identificarse en la aplicaciï¿½n y enviar tres mensajes a un amigo,
+	 * validar que los mensajes enviados aparecen en el chat. Identificarse despuï¿½s
+	 * con el usuario que recibido el mensaje y validar que el nï¿½mero de mensajes
+	 * sin leer aparece en la propia lista de amigos.
+	 */
 	@Test
 	public void PR30() {
-		assertTrue("PR30 sin hacer", false);
+		//Lo que se va a hacer es entrar como sdi, ver que no hay ningun mensaje sin leer
+				//en la conversaciÃ³n con prueba, luego entrar como prueba, enviarle un mensaje.
+				driver.navigate().to("https://localhost:8081/cliente.html");
+				PO_LoginView.fillForm(driver, "sdi@uniovi.es", "123456");
+
+				//Esperamos a que lo calcule
+				SeleniumUtils.esperarSegundos(driver, 4);
+				
+				
+				// Vemos lo de prueba
+				List<WebElement> elementos = PO_View.checkElement(driver, "free",
+						"//td[contains(text(), 'prueba@uniovi.es')]/following-sibling::*/a[contains(@name, 'numLeido')]");
+				
+				assertTrue(elementos.get(0).getText().equals("0"));
+				
+
+				// Ahora se va a prueba para enviarle un mensaje a sdi
+				driver.manage().deleteAllCookies();
+				driver.navigate().to("https://localhost:8081/cliente.html");
+				PO_LoginView.fillForm(driver, "prueba@uniovi.es", "123456");
+				elementos = PO_View.checkElement(driver, "free",
+						"//td[contains(text(), 'sdi@uniovi.es')]/following-sibling::*/a[contains(@id, 'mensajes')]");
+				
+				elementos.get(0).click();
+				
+				
+				//Ahora vamos a aÃ±adir los mensajes
+				
+				WebElement search = driver.findElement(By.name("message"));
+				search.click();
+				search.clear();
+				search.sendKeys("Mensaje de prueba");
+				WebElement elemento = driver.findElement(By.id("boton-enviar"));
+				elemento.click();
+				SeleniumUtils.esperarSegundos(driver, 1);
+				search.sendKeys("Mensaje de prueba2");
+				elemento.click();
+				SeleniumUtils.esperarSegundos(driver, 1);
+				search.sendKeys("Mensaje de prueba3");
+				elemento.click();
+				
+				//Ahora se encuentra como sdi
+				driver.manage().deleteAllCookies();
+				driver.navigate().to("https://localhost:8081/cliente.html");
+				PO_LoginView.fillForm(driver, "sdi@uniovi.es", "123456");
+				
+				//Esperamos a que lo calcule
+				SeleniumUtils.esperarSegundos(driver, 4);
+				
+				elementos = PO_View.checkElement(driver, "free",
+						"//td[contains(text(), 'prueba@uniovi.es')]/following-sibling::*/a[contains(@name, 'numLeido')]");
+				assertTrue(elementos.get(0).getText().equals("3"));
+				
+				
 	}
 
 	// PR031. Sin hacer /

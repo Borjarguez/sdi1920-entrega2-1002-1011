@@ -27,7 +27,8 @@ module.exports = function (app, gestorBD) {
         })
     });
 
-    app.get("/api/chat/amigos", function (req, res) {
+    app.get("/api/amigos", function (req, res) {
+
         let email = res.usuario;
         let criteria = {$or: [{"sender": email, "accepted": true}, {"receiver": email, "accepted": true}]};
 
@@ -43,6 +44,7 @@ module.exports = function (app, gestorBD) {
             }
         });
     });
+
 
     app.put("/api/chat/:id", function (req, res) {
         let email = res.usuario;
@@ -68,8 +70,8 @@ module.exports = function (app, gestorBD) {
                                 amigo = amigos[i]
                         criteria = {
                             $or: [
-                                {$and: [{"sender": email}, {"receiver": amigo.email}]},
-                                {$and: [{"sender": amigo.email}, {"receiver": email}]}
+                                {$and: [{"senderConver": email}, {"receiverConver": amigo.email}]},
+                                {$and: [{"senderConver": amigo.email}, {"receiverConver": email}]}
                             ]
                         };
                         gestorBD.obtenerConversaciones(criteria, function (conversaciones) {
@@ -81,12 +83,12 @@ module.exports = function (app, gestorBD) {
                             } else {
                                 if (conversaciones[0] == null) {
                                     let conversacion = {
-                                        "sender": res.usuario,
-                                        "receiver": amigo.email,
+                                        "senderConver": res.usuario,
+                                        "receiverConver": amigo.email,
                                         "mensajes": [{
                                             "_id": gestorBD.mongo.ObjectID(),
                                             "sender": res.usuario,
-                                            "receiver": amigo[0],
+                                            "receiver": amigo.email,
                                             "texto": req.body.text,
                                             "read": false
                                         }]
@@ -109,13 +111,12 @@ module.exports = function (app, gestorBD) {
                                     var mensaje = {
                                         "_id": gestorBD.mongo.ObjectID(),
                                         "sender": res.usuario,
-                                        "receiver": amigo[0],
-                                        "date": new Date(),
+                                        "receiver": amigo.email,
                                         "texto": req.body.text,
                                         "read": false
                                     };
 
-                                    gestorBD.insertarMensaje(criterio, {"$push": {"mensajes": mensaje}}, function (conversaciones) {
+                                    gestorBD.insertarMensaje(criteria, {"$push": {"mensajes": mensaje}}, function (conversaciones) {
                                         if (conversaciones == null) {
                                             res.status(500);
                                             res.json({
@@ -138,6 +139,7 @@ module.exports = function (app, gestorBD) {
 
     });
 
+
     app.get("/api/chat/:id", function (req, res) {
         let email = res.usuario;
         let criteria = {$or: [{"sender": email, "accepted": true}, {"receiver": email, "accepted": true}]};
@@ -157,13 +159,17 @@ module.exports = function (app, gestorBD) {
                         });
                     } else {
                         let amigo = null;
-                        for (let i = 0; i < amigos.length; i++)
-                            if (amigos[i].email === usuarios[0].email)
+
+                        for (let i = 0; i < amigos.length; i++) {
+                            if (amigos[i].email === usuarios[0].email) {
                                 amigo = amigos[i]
+                            }
+                        }
+
                         criteria = {
                             $or: [
-                                {$and: [{"sender": email}, {"receiver": amigo.email}]},
-                                {$and: [{"sender": amigo.email}, {"receiver": email}]}
+                                {$and: [{"senderConver": email}, {"receiverConver": amigo.email}]},
+                                {$and: [{"senderConver": amigo.email}, {"receiverConver": email}]}
                             ]
                         };
                         gestorBD.obtenerConversaciones(criteria, function (conversaciones) {
@@ -172,14 +178,44 @@ module.exports = function (app, gestorBD) {
                                 res.json({
                                     error: "se ha producido un error"
                                 });
+                            } else if (conversaciones[0] == null) {
+                                res.status(200);
+                                res.send({});
                             } else {
                                 res.status(200);
-                                res.send(JSON.stringify(conversaciones));
+                                res.send(conversaciones[0]);
                             }
                         });
                     }
                 });
             }
         });
+    });
+
+    app.put("/api/chat/marcarLeido/:id", function (req, res) {
+
+
+        let email = res.usuario;
+        let criteria = {"_id": gestorBD.mongo.ObjectID(req.body.am),
+            "mensajes":{"$elemMatch":{"_id":gestorBD.mongo.ObjectID(req.params.id),"read":false,"receiver":email}}
+            };
+
+        gestorBD.marcarMensajeLeido(criteria, {$set: {"mensajes.$.read": true}}, function (result) {
+            if (result == null) {
+                res.status(500);
+                res.json({
+                    error: "se ha producido un error"
+                })
+            } else {
+
+                res.status(200);
+                res.json({
+                    mensaje: "mensaje actualizado a leido"
+                })
+            }
+
+        });
+
+
     });
 }
