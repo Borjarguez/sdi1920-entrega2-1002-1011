@@ -14,6 +14,7 @@ module.exports = function (app, gestorBD) {
                     autenticado: false
                 })
             } else {
+
                 var token = app.get('jwt').sign({
                     usuario: criterio.email,
                     tiempo: Date.now() / 1000

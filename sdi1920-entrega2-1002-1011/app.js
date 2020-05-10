@@ -79,8 +79,8 @@ routerUsuarioToken.use(function (req, res, next) {
 });
 
 // Aplicar routerUsuarioToken
-app.use('/api/amigos', routerUsuarioToken);
 app.use('/api/chat', routerUsuarioToken);
+app.use('/api/amigos', routerUsuarioToken);
 
 // routerUsuarioSession
 let routerUsuarioSession = express.Router();
@@ -95,23 +95,13 @@ routerUsuarioSession.use(function (req, res, next) {
     }
 });
 
-let routerUsuarioSessionAmigos = express.Router();
-routerUsuarioSessionAmigos.use(function (req, res, next) {
-    let logger = app.get('logger');
-    if (req.session.usuario) {
-        logger.log("El usuario que se encuentra en sesión es: "+req.session.usuario);
-        next();
-    } else {
-        logger.error("No se encuentra ningún usuario en sesión");
-        res.send("No puedes ver la lista de amigos sin estar identificado.")
-    }
-});
+
 
 //Aplicar routerUsuarioSession
 app.use("/home", routerUsuarioSession);
 app.use("/listUsers", routerUsuarioSession);
 app.use("/peticiones", routerUsuarioSession);
-app.use("/amigos", routerUsuarioSessionAmigos);
+app.use("/amigos", routerUsuarioSession);
 
 app.use(express.static('public'));
 
