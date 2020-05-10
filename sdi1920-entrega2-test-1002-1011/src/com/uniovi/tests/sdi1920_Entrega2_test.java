@@ -1,8 +1,14 @@
 package com.uniovi.tests;
 
-import com.uniovi.tests.pageobjects.*;
-import com.uniovi.tests.util.SeleniumUtils;
-import org.junit.*;
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
+
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -15,10 +21,6 @@ import com.uniovi.tests.pageobjects.PO_RegisterView;
 import com.uniovi.tests.pageobjects.PO_SearchView;
 import com.uniovi.tests.pageobjects.PO_View;
 import com.uniovi.tests.util.SeleniumUtils;
-
-import static org.junit.Assert.assertTrue;
-
-import java.util.List;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class sdi1920_Entrega2_test {
@@ -90,32 +92,32 @@ public class sdi1920_Entrega2_test {
 	}
 
 	/**
-	 * PR03 Registro de Usuario con datos invalidos (repeticion de contraseï¿½a
+	 * PR03 Registro de Usuario con datos invalidos (repeticion de contrase�a
 	 * invalida)
 	 */
 	@Test
 	public void PR03() {
 		// Vamos al formulario de registro
 		PO_NavView.clickOption(driver, "signup", "class", "btn btn-primary");
-		// Rellenamos el formulario con contraseÃ±a que no coinciden.
+		// Rellenamos el formulario con contrase�a que no coinciden.
 		PO_RegisterView.fillForm(driver, "josefo@prueba.es", "Josefo", "Perez", "7777777", "7777778");
-		PO_RegisterView.checkElement(driver, "text", "Las contraseï¿½as deben ser iguales");
+		PO_RegisterView.checkElement(driver, "text", "Las contrase�as deben ser iguales");
 	}
 
 	/**
-	 * PR04 Registro de Usuario con datos invÃ¡lidos (email existente)
+	 * PR04 Registro de Usuario con datos invalidos (email existente)
 	 */
 	@Test
 	public void PR04() {
 		// Vamos al formulario de registro
 		PO_NavView.clickOption(driver, "signup", "class", "btn btn-primary");
-		// Rellenamos el formulario con contraseÃ±a que no coinciden.
+		// Rellenamos el formulario con contrase�a que no coinciden.
 		PO_RegisterView.fillForm(driver, "prueba@uniovi.es", "Josefo", "Perez", "7777777", "7777777");
 		PO_RegisterView.checkElement(driver, "text", "El email ya existe en el sistema");
 	}
 
 	/**
-	 * PR05 Inicio de sesion con datos vÃ¡lidos (usuario estÃ¡ndar)
+	 * PR05 Inicio de sesion con datos validos (usuario estandar)
 	 */
 	@Test
 	public void PR05() {
@@ -127,7 +129,7 @@ public class sdi1920_Entrega2_test {
 
 	/**
 	 * PR06 Inicio de sesion con datos invalidos (usuario estandar, campo email y
-	 * contraseï¿½a vacios)
+	 * contrase�a vacios)
 	 */
 	@Test
 	public void PR06() {
@@ -139,8 +141,8 @@ public class sdi1920_Entrega2_test {
 	}
 
 	/**
-	 * PR07 Inicio de sesiÃ³n con datos invÃ¡lidos (usuario estÃ¡ndar, email
-	 * existente, pero contraseÃ±a incorrecta)
+	 * PR07 Inicio de sesion con datos invalidos (usuario estandar, email
+	 * existente, pero contrase�a incorrecta)
 	 */
 	@Test
 	public void PR07() {
@@ -150,8 +152,8 @@ public class sdi1920_Entrega2_test {
 	}
 
 	/**
-	 * PR08 Inicio de sesiÃ³n con datos invÃ¡lidos (usuario estÃ¡ndar, email no
-	 * existente y contraseÃ±a no vacÃ­a)
+	 * PR08 Inicio de sesion con datos invalidos (usuario estandar, email no
+	 * existente y contrase�a no vacia)
 	 */
 	@Test
 	public void PR08() {
@@ -169,12 +171,12 @@ public class sdi1920_Entrega2_test {
 		PO_NavView.clickOption(driver, "login", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "pedro@uniovi.es", "123456");
 		PO_NavView.clickOption(driver, "logout", "class", "btn btn-primary");
-		PO_LoginView.checkElement(driver, "text", "Iniciar sesiï¿½n");
+		PO_LoginView.checkElement(driver, "text", "Iniciar sesion");
 	}
 
 	/**
-	 * PR10 Comprobar que el boton cerrar sesiÃ³n no estÃ¡ visible si el usuario no
-	 * estÃ¡ autenticado
+	 * PR10 Comprobar que el boton cerrar sesion no esta visible si el usuario no
+	 * esta autenticado
 	 */
 	@Test
 	public void PR10() {
@@ -189,7 +191,7 @@ public class sdi1920_Entrega2_test {
 	public void PR11() {
 		PO_NavView.clickOption(driver, "login", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "prueba@uniovi.es", "123456");
-		PO_NavView.checkElement(driver, "text", "Pï¿½gina principal");
+		PO_NavView.checkElement(driver, "text", "Pagina principal");
 		PO_NavView.clickOption(driver, "listUsers", "id", "listUsers");
 
 		List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",
@@ -205,7 +207,7 @@ public class sdi1920_Entrega2_test {
 	public void PR12() {
 		PO_NavView.clickOption(driver, "login", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "pedro@uniovi.es", "123456");
-		PO_NavView.checkElement(driver, "text", "Pï¿½gina principal");
+		PO_NavView.checkElement(driver, "text", "Pagina principal");
 		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listUsers')]");
 		elementos.get(0).click();
 		PO_SearchView.fillForm(driver, "");
@@ -215,7 +217,7 @@ public class sdi1920_Entrega2_test {
 
 	/**
 	 * PR13 Hacer una busqueda escribiendo en el campo un texto que no exista y
-	 * comprobar que se muestra la pÃ¡gina que corresponde, con la lista de usuarios
+	 * comprobar que se muestra la pagina que corresponde, con la lista de usuarios
 	 * vacia
 	 */
 	@Test
@@ -240,7 +242,7 @@ public class sdi1920_Entrega2_test {
 	public void PR14() {
 		PO_NavView.clickOption(driver, "login", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "pedro@uniovi.es", "123456");
-		PO_NavView.checkElement(driver, "text", "Pï¿½gina principal");
+		PO_NavView.checkElement(driver, "text", "Pagina principal");
 		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listUsers')]");
 		elementos.get(0).click();
 		PO_SearchView.fillForm(driver, "Pedr");
@@ -263,7 +265,7 @@ public class sdi1920_Entrega2_test {
 	}
 
 	/**
-	 * PR15 Desde el listado de usuarios de la aplicaci�n, enviar una invitaci�n de
+	 * PR15 Desde el listado de usuarios de la aplicacion, enviar una invitacion de
 	 * amistad a un usuario. Comprobar que la solicitud de amistad aparece en el
 	 * listado de invitaciones (punto siguiente).
 	 */
@@ -339,10 +341,10 @@ public class sdi1920_Entrega2_test {
 	}
 
 	/**
-	 * PR16 Desde el listado de usuarios de la aplicaci�n, enviar una invitaci�n de
-	 * amistad a un usuario al que ya le hab�amos enviado la invitaci�n previamente.
-	 * No deber�a dejarnos enviar la invitaci�n, se podr�a ocultar el bot�n de
-	 * enviar invitaci�n o notificar que ya hab�a sido enviada previamente
+	 * PR16 Desde el listado de usuarios de la aplicacion, enviar una invitacion de
+	 * amistad a un usuario al que ya le habiamos enviado la invitacion previamente.
+	 * No deberia dejarnos enviar la invitacion, se podria ocultar el boton de
+	 * enviar invitacion o notificar que ya habia sido enviada previamente
 	 */
 	@Test
 	public void PR16() {
@@ -435,7 +437,7 @@ public class sdi1920_Entrega2_test {
 
 	/**
 	 * PR18 Sobre el listado de invitaciones recibidas. Hacer click en el
-	 * bot�n/enlace de una de ellas y comprobar que dicha solicitud desaparece del
+	 * boton/enlace de una de ellas y comprobar que dicha solicitud desaparece del
 	 * listado de invitaciones.
 	 */
 	@Test
@@ -566,8 +568,8 @@ public class sdi1920_Entrega2_test {
 	}
 
 	/**
-	 * PR20 Intentar acceder sin estar autenticado a la opci�n de listado de
-	 * usuarios. Se deber� volver al formulario de login.
+	 * PR20 Intentar acceder sin estar autenticado a la opcion de listado de
+	 * usuarios. Se deberi volver al formulario de login.
 	 */
 	@Test
 	public void PR20() {
@@ -578,8 +580,8 @@ public class sdi1920_Entrega2_test {
 	}
 
 	/**
-	 * PR21 Intentar acceder sin estar autenticado a la opci�n de listado de
-	 * invitaciones de amistad recibida de un usuario est�ndar. Se deber� volver al
+	 * PR21 Intentar acceder sin estar autenticado a la opcion de listado de
+	 * invitaciones de amistad recibida de un usuario estandar. Se deberi volver al
 	 * formulario de login.
 	 */
 	@Test
@@ -592,7 +594,7 @@ public class sdi1920_Entrega2_test {
 
 	/**
 	 * PR22 Intentar acceder estando autenticado como usuario standard a la lista de
-	 * amigos de otro usuario. Se deber� mostrar un mensaje de acci�n indebida
+	 * amigos de otro usuario. Se deberi mostrar un mensaje de accion indebida
 	 */
 	@Test
 	public void PR22() {
@@ -604,7 +606,7 @@ public class sdi1920_Entrega2_test {
 	}
 
 	/**
-	 * PR23 Inicio de sesi�n con datos v�lidos.
+	 * PR23 Inicio de sesion con datos validos.
 	 */
 	@Test
 	public void PR23() {
@@ -619,8 +621,8 @@ public class sdi1920_Entrega2_test {
 	}
 
 	/**
-	 * PR24 Inicio de sesi�n con datos inv�lidos (usuario no existente en la
-	 * aplicaci�n).
+	 * PR24 Inicio de sesion con datos invalidos (usuario no existente en la
+	 * aplicacio).
 	 */
 	@Test
 	public void PR24() {
@@ -668,14 +670,17 @@ public class sdi1920_Entrega2_test {
 		assertTrue(elementos.size() == 5);
 
 		// Ahora hacemos el filtrado por nombre, vamos a buscar a sdi
-		PO_SearchView.fillForm(driver, "sdi");
+		WebElement search = driver.findElement(By.name("searchText"));
+        search.click();
+        search.clear();
+        search.sendKeys("sdi");
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr", PO_View.getTimeout());
 		assertTrue(elementos.size() == 1);
 
 	}
 
 	/**
-	 * PR27 Acceder a la lista de mensajes de un amigo �chat�, la lista debe
+	 * PR27 Acceder a la lista de mensajes de un amigo chat, la lista debe
 	 * contener al menos tres mensajes.
 	 */
 	@Test
@@ -697,10 +702,10 @@ public class sdi1920_Entrega2_test {
 	}
 
 	/**
-	 * PR29 Identificarse en la aplicaci�n y enviar un mensaje a un amigo, validar
-	 * que el mensaje enviado aparece en el chat. Identificarse despu�s con el
+	 * PR29 Identificarse en la aplicacion y enviar un mensaje a un amigo, validar
+	 * que el mensaje enviado aparece en el chat. Identificarse despues con el
 	 * usuario que recibido el mensaje y validar que tiene un mensaje sin leer,
-	 * entrar en el chat y comprobar que el mensaje pasa a tener el estado le�do.
+	 * entrar en el chat y comprobar que el mensaje pasa a tener el estado leido.
 	 */
 	@Test
 	public void PR29() {
@@ -769,9 +774,9 @@ public class sdi1920_Entrega2_test {
 	}
 
 	/**
-	 * PR30 Identificarse en la aplicaci�n y enviar tres mensajes a un amigo,
-	 * validar que los mensajes enviados aparecen en el chat. Identificarse despu�s
-	 * con el usuario que recibido el mensaje y validar que el n�mero de mensajes
+	 * PR30 Identificarse en la aplicacion y enviar tres mensajes a un amigo,
+	 * validar que los mensajes enviados aparecen en el chat. Identificarse despues
+	 * con el usuario que recibido el mensaje y validar que el numero de mensajes
 	 * sin leer aparece en la propia lista de amigos.
 	 */
 	@Test
