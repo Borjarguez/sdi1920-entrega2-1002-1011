@@ -12,7 +12,7 @@ module.exports = function (app, swig, gestorBD) {
 
     app.post('/signup', function (req, res) {
         if (req.body.password !== req.body.passwordCheck) {
-            res.redirect("/signup"+ "?mensaje=Las contraseñas deben ser iguales&tipoMensaje=alert-danger");
+            res.redirect("/signup" + "?mensaje=Las contraseñas deben ser iguales&tipoMensaje=alert-danger");
             return;
         }
 
@@ -97,7 +97,11 @@ module.exports = function (app, swig, gestorBD) {
             let criteria = {};
 
             if (req.query.searchText != null)
-                criteria = {"name": {$regex: ".*" + req.query.searchText + ".*"}};
+                criteria = {$or: [
+                        {"name": {$regex: ".*" + req.query.searchText + ".*"}},
+                        {"surname": {$regex: ".*" + req.query.searchText + ".*"}},
+                        {"email": {$regex: ".*" + req.query.searchText + ".*"}}
+                ]};
 
             let pg = parseInt(req.query.pg);
 
