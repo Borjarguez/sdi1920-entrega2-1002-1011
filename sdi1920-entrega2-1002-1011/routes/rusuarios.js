@@ -11,27 +11,21 @@ module.exports = function (app, swig, gestorBD) {
     });
 
     app.post('/signup', function (req, res) {
-        if (req.body.password != req.body.passwordCheck) {
-            let errorT = {
-                messageType: "alert-danger",
-                message: "Ambas contraseñas deben ser iguales"
-            };
-
-            req.session.error = errorT;
-            res.redirect("/signup");
+        if (req.body.password !== req.body.passwordCheck) {
+            res.redirect("/signup" + "?mensaje=Las contraseñas deben ser iguales&tipoMensaje=alert-danger");
             return;
         }
 
-        if (req.body.email == "") {
-            let errorT = {
-                messageType: "alert-danger",
-                message: "El campo email no puede estar vacío"
-            };
-
-            req.session.error = errorT;
-            res.redirect("/signup");
+        if (req.body.email === "") {
+            res.redirect("/signup" + "?mensaje=Email vacio&tipoMensaje=alert-danger");
             return;
         }
+
+        if (req.body.name === "" || req.body.surname === "") {
+            res.redirect("/signup" + "?mensaje=Campos vacios&tipoMensaje=alert-danger");
+            return;
+        }
+
 
         let secure = app.get("crypto").createHmac('sha256', app.get('clave'))
             .update(req.body.password).digest('hex');
@@ -46,11 +40,11 @@ module.exports = function (app, swig, gestorBD) {
         gestorBD.obtenerUsuarios({email: req.body.email}, function (users) {
             if (users.length != 0 && users != null) {
                 req.session.usuario = null;
-                res.redirect("/signup?message=Email already registered");
+                res.redirect("/signup" + "?mensaje=El email ya existe en el sistema&tipoMensaje=alert-danger");
             } else {
                 gestorBD.insertUser(user, function (id) {
                     if (id == null)
-                        res.redirect("/signup?message=Error during the register");
+                        res.redirect("/signup" + "?mensaje=Email o password incorrecto&tipoMensaje=alert-danger");
                     else {
                         req.session.usuario = user.email;
                         res.redirect("/home");
@@ -102,8 +96,12 @@ module.exports = function (app, swig, gestorBD) {
     app.get("/listUsers", function (req, res) {
             let criteria = {};
 
-            if (req.query.search != null)
-                criteria = {"name": {$regex: ".*" + req.query.search + ".*"}};
+            if (req.query.searchText != null)
+                criteria = {$or: [
+                        {"name": {$regex: ".*" + req.query.searchText + ".*"}},
+                        {"surname": {$regex: ".*" + req.query.searchText + ".*"}},
+                        {"email": {$regex: ".*" + req.query.searchText + ".*"}}
+                ]};
 
             let pg = parseInt(req.query.pg);
 

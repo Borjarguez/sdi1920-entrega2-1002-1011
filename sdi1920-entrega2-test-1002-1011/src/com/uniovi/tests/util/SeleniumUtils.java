@@ -50,6 +50,19 @@ public class SeleniumUtils {
 		assertTrue(resultado);	
 	}
 
+	/**
+	 * Aborta si el elemento no está presente en la página actual
+	 *
+	 * @param driver: apuntando al navegador abierto actualmente.
+	 * @param texto:  texto a buscar
+	 */
+	static public void elementoNoPresentePagina(WebDriver driver,
+												String texto) {
+		List<WebElement> list = driver.findElements(
+				By.xpath("//*[contains(@id,'" + texto + "')]"));
+		assertTrue("Texto " + texto + " aun presente !",
+				list.size() == 0);
+	}
 
 	/**
 	 * Espera por la visibilidad de un elemento/s en la vista actualmente cargandose en driver. Para ello se empleará una consulta xpath.
