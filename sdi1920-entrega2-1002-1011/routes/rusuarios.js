@@ -12,16 +12,19 @@ module.exports = function (app, swig, gestorBD) {
 
     app.post('/signup', function (req, res) {
         if (req.body.password !== req.body.passwordCheck) {
+            app.get("logger").error("Error al registrarse, contraseñas diferentes");
             res.redirect("/signup" + "?mensaje=Las contraseñas deben ser iguales&tipoMensaje=alert-danger");
             return;
         }
 
         if (req.body.email === "") {
+            app.get("logger").error("Error al registrarse, email vacio");
             res.redirect("/signup" + "?mensaje=Email vacio&tipoMensaje=alert-danger");
             return;
         }
 
         if (req.body.name === "" || req.body.surname === "") {
+            app.get("logger").error("Error al registrarse, campos vacios");
             res.redirect("/signup" + "?mensaje=Campos vacios&tipoMensaje=alert-danger");
             return;
         }
@@ -40,13 +43,17 @@ module.exports = function (app, swig, gestorBD) {
         gestorBD.obtenerUsuarios({email: req.body.email}, function (users) {
             if (users.length != 0 && users != null) {
                 req.session.usuario = null;
+                app.get("logger").error("Error al registrarse, el email ya existe");
                 res.redirect("/signup" + "?mensaje=El email ya existe en el sistema&tipoMensaje=alert-danger");
             } else {
                 gestorBD.insertUser(user, function (id) {
-                    if (id == null)
+                    if (id == null) {
+                        app.get("logger").error("Error al registrarse, email o contraseña incorrectos");
                         res.redirect("/signup" + "?mensaje=Email o password incorrecto&tipoMensaje=alert-danger");
-                    else {
+                    }else {
+
                         req.session.usuario = user.email;
+                        app.get("logger").info("Usuario que se registra: "+req.session.usuario);
                         res.redirect("/home");
                     }
                 });
@@ -56,6 +63,7 @@ module.exports = function (app, swig, gestorBD) {
 
     app.get("/login", function (req, res) {
         if (req.session.error != null) {
+
             let response = swig.renderFile('views/login.html', {
                 errorT: req.session.error
             });
@@ -82,6 +90,7 @@ module.exports = function (app, swig, gestorBD) {
                 res.redirect("/login" + "?mensaje=Email o password incorrecto&tipoMensaje=alert-danger");
             } else {
                 req.session.usuario = users[0].email;
+                app.get("logger").info("Usuario que inicia sesión: "+req.session.usuario);
                 req.session.error = null;
                 res.redirect('/home');
             }
@@ -89,6 +98,7 @@ module.exports = function (app, swig, gestorBD) {
     });
 
     app.get('/logout', function (req, res) {
+        app.get("logger").info("Usuario que se va de la sesión: "+req.session.usuario);
         req.session.usuario = null;
         res.redirect("/login");
     });
@@ -174,6 +184,7 @@ module.exports = function (app, swig, gestorBD) {
                     pages: pages,
                     actual: pg
                 });
+                app.get("logger").info(req.session.usuario+" : va a la lista de amigos");
                 res.send(response);
             }
         });
@@ -361,7 +372,9 @@ module.exports = function (app, swig, gestorBD) {
                 }
             ]
         };
+
         gestorBD.resetearBD(datosIniciales, function () {
+            app.get("logger").info("Reset de la base de datos");
             res.send("Base de datos reseteada");
         });
     });

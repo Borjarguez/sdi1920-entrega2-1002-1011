@@ -87,7 +87,6 @@ let routerUsuarioSession = express.Router();
 routerUsuarioSession.use(function (req, res, next) {
     let logger = app.get('logger');
     if (req.session.usuario) {
-        logger.log("El usuario que se encuentra en sesión es: "+req.session.usuario);
         next();
     } else {
         logger.error("No se encuentra ningún usuario en sesión");

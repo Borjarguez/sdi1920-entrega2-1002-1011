@@ -9,6 +9,7 @@ module.exports = function (app, gestorBD) {
         };
         gestorBD.obtenerUsuarios(criterio, function (usuarios) {
             if (usuarios == null || usuarios.length == 0) {
+                app.get("logger").error("No se puede autenticar en la api");
                 res.status(401);
                 res.json({
                     autenticado: false
@@ -20,6 +21,7 @@ module.exports = function (app, gestorBD) {
                     tiempo: Date.now() / 1000
                 }, "secreto");
                 res.status(200);
+                app.get("logger").info(req.body.email+": se ha autenticado en la api");
                 res.json({
                     autenticado: true,
                     token: token
@@ -35,12 +37,14 @@ module.exports = function (app, gestorBD) {
 
         gestorBD.obtenerAmigos(criteria, email, function (amigos) {
             if (amigos == null) {
+                app.get("logger").error(res.usuario+": no puede acceder a la lista de amigos en el servicio web");
                 res.status(500);
                 res.json({
                     error: "se ha producido un error"
                 });
             } else {
                 res.status(200);
+                app.get("logger").info(res.usuario+" : va a la lista de amigos en el servicio web");
                 res.send(JSON.stringify(amigos));
             }
         });
@@ -54,6 +58,7 @@ module.exports = function (app, gestorBD) {
         gestorBD.obtenerUsuarios({"_id": gestorBD.mongo.ObjectID(req.params.id)}, function (usuarios) {
             if (usuarios == null) {
                 res.status(500);
+                app.get("logger").error(res.usuario+" : no puede enviar un mensaje en el servidor web");
                 res.json({
                     error: "se ha producido un error"
                 });
@@ -61,6 +66,7 @@ module.exports = function (app, gestorBD) {
                 gestorBD.obtenerAmigos(criteria, email, function (amigos) {
                     if (amigos == null || amigos[0] == null) {
                         res.status(500);
+                        app.get("logger").error(res.usuario+" : no puede enviar un mensaje en el servidor web");
                         res.json({
                             error: "se ha producido un error"
                         });
@@ -78,6 +84,7 @@ module.exports = function (app, gestorBD) {
                         gestorBD.obtenerConversaciones(criteria, function (conversaciones) {
                             if (conversaciones == null) {
                                 res.status(500);
+                                app.get("logger").error(res.usuario+" : no puede enviar un mensaje en el servidor web");
                                 res.json({
                                     error: "se ha producido un error"
                                 });
@@ -98,6 +105,7 @@ module.exports = function (app, gestorBD) {
                                     gestorBD.insertarConversacion(conversacion, function (conversaciones) {
                                         if (conversaciones == null) {
                                             res.status(500);
+                                            app.get("logger").error(res.usuario+" : no puede enviar un mensaje en el servidor web");
                                             res.json({
                                                 error: "se ha producido un error"
                                             });
@@ -120,11 +128,13 @@ module.exports = function (app, gestorBD) {
                                     gestorBD.insertarMensaje(criteria, {"$push": {"mensajes": mensaje}}, function (conversaciones) {
                                         if (conversaciones == null) {
                                             res.status(500);
+                                            app.get("logger").error(res.usuario+" : no puede enviar un mensaje en el servidor web");
                                             res.json({
                                                 error: "se ha producido un error"
                                             });
                                         } else {
                                             res.status(201);
+                                            app.get("logger").info(res.usuario+" : ha enviado un mensaje a "+amigo.email);
                                             res.json({
                                                 mensaje: "mensaje enviado",
                                             })
@@ -148,6 +158,7 @@ module.exports = function (app, gestorBD) {
         gestorBD.obtenerUsuarios({"_id": gestorBD.mongo.ObjectID(req.params.id)}, function (usuarios) {
             if (usuarios == null) {
                 res.status(500);
+                app.get("logger").error(res.usuario+" : no puede acceder al chat");
                 res.json({
                     error: "se ha producido un error"
                 });
@@ -155,6 +166,7 @@ module.exports = function (app, gestorBD) {
                 gestorBD.obtenerAmigos(criteria, email, function (amigos) {
                     if (amigos == null || amigos[0] == null) {
                         res.status(500);
+                        app.get("logger").error(res.usuario+" : no puede acceder al chat");
                         res.json({
                             error: "se ha producido un error"
                         });
@@ -176,14 +188,17 @@ module.exports = function (app, gestorBD) {
                         gestorBD.obtenerConversaciones(criteria, function (conversaciones) {
                             if (conversaciones == null) {
                                 res.status(500);
+                                app.get("logger").error(res.usuario+" : no puede acceder al chat");
                                 res.json({
                                     error: "se ha producido un error"
                                 });
                             } else if (conversaciones[0] == null) {
                                 res.status(200);
+                                app.get("logger").info(res.usuario+" : accedió al chat con "+amigo.email);
                                 res.send({});
                             } else {
                                 res.status(200);
+                                app.get("logger").info(res.usuario+" : accedió al chat con "+amigo.email);
                                 res.send(conversaciones[0]);
                             }
                         });
@@ -204,12 +219,14 @@ module.exports = function (app, gestorBD) {
         gestorBD.marcarMensajeLeido(criteria, {$set: {"mensajes.$.read": true}}, function (result) {
             if (result == null) {
                 res.status(500);
+                app.get("logger").error(res.usuario+" : no puede cambiar un mensaje a leido");
                 res.json({
                     error: "se ha producido un error"
                 })
             } else {
 
                 res.status(200);
+                app.get("logger").error(res.usuario+" : leyo un mensaje");
                 res.json({
                     mensaje: "mensaje actualizado a leido"
                 })
