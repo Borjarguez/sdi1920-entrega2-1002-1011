@@ -192,7 +192,7 @@ public class sdi1920_Entrega2_test {
 		PO_NavView.clickOption(driver, "login", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "prueba@uniovi.es", "123456");
 		PO_NavView.checkElement(driver, "text", "Página principal");
-		PO_NavView.clickOption(driver, "listUsers", "id", "listUsers");
+		PO_NavView.clickOption(driver, "listaUsuarios", "id", "listaUsuarios");
 
 		List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",
 				PO_View.getTimeout());
@@ -208,7 +208,7 @@ public class sdi1920_Entrega2_test {
 		PO_NavView.clickOption(driver, "login", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "pedro@uniovi.es", "123456");
 		PO_NavView.checkElement(driver, "text", "Página principal");
-		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listUsers')]");
+		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listaUsuarios')]");
 		elementos.get(0).click();
 		PO_SearchView.fillForm(driver, "");
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr", PO_View.getTimeout());
@@ -225,7 +225,7 @@ public class sdi1920_Entrega2_test {
 		PO_NavView.clickOption(driver, "login", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "pedro@uniovi.es", "123456");
 		PO_NavView.checkElement(driver, "text", "pedro@uniovi.es");
-		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listUsers')]");
+		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listaUsuarios')]");
 		elementos.get(0).click();
 		PO_SearchView.fillForm(driver, "asdfg");
 
@@ -243,7 +243,7 @@ public class sdi1920_Entrega2_test {
 		PO_NavView.clickOption(driver, "login", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "pedro@uniovi.es", "123456");
 		PO_NavView.checkElement(driver, "text", "Página principal");
-		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listUsers')]");
+		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listaUsuarios')]");
 		elementos.get(0).click();
 		PO_SearchView.fillForm(driver, "Pedr");
 
@@ -295,13 +295,13 @@ public class sdi1920_Entrega2_test {
 		PO_LoginView.fillForm(driver, "prueba@uniovi.es", "123456");
 
 		// Vamos a mirar la lista de usuarios
-		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listUsers')]");
+		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listaUsuarios')]");
 
 		// Pinchamos en ver usuarios
 		elementos.get(0).click();
 
 		// Vamos a la paginacion 3, que es donde se encuentra anton@uniovi.es
-		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listUsers?pg=3')]");
+		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listaUsuarios?pg=3')]");
 
 		elementos.get(0).click();
 
@@ -354,14 +354,14 @@ public class sdi1920_Entrega2_test {
 		PO_LoginView.fillForm(driver, "prueba@uniovi.es", "123456");
 
 		// Vamos a mirar la lista de usuarios
-		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listUsers')]");
+		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listaUsuarios')]");
 
 		// Pinchamos en ver usuarios
 		elementos.get(0).click();
 
 		// Vamos a la paginacion 3, que es donde se encuentra anton@uniovi.es
 
-		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listUsers?pg=3')]");
+		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listaUsuarios?pg=3')]");
 
 		elementos.get(0).click();
 
@@ -374,9 +374,9 @@ public class sdi1920_Entrega2_test {
 
 		// ----------Segundo se intenta enviar otra vez la peticion y se ve que no se
 		// puede
-		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listUsers')]");
+		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listaUsuarios')]");
 		elementos.get(0).click();
-		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listUsers?pg=3')]");
+		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listaUsuarios?pg=3')]");
 		elementos.get(0).click();
 		elementos = PO_View.checkElement(driver, "free",
 				"//td[contains(text(), 'anton@uniovi.es')]/following-sibling::*/a[contains(@name, 'peticion')]");
@@ -406,9 +406,9 @@ public class sdi1920_Entrega2_test {
 		// ----------Segundo se entra como usuario prueba@uniovi.es para mandar peticion
 		// a anton
 		PO_LoginView.fillForm(driver, "prueba@uniovi.es", "123456");
-		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listUsers')]");
+		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listaUsuarios')]");
 		elementos.get(0).click();
-		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listUsers?pg=3')]");
+		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listaUsuarios?pg=3')]");
 		elementos.get(0).click();
 		elementos = PO_View.checkElement(driver, "free",
 				"//td[contains(text(), 'anton@uniovi.es')]/following-sibling::*/a[contains(@name, 'peticion')]");
@@ -446,9 +446,9 @@ public class sdi1920_Entrega2_test {
 		// asi que haya 6 peticiones y haya paginacion
 		PO_NavView.clickOption(driver, "login", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "anton@uniovi.es", "123456");
-		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listUsers')]");
+		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listaUsuarios')]");
 		elementos.get(0).click();
-		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listUsers?pg=2')]");
+		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listaUsuarios?pg=2')]");
 		elementos.get(0).click();
 		elementos = PO_View.checkElement(driver, "free",
 				"//td[contains(text(), 'prueba@uniovi.es')]/following-sibling::*/a[contains(@name, 'peticion')]");
@@ -494,9 +494,9 @@ public class sdi1920_Entrega2_test {
 
 		// ----------Primero se entra como anton y se manda peticion a prueba
 		PO_LoginView.fillForm(driver, "anton@uniovi.es", "123456");
-		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listUsers')]");
+		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listaUsuarios')]");
 		elementos.get(0).click();
-		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listUsers?pg=2')]");
+		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/listaUsuarios?pg=2')]");
 		elementos.get(0).click();
 		elementos = PO_View.checkElement(driver, "free",
 				"//td[contains(text(), 'prueba@uniovi.es')]/following-sibling::*/a[contains(@name, 'peticion')]");
@@ -574,7 +574,7 @@ public class sdi1920_Entrega2_test {
 	@Test
 	public void PR20() {
 		// Vamos a listado de usuarios
-		driver.navigate().to("https://localhost:8081/listUsers");
+		driver.navigate().to("https://localhost:8081/listaUsuarios");
 		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//h2[contains(text(), 'Iniciar sesión')]");
 		assertTrue(elementos.size() == 1);
 	}

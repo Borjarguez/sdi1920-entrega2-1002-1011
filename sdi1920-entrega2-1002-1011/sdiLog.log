@@ -1,201 +1,196 @@
-[2020-05-11T20:01:43.091] [INFO] sdi - Reset de la base de datos
-[2020-05-11T20:01:47.602] [INFO] sdi - Usuario que se registra: josefo@uniovi.es
-[2020-05-11T20:01:49.277] [INFO] sdi - Reset de la base de datos
-[2020-05-11T20:01:51.232] [ERROR] sdi - Error al registrarse, email vacio
-[2020-05-11T20:01:52.995] [ERROR] sdi - Error al registrarse, campos vacios
-[2020-05-11T20:01:54.861] [ERROR] sdi - Error al registrarse, campos vacios
-[2020-05-11T20:01:55.881] [INFO] sdi - Reset de la base de datos
-[2020-05-11T20:01:57.844] [ERROR] sdi - Error al registrarse, contraseñas diferentes
-[2020-05-11T20:01:58.649] [INFO] sdi - Reset de la base de datos
-[2020-05-11T20:02:00.834] [ERROR] sdi - Error al registrarse, el email ya existe
-[2020-05-11T20:02:01.741] [INFO] sdi - Reset de la base de datos
-[2020-05-11T20:02:03.165] [INFO] sdi - Usuario que inicia sesión: pedro@uniovi.es
-[2020-05-11T20:02:03.743] [INFO] sdi - Usuario que se va de la sesión: pedro@uniovi.es
-[2020-05-11T20:02:04.498] [INFO] sdi - Reset de la base de datos
-[2020-05-11T20:02:07.923] [INFO] sdi - Reset de la base de datos
-[2020-05-11T20:02:10.473] [INFO] sdi - Reset de la base de datos
-[2020-05-11T20:02:12.400] [INFO] sdi - Reset de la base de datos
-[2020-05-11T20:02:13.668] [INFO] sdi - Usuario que inicia sesión: pedro@uniovi.es
-[2020-05-11T20:02:14.111] [INFO] sdi - Usuario que se va de la sesión: pedro@uniovi.es
-[2020-05-11T20:02:14.942] [INFO] sdi - Reset de la base de datos
-[2020-05-11T20:02:15.849] [INFO] sdi - Reset de la base de datos
-[2020-05-11T20:02:17.479] [INFO] sdi - Usuario que inicia sesión: prueba@uniovi.es
-[2020-05-11T20:02:20.032] [INFO] sdi - Reset de la base de datos
-[2020-05-11T20:02:21.391] [INFO] sdi - Usuario que inicia sesión: pedro@uniovi.es
-[2020-05-11T20:02:24.344] [INFO] sdi - Reset de la base de datos
-[2020-05-11T20:02:25.965] [INFO] sdi - Usuario que inicia sesión: pedro@uniovi.es
-[2020-05-11T20:02:28.917] [INFO] sdi - Reset de la base de datos
-[2020-05-11T20:02:30.306] [INFO] sdi - Usuario que inicia sesión: pedro@uniovi.es
-[2020-05-11T20:02:33.396] [INFO] sdi - Reset de la base de datos
-[2020-05-11T20:02:34.766] [INFO] sdi - Usuario que inicia sesión: anton@uniovi.es
-[2020-05-11T20:02:36.049] [INFO] sdi - anton@uniovi.es : va a la lista de peticiones
-[2020-05-11T20:02:36.384] [INFO] sdi - Usuario que se va de la sesión: anton@uniovi.es
-[2020-05-11T20:02:37.741] [INFO] sdi - Usuario que inicia sesión: prueba@uniovi.es
-[2020-05-11T20:02:40.145] [INFO] sdi - prueba@uniovi.es : manda peticion a anton@uniovi.es
-[2020-05-11T20:02:40.794] [INFO] sdi - Usuario que se va de la sesión: prueba@uniovi.es
-[2020-05-11T20:02:42.032] [INFO] sdi - Usuario que inicia sesión: anton@uniovi.es
-[2020-05-11T20:02:43.075] [INFO] sdi - anton@uniovi.es : va a la lista de peticiones
-[2020-05-11T20:02:43.851] [INFO] sdi - anton@uniovi.es : va a la lista de peticiones
-[2020-05-11T20:02:44.025] [INFO] sdi - Usuario que se va de la sesión: anton@uniovi.es
-[2020-05-11T20:02:44.780] [INFO] sdi - Reset de la base de datos
-[2020-05-11T20:02:46.021] [INFO] sdi - Usuario que inicia sesión: prueba@uniovi.es
-[2020-05-11T20:02:48.813] [INFO] sdi - prueba@uniovi.es : manda peticion a anton@uniovi.es
-[2020-05-11T20:02:51.197] [ERROR] sdi - prueba@uniovi.es : intenta mandar una petición fallida
-[2020-05-11T20:02:52.806] [INFO] sdi - Reset de la base de datos
-[2020-05-11T20:02:54.390] [INFO] sdi - Usuario que inicia sesión: anton@uniovi.es
-[2020-05-11T20:02:55.510] [INFO] sdi - anton@uniovi.es : va a la lista de peticiones
-[2020-05-11T20:02:55.788] [INFO] sdi - Usuario que se va de la sesión: anton@uniovi.es
-[2020-05-11T20:02:56.919] [INFO] sdi - Usuario que inicia sesión: prueba@uniovi.es
-[2020-05-11T20:02:59.158] [INFO] sdi - prueba@uniovi.es : manda peticion a anton@uniovi.es
-[2020-05-11T20:02:59.740] [INFO] sdi - Usuario que se va de la sesión: prueba@uniovi.es
-[2020-05-11T20:03:00.788] [INFO] sdi - Usuario que inicia sesión: anton@uniovi.es
-[2020-05-11T20:03:01.876] [INFO] sdi - anton@uniovi.es : va a la lista de peticiones
-[2020-05-11T20:03:02.555] [INFO] sdi - anton@uniovi.es : va a la lista de peticiones
-[2020-05-11T20:03:03.454] [INFO] sdi - Reset de la base de datos
-[2020-05-11T20:03:04.719] [INFO] sdi - Usuario que inicia sesión: anton@uniovi.es
-[2020-05-11T20:03:06.912] [INFO] sdi - anton@uniovi.es : manda peticion a prueba@uniovi.es
-[2020-05-11T20:03:07.629] [INFO] sdi - Usuario que se va de la sesión: anton@uniovi.es
-[2020-05-11T20:03:08.580] [INFO] sdi - Usuario que inicia sesión: prueba@uniovi.es
-[2020-05-11T20:03:09.485] [INFO] sdi - prueba@uniovi.es : va a la lista de peticiones
-[2020-05-11T20:03:10.080] [INFO] sdi - prueba@uniovi.es : va a la lista de peticiones
-[2020-05-11T20:03:10.636] [INFO] sdi - prueba@uniovi.es : acepta una peticion
-[2020-05-11T20:03:11.038] [INFO] sdi - prueba@uniovi.es : va a la lista de peticiones
-[2020-05-11T20:03:11.196] [INFO] sdi - Usuario que se va de la sesión: prueba@uniovi.es
-[2020-05-11T20:03:11.974] [INFO] sdi - Reset de la base de datos
-[2020-05-11T20:03:13.250] [INFO] sdi - Usuario que inicia sesión: anton@uniovi.es
-[2020-05-11T20:03:15.664] [INFO] sdi - anton@uniovi.es : manda peticion a prueba@uniovi.es
-[2020-05-11T20:03:16.239] [INFO] sdi - Usuario que se va de la sesión: anton@uniovi.es
-[2020-05-11T20:03:17.449] [INFO] sdi - Usuario que inicia sesión: prueba@uniovi.es
-[2020-05-11T20:03:18.623] [INFO] sdi - prueba@uniovi.es : va a la lista de amigos
-[2020-05-11T20:03:19.407] [INFO] sdi - prueba@uniovi.es : va a la lista de peticiones
-[2020-05-11T20:03:20.141] [INFO] sdi - prueba@uniovi.es : va a la lista de peticiones
-[2020-05-11T20:03:20.906] [INFO] sdi - prueba@uniovi.es : acepta una peticion
-[2020-05-11T20:03:21.417] [INFO] sdi - prueba@uniovi.es : va a la lista de peticiones
-[2020-05-11T20:03:22.180] [INFO] sdi - prueba@uniovi.es : va a la lista de amigos
-[2020-05-11T20:03:22.955] [INFO] sdi - prueba@uniovi.es : va a la lista de amigos
-[2020-05-11T20:03:23.178] [INFO] sdi - Usuario que se va de la sesión: prueba@uniovi.es
-[2020-05-11T20:03:24.271] [INFO] sdi - Reset de la base de datos
-[2020-05-11T20:03:24.378] [ERROR] sdi - No se encuentra ningún usuario en sesión
-[2020-05-11T20:03:25.418] [INFO] sdi - Reset de la base de datos
-[2020-05-11T20:03:25.569] [ERROR] sdi - No se encuentra ningún usuario en sesión
-[2020-05-11T20:03:26.714] [INFO] sdi - Reset de la base de datos
-[2020-05-11T20:03:26.862] [ERROR] sdi - No se encuentra ningún usuario en sesión
-[2020-05-11T20:03:27.689] [INFO] sdi - Reset de la base de datos
-[2020-05-11T20:03:28.935] [INFO] sdi - prueba@uniovi.es: se ha autenticado en la api
-[2020-05-11T20:03:29.402] [INFO] sdi - prueba@uniovi.es : va a la lista de amigos en el servicio web
-[2020-05-11T20:03:30.271] [ERROR] sdi - prueba@uniovi.es : no puede acceder al chat
-[2020-05-11T20:03:30.279] [ERROR] sdi - prueba@uniovi.es : no puede acceder al chat
-[2020-05-11T20:03:30.312] [ERROR] sdi - prueba@uniovi.es : no puede acceder al chat
-[2020-05-11T20:03:30.317] [ERROR] sdi - prueba@uniovi.es : no puede acceder al chat
-[2020-05-11T20:03:30.340] [INFO] sdi - Reset de la base de datos
-[2020-05-11T20:03:30.727] [INFO] sdi - prueba@uniovi.es : accedió al chat con sdi@uniovi.es
-[2020-05-11T20:03:31.789] [ERROR] sdi - No se puede autenticar en la api
-[2020-05-11T20:03:32.933] [INFO] sdi - Reset de la base de datos
-[2020-05-11T20:03:34.096] [INFO] sdi - prueba@uniovi.es: se ha autenticado en la api
-[2020-05-11T20:03:34.564] [INFO] sdi - prueba@uniovi.es : va a la lista de amigos en el servicio web
-[2020-05-11T20:03:35.858] [INFO] sdi - prueba@uniovi.es : accedió al chat con ines@uniovi.es
-[2020-05-11T20:03:35.891] [INFO] sdi - prueba@uniovi.es : accedió al chat con borja@uniovi.es
-[2020-05-11T20:03:35.895] [INFO] sdi - prueba@uniovi.es : accedió al chat con luisa@uniovi.es
-[2020-05-11T20:03:35.905] [INFO] sdi - prueba@uniovi.es : accedió al chat con sdi@uniovi.es
-[2020-05-11T20:03:35.918] [INFO] sdi - prueba@uniovi.es : accedió al chat con aurora@uniovi.es
-[2020-05-11T20:03:36.065] [INFO] sdi - Reset de la base de datos
-[2020-05-11T20:03:37.443] [INFO] sdi - prueba@uniovi.es: se ha autenticado en la api
-[2020-05-11T20:03:37.888] [INFO] sdi - prueba@uniovi.es : va a la lista de amigos en el servicio web
-[2020-05-11T20:03:39.095] [INFO] sdi - prueba@uniovi.es : accedió al chat con ines@uniovi.es
-[2020-05-11T20:03:39.097] [INFO] sdi - prueba@uniovi.es : accedió al chat con luisa@uniovi.es
-[2020-05-11T20:03:39.126] [INFO] sdi - prueba@uniovi.es : accedió al chat con borja@uniovi.es
-[2020-05-11T20:03:39.127] [INFO] sdi - prueba@uniovi.es : accedió al chat con sdi@uniovi.es
-[2020-05-11T20:03:39.165] [INFO] sdi - prueba@uniovi.es : accedió al chat con aurora@uniovi.es
-[2020-05-11T20:03:39.479] [ERROR] sdi - prueba@uniovi.es : no puede acceder al chat
-[2020-05-11T20:03:39.483] [ERROR] sdi - prueba@uniovi.es : no puede acceder al chat
-[2020-05-11T20:03:39.485] [ERROR] sdi - prueba@uniovi.es : no puede acceder al chat
-[2020-05-11T20:03:39.488] [ERROR] sdi - prueba@uniovi.es : no puede acceder al chat
-[2020-05-11T20:03:39.610] [INFO] sdi - Reset de la base de datos
-[2020-05-11T20:03:40.842] [INFO] sdi - prueba@uniovi.es: se ha autenticado en la api
-[2020-05-11T20:03:41.292] [INFO] sdi - prueba@uniovi.es : va a la lista de amigos en el servicio web
-[2020-05-11T20:03:42.555] [INFO] sdi - prueba@uniovi.es : accedió al chat con borja@uniovi.es
-[2020-05-11T20:03:42.582] [INFO] sdi - prueba@uniovi.es : accedió al chat con luisa@uniovi.es
-[2020-05-11T20:03:42.583] [INFO] sdi - prueba@uniovi.es : accedió al chat con aurora@uniovi.es
-[2020-05-11T20:03:42.840] [INFO] sdi - prueba@uniovi.es : accedió al chat con ines@uniovi.es
-[2020-05-11T20:03:42.968] [INFO] sdi - prueba@uniovi.es : accedió al chat con sdi@uniovi.es
-[2020-05-11T20:03:43.045] [INFO] sdi - prueba@uniovi.es : accedió al chat con ines@uniovi.es
-[2020-05-11T20:03:43.406] [ERROR] sdi - prueba@uniovi.es : leyo un mensaje
-[2020-05-11T20:03:43.409] [ERROR] sdi - prueba@uniovi.es : leyo un mensaje
-[2020-05-11T20:03:43.439] [ERROR] sdi - prueba@uniovi.es : leyo un mensaje
-[2020-05-11T20:03:43.458] [ERROR] sdi - prueba@uniovi.es : leyo un mensaje
-[2020-05-11T20:03:43.461] [ERROR] sdi - prueba@uniovi.es : leyo un mensaje
-[2020-05-11T20:03:44.106] [INFO] sdi - prueba@uniovi.es : accedió al chat con ines@uniovi.es
-[2020-05-11T20:03:44.276] [INFO] sdi - Reset de la base de datos
-[2020-05-11T20:03:46.033] [INFO] sdi - prueba@uniovi.es: se ha autenticado en la api
-[2020-05-11T20:03:46.530] [INFO] sdi - prueba@uniovi.es : va a la lista de amigos en el servicio web
-[2020-05-11T20:03:47.933] [INFO] sdi - prueba@uniovi.es : accedió al chat con luisa@uniovi.es
-[2020-05-11T20:03:47.946] [INFO] sdi - prueba@uniovi.es : accedió al chat con sdi@uniovi.es
-[2020-05-11T20:03:47.957] [INFO] sdi - prueba@uniovi.es : accedió al chat con ines@uniovi.es
-[2020-05-11T20:03:47.976] [INFO] sdi - prueba@uniovi.es : accedió al chat con aurora@uniovi.es
-[2020-05-11T20:03:48.270] [INFO] sdi - prueba@uniovi.es : accedió al chat con borja@uniovi.es
-[2020-05-11T20:03:48.526] [INFO] sdi - prueba@uniovi.es : accedió al chat con ines@uniovi.es
-[2020-05-11T20:03:48.967] [ERROR] sdi - prueba@uniovi.es : leyo un mensaje
-[2020-05-11T20:03:48.993] [ERROR] sdi - prueba@uniovi.es : leyo un mensaje
-[2020-05-11T20:03:49.005] [ERROR] sdi - prueba@uniovi.es : leyo un mensaje
-[2020-05-11T20:03:49.007] [ERROR] sdi - prueba@uniovi.es : leyo un mensaje
-[2020-05-11T20:03:49.008] [ERROR] sdi - prueba@uniovi.es : leyo un mensaje
-[2020-05-11T20:03:49.519] [INFO] sdi - prueba@uniovi.es : accedió al chat con ines@uniovi.es
-[2020-05-11T20:03:50.858] [INFO] sdi - prueba@uniovi.es : accedió al chat con ines@uniovi.es
-[2020-05-11T20:03:51.802] [INFO] sdi - prueba@uniovi.es : accedió al chat con ines@uniovi.es
-[2020-05-11T20:03:53.005] [INFO] sdi - prueba@uniovi.es : accedió al chat con ines@uniovi.es
-[2020-05-11T20:03:53.528] [INFO] sdi - prueba@uniovi.es : ha enviado un mensaje a ines@uniovi.es
-[2020-05-11T20:03:53.984] [INFO] sdi - prueba@uniovi.es : accedió al chat con ines@uniovi.es
-[2020-05-11T20:03:54.399] [ERROR] sdi - prueba@uniovi.es : leyo un mensaje
-[2020-05-11T20:03:54.402] [ERROR] sdi - prueba@uniovi.es : leyo un mensaje
-[2020-05-11T20:03:54.405] [ERROR] sdi - prueba@uniovi.es : leyo un mensaje
-[2020-05-11T20:03:54.419] [ERROR] sdi - prueba@uniovi.es : leyo un mensaje
-[2020-05-11T20:03:54.784] [ERROR] sdi - prueba@uniovi.es : leyo un mensaje
-[2020-05-11T20:03:54.787] [INFO] sdi - prueba@uniovi.es : accedió al chat con ines@uniovi.es
-[2020-05-11T20:03:54.811] [ERROR] sdi - prueba@uniovi.es : leyo un mensaje
-[2020-05-11T20:03:55.092] [INFO] sdi - prueba@uniovi.es : accedió al chat con ines@uniovi.es
-[2020-05-11T20:03:56.531] [INFO] sdi - prueba@uniovi.es : accedió al chat con ines@uniovi.es
-[2020-05-11T20:03:56.975] [INFO] sdi - Reset de la base de datos
-[2020-05-11T20:03:58.172] [INFO] sdi - sdi@uniovi.es: se ha autenticado en la api
-[2020-05-11T20:03:58.638] [INFO] sdi - sdi@uniovi.es : va a la lista de amigos en el servicio web
-[2020-05-11T20:03:59.731] [INFO] sdi - sdi@uniovi.es : accedió al chat con prueba@uniovi.es
-[2020-05-11T20:04:04.057] [INFO] sdi - prueba@uniovi.es: se ha autenticado en la api
-[2020-05-11T20:04:04.508] [INFO] sdi - prueba@uniovi.es : va a la lista de amigos en el servicio web
-[2020-05-11T20:04:05.760] [INFO] sdi - prueba@uniovi.es : accedió al chat con ines@uniovi.es
-[2020-05-11T20:04:05.810] [INFO] sdi - prueba@uniovi.es : accedió al chat con luisa@uniovi.es
-[2020-05-11T20:04:05.821] [INFO] sdi - prueba@uniovi.es : accedió al chat con borja@uniovi.es
-[2020-05-11T20:04:05.875] [INFO] sdi - prueba@uniovi.es : accedió al chat con sdi@uniovi.es
-[2020-05-11T20:04:05.970] [INFO] sdi - prueba@uniovi.es : accedió al chat con aurora@uniovi.es
-[2020-05-11T20:04:06.415] [INFO] sdi - prueba@uniovi.es : accedió al chat con sdi@uniovi.es
-[2020-05-11T20:04:07.365] [INFO] sdi - sdi@uniovi.es: se ha autenticado en la api
-[2020-05-11T20:04:07.840] [INFO] sdi - sdi@uniovi.es : va a la lista de amigos en el servicio web
-[2020-05-11T20:04:09.276] [INFO] sdi - sdi@uniovi.es : accedió al chat con prueba@uniovi.es
-[2020-05-11T20:04:12.425] [INFO] sdi - sdi@uniovi.es : accedió al chat con prueba@uniovi.es
-[2020-05-11T20:04:12.807] [ERROR] sdi - sdi@uniovi.es : leyo un mensaje
-[2020-05-11T20:04:13.520] [INFO] sdi - sdi@uniovi.es : accedió al chat con prueba@uniovi.es
-[2020-05-11T20:04:13.869] [ERROR] sdi - sdi@uniovi.es : leyo un mensaje
-[2020-05-11T20:04:14.221] [INFO] sdi - sdi@uniovi.es : va a la lista de amigos en el servicio web
-[2020-05-11T20:04:14.483] [INFO] sdi - sdi@uniovi.es : accedió al chat con prueba@uniovi.es
-[2020-05-11T20:04:15.338] [INFO] sdi - sdi@uniovi.es : accedió al chat con prueba@uniovi.es
-[2020-05-11T20:04:19.034] [INFO] sdi - Reset de la base de datos
-[2020-05-11T20:04:20.223] [INFO] sdi - sdi@uniovi.es: se ha autenticado en la api
-[2020-05-11T20:04:20.701] [INFO] sdi - sdi@uniovi.es : va a la lista de amigos en el servicio web
-[2020-05-11T20:04:21.960] [INFO] sdi - sdi@uniovi.es : accedió al chat con prueba@uniovi.es
-[2020-05-11T20:04:25.216] [INFO] sdi - prueba@uniovi.es: se ha autenticado en la api
-[2020-05-11T20:04:25.675] [INFO] sdi - prueba@uniovi.es : va a la lista de amigos en el servicio web
-[2020-05-11T20:04:26.940] [INFO] sdi - prueba@uniovi.es : accedió al chat con ines@uniovi.es
-[2020-05-11T20:04:26.973] [INFO] sdi - prueba@uniovi.es : accedió al chat con borja@uniovi.es
-[2020-05-11T20:04:26.987] [INFO] sdi - prueba@uniovi.es : accedió al chat con luisa@uniovi.es
-[2020-05-11T20:04:26.995] [INFO] sdi - prueba@uniovi.es : accedió al chat con sdi@uniovi.es
-[2020-05-11T20:04:27.016] [INFO] sdi - prueba@uniovi.es : accedió al chat con aurora@uniovi.es
-[2020-05-11T20:04:27.516] [INFO] sdi - prueba@uniovi.es : accedió al chat con sdi@uniovi.es
-[2020-05-11T20:04:28.397] [INFO] sdi - prueba@uniovi.es : accedió al chat con sdi@uniovi.es
-[2020-05-11T20:04:28.770] [ERROR] sdi - prueba@uniovi.es : leyo un mensaje
-[2020-05-11T20:04:29.438] [INFO] sdi - prueba@uniovi.es : accedió al chat con sdi@uniovi.es
-[2020-05-11T20:04:29.575] [INFO] sdi - prueba@uniovi.es : accedió al chat con sdi@uniovi.es
-[2020-05-11T20:04:29.644] [INFO] sdi - prueba@uniovi.es : ha enviado un mensaje a sdi@uniovi.es
-[2020-05-11T20:04:30.455] [INFO] sdi - prueba@uniovi.es : accedió al chat con sdi@uniovi.es
-[2020-05-11T20:04:30.769] [INFO] sdi - prueba@uniovi.es : accedió al chat con sdi@uniovi.es
-[2020-05-11T20:04:30.926] [INFO] sdi - prueba@uniovi.es : ha enviado un mensaje a sdi@uniovi.es
-[2020-05-11T20:04:30.962] [INFO] sdi - sdi@uniovi.es: se ha autenticado en la api
-[2020-05-11T20:04:31.439] [INFO] sdi - sdi@uniovi.es : va a la lista de amigos en el servicio web
-[2020-05-11T20:04:32.596] [INFO] sdi - sdi@uniovi.es : accedió al chat con prueba@uniovi.es
+[2020-05-11T22:40:06.599] [INFO] sdi - Reset de la base de datos
+[2020-05-11T22:40:10.767] [INFO] sdi - Usuario que se registra: josefo@uniovi.es
+[2020-05-11T22:40:12.413] [INFO] sdi - Reset de la base de datos
+[2020-05-11T22:40:14.282] [ERROR] sdi - Error al registrarse, email vacio
+[2020-05-11T22:40:16.021] [ERROR] sdi - Error al registrarse, campos vacios
+[2020-05-11T22:40:17.939] [ERROR] sdi - Error al registrarse, campos vacios
+[2020-05-11T22:40:18.769] [INFO] sdi - Reset de la base de datos
+[2020-05-11T22:40:20.744] [ERROR] sdi - Error al registrarse, contraseñas diferentes
+[2020-05-11T22:40:22.190] [INFO] sdi - Reset de la base de datos
+[2020-05-11T22:40:24.346] [ERROR] sdi - Error al registrarse, el email ya existe
+[2020-05-11T22:40:25.635] [INFO] sdi - Reset de la base de datos
+[2020-05-11T22:40:26.990] [INFO] sdi - Usuario que inicia sesión: pedro@uniovi.es
+[2020-05-11T22:40:27.630] [INFO] sdi - Usuario que se va de la sesión: pedro@uniovi.es
+[2020-05-11T22:40:28.484] [INFO] sdi - Reset de la base de datos
+[2020-05-11T22:40:32.106] [INFO] sdi - Reset de la base de datos
+[2020-05-11T22:40:34.461] [INFO] sdi - Reset de la base de datos
+[2020-05-11T22:40:36.649] [INFO] sdi - Reset de la base de datos
+[2020-05-11T22:40:37.968] [INFO] sdi - Usuario que inicia sesión: pedro@uniovi.es
+[2020-05-11T22:40:38.576] [INFO] sdi - Usuario que se va de la sesión: pedro@uniovi.es
+[2020-05-11T22:40:39.415] [INFO] sdi - Reset de la base de datos
+[2020-05-11T22:40:40.282] [INFO] sdi - Reset de la base de datos
+[2020-05-11T22:40:41.758] [INFO] sdi - Usuario que inicia sesión: prueba@uniovi.es
+[2020-05-11T22:40:43.634] [INFO] sdi - Reset de la base de datos
+[2020-05-11T22:40:44.880] [INFO] sdi - Usuario que inicia sesión: pedro@uniovi.es
+[2020-05-11T22:40:47.987] [INFO] sdi - Reset de la base de datos
+[2020-05-11T22:40:49.305] [INFO] sdi - Usuario que inicia sesión: pedro@uniovi.es
+[2020-05-11T22:40:53.019] [INFO] sdi - Reset de la base de datos
+[2020-05-11T22:40:54.515] [INFO] sdi - Usuario que inicia sesión: pedro@uniovi.es
+[2020-05-11T22:40:57.495] [INFO] sdi - Reset de la base de datos
+[2020-05-11T22:40:58.785] [INFO] sdi - Usuario que inicia sesión: anton@uniovi.es
+[2020-05-11T22:41:00.583] [INFO] sdi - anton@uniovi.es : va a la lista de peticiones
+[2020-05-11T22:41:00.738] [INFO] sdi - Usuario que se va de la sesión: anton@uniovi.es
+[2020-05-11T22:41:01.833] [INFO] sdi - Usuario que inicia sesión: prueba@uniovi.es
+[2020-05-11T22:41:04.128] [INFO] sdi - prueba@uniovi.es : manda peticion a anton@uniovi.es
+[2020-05-11T22:41:04.795] [INFO] sdi - Usuario que se va de la sesión: prueba@uniovi.es
+[2020-05-11T22:41:06.071] [INFO] sdi - Usuario que inicia sesión: anton@uniovi.es
+[2020-05-11T22:41:07.112] [INFO] sdi - anton@uniovi.es : va a la lista de peticiones
+[2020-05-11T22:41:07.851] [INFO] sdi - anton@uniovi.es : va a la lista de peticiones
+[2020-05-11T22:41:08.106] [INFO] sdi - Usuario que se va de la sesión: anton@uniovi.es
+[2020-05-11T22:41:08.872] [INFO] sdi - Reset de la base de datos
+[2020-05-11T22:41:10.240] [INFO] sdi - Usuario que inicia sesión: prueba@uniovi.es
+[2020-05-11T22:41:12.570] [INFO] sdi - prueba@uniovi.es : manda peticion a anton@uniovi.es
+[2020-05-11T22:41:14.954] [ERROR] sdi - prueba@uniovi.es : intenta mandar una petición fallida
+[2020-05-11T22:41:16.376] [INFO] sdi - Reset de la base de datos
+[2020-05-11T22:41:17.616] [INFO] sdi - Usuario que inicia sesión: anton@uniovi.es
+[2020-05-11T22:41:18.662] [INFO] sdi - anton@uniovi.es : va a la lista de peticiones
+[2020-05-11T22:41:18.873] [INFO] sdi - Usuario que se va de la sesión: anton@uniovi.es
+[2020-05-11T22:41:20.049] [INFO] sdi - Usuario que inicia sesión: prueba@uniovi.es
+[2020-05-11T22:41:22.727] [INFO] sdi - prueba@uniovi.es : manda peticion a anton@uniovi.es
+[2020-05-11T22:41:23.389] [INFO] sdi - Usuario que se va de la sesión: prueba@uniovi.es
+[2020-05-11T22:41:24.592] [INFO] sdi - Usuario que inicia sesión: anton@uniovi.es
+[2020-05-11T22:41:25.630] [INFO] sdi - anton@uniovi.es : va a la lista de peticiones
+[2020-05-11T22:41:26.290] [INFO] sdi - anton@uniovi.es : va a la lista de peticiones
+[2020-05-11T22:41:27.169] [INFO] sdi - Reset de la base de datos
+[2020-05-11T22:41:28.512] [INFO] sdi - Usuario que inicia sesión: anton@uniovi.es
+[2020-05-11T22:41:30.882] [INFO] sdi - anton@uniovi.es : manda peticion a prueba@uniovi.es
+[2020-05-11T22:41:31.693] [INFO] sdi - Usuario que se va de la sesión: anton@uniovi.es
+[2020-05-11T22:41:32.777] [INFO] sdi - Usuario que inicia sesión: prueba@uniovi.es
+[2020-05-11T22:41:33.893] [INFO] sdi - prueba@uniovi.es : va a la lista de peticiones
+[2020-05-11T22:41:34.753] [INFO] sdi - prueba@uniovi.es : va a la lista de peticiones
+[2020-05-11T22:41:35.405] [INFO] sdi - prueba@uniovi.es : acepta una peticion
+[2020-05-11T22:41:35.848] [INFO] sdi - prueba@uniovi.es : va a la lista de peticiones
+[2020-05-11T22:41:36.190] [INFO] sdi - Usuario que se va de la sesión: prueba@uniovi.es
+[2020-05-11T22:41:37.033] [INFO] sdi - Reset de la base de datos
+[2020-05-11T22:41:38.376] [INFO] sdi - Usuario que inicia sesión: anton@uniovi.es
+[2020-05-11T22:41:40.940] [INFO] sdi - anton@uniovi.es : manda peticion a prueba@uniovi.es
+[2020-05-11T22:41:41.672] [INFO] sdi - Usuario que se va de la sesión: anton@uniovi.es
+[2020-05-11T22:41:43.106] [INFO] sdi - Usuario que inicia sesión: prueba@uniovi.es
+[2020-05-11T22:41:44.221] [INFO] sdi - prueba@uniovi.es : va a la lista de amigos
+[2020-05-11T22:41:44.969] [INFO] sdi - prueba@uniovi.es : va a la lista de peticiones
+[2020-05-11T22:41:45.770] [INFO] sdi - prueba@uniovi.es : va a la lista de peticiones
+[2020-05-11T22:41:46.399] [INFO] sdi - prueba@uniovi.es : acepta una peticion
+[2020-05-11T22:41:46.848] [INFO] sdi - prueba@uniovi.es : va a la lista de peticiones
+[2020-05-11T22:41:47.574] [INFO] sdi - prueba@uniovi.es : va a la lista de amigos
+[2020-05-11T22:41:48.407] [INFO] sdi - prueba@uniovi.es : va a la lista de amigos
+[2020-05-11T22:41:48.682] [INFO] sdi - Usuario que se va de la sesión: prueba@uniovi.es
+[2020-05-11T22:41:49.450] [INFO] sdi - Reset de la base de datos
+[2020-05-11T22:41:49.546] [ERROR] sdi - No se encuentra ningún usuario en sesión
+[2020-05-11T22:41:50.689] [INFO] sdi - Reset de la base de datos
+[2020-05-11T22:41:50.807] [ERROR] sdi - No se encuentra ningún usuario en sesión
+[2020-05-11T22:41:52.024] [INFO] sdi - Reset de la base de datos
+[2020-05-11T22:41:52.213] [ERROR] sdi - No se encuentra ningún usuario en sesión
+[2020-05-11T22:41:53.388] [INFO] sdi - Reset de la base de datos
+[2020-05-11T22:41:54.693] [INFO] sdi - prueba@uniovi.es: se ha autenticado en la api
+[2020-05-11T22:41:55.194] [INFO] sdi - prueba@uniovi.es : va a la lista de amigos en el servicio web
+[2020-05-11T22:41:56.236] [INFO] sdi - Reset de la base de datos
+[2020-05-11T22:41:57.461] [ERROR] sdi - No se puede autenticar en la api
+[2020-05-11T22:41:58.759] [INFO] sdi - Reset de la base de datos
+[2020-05-11T22:42:00.099] [INFO] sdi - prueba@uniovi.es: se ha autenticado en la api
+[2020-05-11T22:42:00.558] [INFO] sdi - prueba@uniovi.es : va a la lista de amigos en el servicio web
+[2020-05-11T22:42:01.741] [INFO] sdi - prueba@uniovi.es : accedió al chat con borja@uniovi.es
+[2020-05-11T22:42:01.744] [INFO] sdi - prueba@uniovi.es : accedió al chat con ines@uniovi.es
+[2020-05-11T22:42:01.747] [INFO] sdi - prueba@uniovi.es : accedió al chat con luisa@uniovi.es
+[2020-05-11T22:42:01.755] [INFO] sdi - prueba@uniovi.es : accedió al chat con aurora@uniovi.es
+[2020-05-11T22:42:01.780] [INFO] sdi - Reset de la base de datos
+[2020-05-11T22:42:01.792] [INFO] sdi - prueba@uniovi.es : accedió al chat con sdi@uniovi.es
+[2020-05-11T22:42:02.937] [INFO] sdi - prueba@uniovi.es: se ha autenticado en la api
+[2020-05-11T22:42:03.335] [INFO] sdi - prueba@uniovi.es : va a la lista de amigos en el servicio web
+[2020-05-11T22:42:04.502] [INFO] sdi - prueba@uniovi.es : accedió al chat con ines@uniovi.es
+[2020-05-11T22:42:04.512] [INFO] sdi - prueba@uniovi.es : accedió al chat con borja@uniovi.es
+[2020-05-11T22:42:04.536] [INFO] sdi - prueba@uniovi.es : accedió al chat con aurora@uniovi.es
+[2020-05-11T22:42:04.542] [INFO] sdi - prueba@uniovi.es : accedió al chat con sdi@uniovi.es
+[2020-05-11T22:42:04.543] [INFO] sdi - prueba@uniovi.es : accedió al chat con luisa@uniovi.es
+[2020-05-11T22:42:05.152] [ERROR] sdi - prueba@uniovi.es : no puede acceder al chat
+[2020-05-11T22:42:05.156] [ERROR] sdi - prueba@uniovi.es : no puede acceder al chat
+[2020-05-11T22:42:05.195] [ERROR] sdi - prueba@uniovi.es : no puede acceder al chat
+[2020-05-11T22:42:05.196] [ERROR] sdi - prueba@uniovi.es : no puede acceder al chat
+[2020-05-11T22:42:05.279] [INFO] sdi - Reset de la base de datos
+[2020-05-11T22:42:06.669] [INFO] sdi - prueba@uniovi.es: se ha autenticado en la api
+[2020-05-11T22:42:07.147] [INFO] sdi - prueba@uniovi.es : va a la lista de amigos en el servicio web
+[2020-05-11T22:42:08.314] [INFO] sdi - prueba@uniovi.es : accedió al chat con ines@uniovi.es
+[2020-05-11T22:42:08.375] [INFO] sdi - prueba@uniovi.es : accedió al chat con luisa@uniovi.es
+[2020-05-11T22:42:08.378] [INFO] sdi - prueba@uniovi.es : accedió al chat con borja@uniovi.es
+[2020-05-11T22:42:08.402] [INFO] sdi - prueba@uniovi.es : accedió al chat con sdi@uniovi.es
+[2020-05-11T22:42:08.404] [INFO] sdi - prueba@uniovi.es : accedió al chat con aurora@uniovi.es
+[2020-05-11T22:42:08.821] [INFO] sdi - prueba@uniovi.es : accedió al chat con ines@uniovi.es
+[2020-05-11T22:42:09.180] [ERROR] sdi - prueba@uniovi.es : leyo un mensaje
+[2020-05-11T22:42:09.182] [ERROR] sdi - prueba@uniovi.es : leyo un mensaje
+[2020-05-11T22:42:09.189] [ERROR] sdi - prueba@uniovi.es : leyo un mensaje
+[2020-05-11T22:42:09.197] [ERROR] sdi - prueba@uniovi.es : leyo un mensaje
+[2020-05-11T22:42:09.205] [ERROR] sdi - prueba@uniovi.es : leyo un mensaje
+[2020-05-11T22:42:09.493] [ERROR] sdi - prueba@uniovi.es : no puede acceder al chat
+[2020-05-11T22:42:09.789] [INFO] sdi - Reset de la base de datos
+[2020-05-11T22:42:10.983] [INFO] sdi - prueba@uniovi.es: se ha autenticado en la api
+[2020-05-11T22:42:11.441] [INFO] sdi - prueba@uniovi.es : va a la lista de amigos en el servicio web
+[2020-05-11T22:42:12.610] [INFO] sdi - prueba@uniovi.es : accedió al chat con ines@uniovi.es
+[2020-05-11T22:42:12.644] [INFO] sdi - prueba@uniovi.es : accedió al chat con luisa@uniovi.es
+[2020-05-11T22:42:12.650] [INFO] sdi - prueba@uniovi.es : accedió al chat con borja@uniovi.es
+[2020-05-11T22:42:12.678] [INFO] sdi - prueba@uniovi.es : accedió al chat con aurora@uniovi.es
+[2020-05-11T22:42:12.714] [INFO] sdi - prueba@uniovi.es : accedió al chat con sdi@uniovi.es
+[2020-05-11T22:42:13.092] [INFO] sdi - prueba@uniovi.es : accedió al chat con ines@uniovi.es
+[2020-05-11T22:42:13.490] [ERROR] sdi - prueba@uniovi.es : leyo un mensaje
+[2020-05-11T22:42:13.499] [ERROR] sdi - prueba@uniovi.es : leyo un mensaje
+[2020-05-11T22:42:13.529] [ERROR] sdi - prueba@uniovi.es : leyo un mensaje
+[2020-05-11T22:42:13.533] [ERROR] sdi - prueba@uniovi.es : leyo un mensaje
+[2020-05-11T22:42:13.537] [ERROR] sdi - prueba@uniovi.es : leyo un mensaje
+[2020-05-11T22:42:14.061] [INFO] sdi - prueba@uniovi.es : accedió al chat con ines@uniovi.es
+[2020-05-11T22:42:15.072] [INFO] sdi - prueba@uniovi.es : accedió al chat con ines@uniovi.es
+[2020-05-11T22:42:16.119] [INFO] sdi - prueba@uniovi.es : accedió al chat con ines@uniovi.es
+[2020-05-11T22:42:17.112] [INFO] sdi - prueba@uniovi.es : accedió al chat con ines@uniovi.es
+[2020-05-11T22:42:18.020] [INFO] sdi - prueba@uniovi.es : ha enviado un mensaje a ines@uniovi.es
+[2020-05-11T22:42:18.055] [INFO] sdi - prueba@uniovi.es : accedió al chat con ines@uniovi.es
+[2020-05-11T22:42:18.417] [ERROR] sdi - prueba@uniovi.es : leyo un mensaje
+[2020-05-11T22:42:18.438] [ERROR] sdi - prueba@uniovi.es : leyo un mensaje
+[2020-05-11T22:42:18.440] [ERROR] sdi - prueba@uniovi.es : leyo un mensaje
+[2020-05-11T22:42:18.443] [ERROR] sdi - prueba@uniovi.es : leyo un mensaje
+[2020-05-11T22:42:18.760] [ERROR] sdi - prueba@uniovi.es : leyo un mensaje
+[2020-05-11T22:42:18.788] [ERROR] sdi - prueba@uniovi.es : leyo un mensaje
+[2020-05-11T22:42:19.049] [INFO] sdi - prueba@uniovi.es : accedió al chat con ines@uniovi.es
+[2020-05-11T22:42:19.141] [INFO] sdi - prueba@uniovi.es : accedió al chat con ines@uniovi.es
+[2020-05-11T22:42:20.065] [INFO] sdi - prueba@uniovi.es : accedió al chat con ines@uniovi.es
+[2020-05-11T22:42:21.116] [INFO] sdi - prueba@uniovi.es : accedió al chat con ines@uniovi.es
+[2020-05-11T22:42:21.863] [INFO] sdi - Reset de la base de datos
+[2020-05-11T22:42:23.132] [INFO] sdi - sdi@uniovi.es: se ha autenticado en la api
+[2020-05-11T22:42:23.647] [INFO] sdi - sdi@uniovi.es : va a la lista de amigos en el servicio web
+[2020-05-11T22:42:24.864] [INFO] sdi - sdi@uniovi.es : accedió al chat con prueba@uniovi.es
+[2020-05-11T22:42:28.194] [INFO] sdi - prueba@uniovi.es: se ha autenticado en la api
+[2020-05-11T22:42:28.684] [INFO] sdi - prueba@uniovi.es : va a la lista de amigos en el servicio web
+[2020-05-11T22:42:29.863] [INFO] sdi - prueba@uniovi.es : accedió al chat con ines@uniovi.es
+[2020-05-11T22:42:29.885] [INFO] sdi - prueba@uniovi.es : accedió al chat con borja@uniovi.es
+[2020-05-11T22:42:29.899] [INFO] sdi - prueba@uniovi.es : accedió al chat con luisa@uniovi.es
+[2020-05-11T22:42:29.951] [INFO] sdi - prueba@uniovi.es : accedió al chat con aurora@uniovi.es
+[2020-05-11T22:42:29.976] [INFO] sdi - prueba@uniovi.es : accedió al chat con sdi@uniovi.es
+[2020-05-11T22:42:30.355] [INFO] sdi - prueba@uniovi.es : accedió al chat con sdi@uniovi.es
+[2020-05-11T22:42:31.187] [INFO] sdi - sdi@uniovi.es: se ha autenticado en la api
+[2020-05-11T22:42:31.658] [INFO] sdi - sdi@uniovi.es : va a la lista de amigos en el servicio web
+[2020-05-11T22:42:32.790] [INFO] sdi - sdi@uniovi.es : accedió al chat con prueba@uniovi.es
+[2020-05-11T22:42:36.244] [INFO] sdi - sdi@uniovi.es : accedió al chat con prueba@uniovi.es
+[2020-05-11T22:42:36.630] [ERROR] sdi - sdi@uniovi.es : leyo un mensaje
+[2020-05-11T22:42:37.291] [INFO] sdi - sdi@uniovi.es : accedió al chat con prueba@uniovi.es
+[2020-05-11T22:42:37.657] [ERROR] sdi - sdi@uniovi.es : leyo un mensaje
+[2020-05-11T22:42:38.017] [INFO] sdi - sdi@uniovi.es : va a la lista de amigos en el servicio web
+[2020-05-11T22:42:38.262] [INFO] sdi - sdi@uniovi.es : accedió al chat con prueba@uniovi.es
+[2020-05-11T22:42:39.173] [INFO] sdi - sdi@uniovi.es : accedió al chat con prueba@uniovi.es
+[2020-05-11T22:42:42.717] [INFO] sdi - Reset de la base de datos
+[2020-05-11T22:42:44.046] [INFO] sdi - sdi@uniovi.es: se ha autenticado en la api
+[2020-05-11T22:42:44.495] [INFO] sdi - sdi@uniovi.es : va a la lista de amigos en el servicio web
+[2020-05-11T22:42:45.587] [INFO] sdi - sdi@uniovi.es : accedió al chat con prueba@uniovi.es
+[2020-05-11T22:42:49.122] [INFO] sdi - prueba@uniovi.es: se ha autenticado en la api
+[2020-05-11T22:42:49.577] [INFO] sdi - prueba@uniovi.es : va a la lista de amigos en el servicio web
+[2020-05-11T22:42:50.912] [INFO] sdi - prueba@uniovi.es : accedió al chat con borja@uniovi.es
+[2020-05-11T22:42:50.934] [INFO] sdi - prueba@uniovi.es : accedió al chat con ines@uniovi.es
+[2020-05-11T22:42:50.935] [INFO] sdi - prueba@uniovi.es : accedió al chat con sdi@uniovi.es
+[2020-05-11T22:42:50.951] [INFO] sdi - prueba@uniovi.es : accedió al chat con aurora@uniovi.es
+[2020-05-11T22:42:50.988] [INFO] sdi - prueba@uniovi.es : accedió al chat con luisa@uniovi.es
+[2020-05-11T22:42:51.373] [INFO] sdi - prueba@uniovi.es : accedió al chat con sdi@uniovi.es
+[2020-05-11T22:42:52.340] [INFO] sdi - prueba@uniovi.es : accedió al chat con sdi@uniovi.es
+[2020-05-11T22:42:53.337] [INFO] sdi - prueba@uniovi.es : accedió al chat con sdi@uniovi.es
+[2020-05-11T22:42:53.699] [INFO] sdi - prueba@uniovi.es : ha enviado un mensaje a sdi@uniovi.es
+[2020-05-11T22:42:53.743] [INFO] sdi - prueba@uniovi.es : accedió al chat con sdi@uniovi.es
+[2020-05-11T22:42:53.813] [ERROR] sdi - prueba@uniovi.es : leyo un mensaje
+[2020-05-11T22:42:54.404] [INFO] sdi - prueba@uniovi.es : accedió al chat con sdi@uniovi.es
+[2020-05-11T22:42:54.811] [INFO] sdi - sdi@uniovi.es: se ha autenticado en la api
+[2020-05-11T22:42:55.080] [INFO] sdi - prueba@uniovi.es : ha enviado un mensaje a sdi@uniovi.es
+[2020-05-11T22:42:55.323] [INFO] sdi - sdi@uniovi.es : va a la lista de amigos en el servicio web
+[2020-05-11T22:42:56.544] [INFO] sdi - sdi@uniovi.es : accedió al chat con prueba@uniovi.es

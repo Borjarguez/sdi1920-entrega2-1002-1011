@@ -98,7 +98,7 @@ routerUsuarioSession.use(function (req, res, next) {
 
 //Aplicar routerUsuarioSession
 app.use("/home", routerUsuarioSession);
-app.use("/listUsers", routerUsuarioSession);
+app.use("/listaUsuarios", routerUsuarioSession);
 app.use("/peticiones", routerUsuarioSession);
 app.use("/amigos", routerUsuarioSession);
 

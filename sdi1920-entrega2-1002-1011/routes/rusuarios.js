@@ -103,7 +103,7 @@ module.exports = function (app, swig, gestorBD) {
         res.redirect("/login");
     });
 
-    app.get("/listUsers", function (req, res) {
+    app.get("/listaUsuarios", function (req, res) {
             let criteria = {};
 
             if (req.query.searchText != null)
@@ -132,7 +132,7 @@ module.exports = function (app, swig, gestorBD) {
                     for (let i = pg - 2; i <= pg + 2; i++)
                         if (i > 0 && i <= lastPg) pages.push(i);
 
-                    let response = swig.renderFile('views/listUsers.html', {
+                    let response = swig.renderFile('views/listaUsuarios.html', {
                         users: users,
                         pages: pages,
                         actual: pg

@@ -10,7 +10,7 @@ module.exports = function (app, swig, gestorBD) {
         if (peticion.sender == peticion.receiver){
             app.get("logger").error(req.session.usuario+" : intenta mandarse una petición así mismo");
 
-            res.redirect("/listUsers"+"?mensaje=No te puedes mandar petición a ti mismo&tipoMensaje=alert-danger");
+            res.redirect("/listaUsuarios"+"?mensaje=No te puedes mandar petición a ti mismo&tipoMensaje=alert-danger");
 
         }
 
@@ -21,11 +21,11 @@ module.exports = function (app, swig, gestorBD) {
             gestorBD.mandarPeticion(criterio,peticion, function (email) {
                 if (email == null){
                     app.get("logger").error(req.session.usuario+" : intenta mandar una petición fallida");
-                    res.redirect("/listUsers"+"?mensaje=No se puede mandar petición a este usuario&tipoMensaje=alert-danger");
+                    res.redirect("/listaUsuarios"+"?mensaje=No se puede mandar petición a este usuario&tipoMensaje=alert-danger");
                 }
                 else{
                     app.get("logger").info(req.session.usuario+" : manda peticion a "+req.params.email);
-                    res.redirect("/listUsers");
+                    res.redirect("/listaUsuarios");
 
                 }
             });
