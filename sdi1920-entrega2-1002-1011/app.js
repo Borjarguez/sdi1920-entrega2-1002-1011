@@ -79,14 +79,14 @@ routerUsuarioToken.use(function (req, res, next) {
 });
 
 // Aplicar routerUsuarioToken
-app.use('/api/*', routerUsuarioToken);
+app.use('/api/chat', routerUsuarioToken);
+app.use('/api/amigos', routerUsuarioToken);
 
 // routerUsuarioSession
 let routerUsuarioSession = express.Router();
 routerUsuarioSession.use(function (req, res, next) {
     let logger = app.get('logger');
     if (req.session.usuario) {
-        logger.log("El usuario que se encuentra en sesión es: "+req.session.usuario);
         next();
     } else {
         logger.error("No se encuentra ningún usuario en sesión");
@@ -94,36 +94,26 @@ routerUsuarioSession.use(function (req, res, next) {
     }
 });
 
-let routerUsuarioSessionAmigos = express.Router();
-routerUsuarioSessionAmigos.use(function (req, res, next) {
-    let logger = app.get('logger');
-    if (req.session.usuario) {
-        logger.log("El usuario que se encuentra en sesión es: "+req.session.usuario);
-        next();
-    } else {
-        logger.error("No se encuentra ningún usuario en sesión");
-        res.send("No puedes ver la lista de amigos sin estar identificado.")
-    }
-});
+
 
 //Aplicar routerUsuarioSession
 app.use("/home", routerUsuarioSession);
 app.use("/listUsers", routerUsuarioSession);
 app.use("/peticiones", routerUsuarioSession);
-app.use("/amigos", routerUsuarioSessionAmigos);
+app.use("/amigos", routerUsuarioSession);
 
 app.use(express.static('public'));
 
 // Variables
 app.set('port', 8081);
 app.set('db', 'mongodb://admin:sdi@tiendamusica-shard-00-00-divfp.mongodb.net:27017,tiendamusica-shard-00-01-divfp.mongodb.net:27017,tiendamusica-shard-00-02-divfp.mongodb.net:27017/test?ssl=true&replicaSet=tiendamusica-shard-0&authSource=admin&retryWrites=true&w=majority');
-
 app.set('clave', 'abcdefg');
 app.set('crypto', crypto);
 
 //Rutas/controladores por lógica
 require("./routes/rusuarios.js")(app, swig, gestorBD);
 require("./routes/rpeticiones.js")(app, swig, gestorBD);
+require("./routes/rapiusuarios.js")(app,gestorBD);
 
 app.get('/', function (req, res) {
     res.redirect('/index');

@@ -35,7 +35,7 @@
     <ul class="pagination" name="pagination">
         {% for page in pages %}
         <li class="page-item" id="pi-{{ page }}">
-            <a class="page-link" href="/peticiones?pg={{ page }}">{{ page }}</a>
+            <a name="paginacion" class="page-link" href="/peticiones?pg={{ page }}">{{ page }}</a>
         </li>
         {% endfor %}
         <script>
