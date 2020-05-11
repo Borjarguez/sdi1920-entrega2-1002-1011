@@ -60,7 +60,7 @@ public class sdi1920_Entrega2_test {
 	}
 
 	/**
-	 * PR01 Registro de Usuario con datos vÃƒÂ¡lidos
+	 * PR01 Registro de Usuario con datos validos
 	 */
 	@Test
 	public void PR01() {
@@ -276,7 +276,7 @@ public class sdi1920_Entrega2_test {
 		// peticiones
 		PO_LoginView.fillForm(driver, "anton@uniovi.es", "123456");
 
-		// Vamos a la opciï¿½n de ver peticiones
+		// Vamos a la eleccion de ver peticiones
 		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, 'peticiones')]");
 		elementos.get(0).click();
 
@@ -317,7 +317,7 @@ public class sdi1920_Entrega2_test {
 		// la peticion de prueba@uniovi.es
 		PO_LoginView.fillForm(driver, "anton@uniovi.es", "123456");
 
-		// Vamos a la opciï¿½n de ver peticiones
+		// Vamos a la eleccion de ver peticiones
 		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, 'peticiones')]");
 
 		elementos.get(0).click();
@@ -474,7 +474,7 @@ public class sdi1920_Entrega2_test {
 				"//td[contains(text(), 'anton@uniovi.es')]/following-sibling::*/a[contains(@name, 'mandarPeticion')]");
 		elementos.get(0).click();
 
-		// ----------Le aceptï¿½ la peticion a anton, por lo que ahora van a tener 5
+		// ----------Le acepta la peticion a anton, por lo que ahora van a tener 5
 		// peticiones y 1 de paginacion
 		// 1 de paginacion
 		assertTrue(getCuantasPaginas() == 1);
@@ -692,7 +692,7 @@ public class sdi1920_Entrega2_test {
 	@Test
 	public void PR27() {
 		driver.manage().deleteAllCookies();
-		// En el reset aï¿½adimos una conversacion de prueba e ines de 5 mensajes
+		// En el reset insertamos una conversacion de prueba e ines de 5 mensajes
 		driver.navigate().to("https://localhost:8081/cliente.html");
 		// Rellenamos el formulario bien
 		PO_LoginView.fillForm(driver, "prueba@uniovi.es", "123456");
@@ -781,7 +781,7 @@ public class sdi1920_Entrega2_test {
 
 		elementos.get(0).click();
 
-		// Ahora vamos a aï¿½adir el mensaje
+		// Ahora vamos a insertar el mensaje
 
 		WebElement search = driver.findElement(By.name("message"));
 		search.click();
