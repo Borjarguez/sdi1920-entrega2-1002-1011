@@ -8,7 +8,7 @@ module.exports = function (app, swig, gestorBD) {
             accepted : false
         };
         if (peticion.sender == peticion.receiver){
-
+            app.get("logger").error(req.session.usuario+" : intenta mandarse una petición así mismo");
 
             res.redirect("/listUsers"+"?mensaje=No te puedes mandar petición a ti mismo&tipoMensaje=alert-danger");
 
@@ -20,9 +20,11 @@ module.exports = function (app, swig, gestorBD) {
             {"receiver":peticion.receiver,"sender":peticion.sender}]};
             gestorBD.mandarPeticion(criterio,peticion, function (email) {
                 if (email == null){
+                    app.get("logger").error(req.session.usuario+" : intenta mandar una petición fallida");
                     res.redirect("/listUsers"+"?mensaje=No se puede mandar petición a este usuario&tipoMensaje=alert-danger");
                 }
                 else{
+                    app.get("logger").info(req.session.usuario+" : manda peticion a "+req.params.email);
                     res.redirect("/listUsers");
 
                 }
@@ -53,6 +55,7 @@ module.exports = function (app, swig, gestorBD) {
                     pages:pages,
                     actual:pg
                 });
+                app.get("logger").info(req.session.usuario+" : va a la lista de peticiones");
                 res.send(responde);
             }
         });
@@ -62,8 +65,10 @@ module.exports = function (app, swig, gestorBD) {
         let criterio = { "_id" : gestorBD.mongo.ObjectID(req.params.id) };
         gestorBD.aceptarPeticion(criterio, function (amigo) {
             if (amigo == null) {
+                app.get("logger").error(req.session.usuario+" : error al aceptar una peticion");
                 res.send("Error al aceptar la petición ");
             }else{
+                app.get("logger").info(req.session.usuario+" : acepta una peticion");
                 res.redirect("/peticiones");
             }
 
