@@ -165,7 +165,7 @@ public class sdi1920_Entrega2_test {
     public void PR08() {
         PO_HomeView.clickOption(driver, "login", "class",
                 "btn btn-primary");
-        PO_LoginView.fillForm(driver, "antunaalejandro@uniovi.es", "123456");
+        PO_LoginView.fillForm(driver, "borjarguez@uniovi.es", "123456");
         PO_LoginView.checkElement(driver, "text", "Email o password incorrecto");
     }
 
